@@ -18,6 +18,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var background: SKSpriteNode?
     private var fish: SKSpriteNode?
     
+    var createObstacle: CreateObstacle?
+    
     override func didMove(to view: SKView) {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -25,6 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         renderBackground()
         setUp()
+        createObstacle = CreateObstacle(delegator: self)
         
         //Generate Obstacles
         Timer.scheduledTimer(timeInterval: TimeInterval(2.3), target: self, selector: #selector(GameScene.handleItemTimer), userInfo:nil, repeats: true)

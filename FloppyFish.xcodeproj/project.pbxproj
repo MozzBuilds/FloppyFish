@@ -18,6 +18,7 @@
 		A718284F272EDA330002A8B5 /* FloppyFishUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718284E272EDA330002A8B5 /* FloppyFishUITests.swift */; };
 		A718285F272EDB070002A8B5 /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718285E272EDB070002A8B5 /* GameMenu.swift */; };
 		A7182861272EDB2C0002A8B5 /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = A7182860272EDB2C0002A8B5 /* GameMenu.sks */; };
+		A7182864272F46CA0002A8B5 /* CreateObstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7182863272F46CA0002A8B5 /* CreateObstacle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		A7182850272EDA330002A8B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A718285E272EDB070002A8B5 /* GameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		A7182860272EDB2C0002A8B5 /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
+		A7182863272F46CA0002A8B5 /* CreateObstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateObstacle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		A718282A272EDA300002A8B5 /* FloppyFish */ = {
 			isa = PBXGroup;
 			children = (
+				A7182862272F46A10002A8B5 /* Modules */,
 				A718285D272EDA480002A8B5 /* GameMenu */,
 				A718285C272EDA430002A8B5 /* GameScene */,
 				A718282B272EDA300002A8B5 /* AppDelegate.swift */,
@@ -151,6 +154,14 @@
 				A718285E272EDB070002A8B5 /* GameMenu.swift */,
 			);
 			path = GameMenu;
+			sourceTree = "<group>";
+		};
+		A7182862272F46A10002A8B5 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				A7182863272F46CA0002A8B5 /* CreateObstacle.swift */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A718285F272EDB070002A8B5 /* GameMenu.swift in Sources */,
+				A7182864272F46CA0002A8B5 /* CreateObstacle.swift in Sources */,
 				A7182832272EDA300002A8B5 /* GameScene.swift in Sources */,
 				A7182834272EDA300002A8B5 /* GameViewController.swift in Sources */,
 				A718282C272EDA300002A8B5 /* AppDelegate.swift in Sources */,
