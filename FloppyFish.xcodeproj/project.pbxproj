@@ -16,6 +16,8 @@
 		A7182839272EDA330002A8B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7182838272EDA330002A8B5 /* Assets.xcassets */; };
 		A7182844272EDA330002A8B5 /* FloppyFishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7182843272EDA330002A8B5 /* FloppyFishTests.swift */; };
 		A718284F272EDA330002A8B5 /* FloppyFishUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718284E272EDA330002A8B5 /* FloppyFishUITests.swift */; };
+		A718285F272EDB070002A8B5 /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718285E272EDB070002A8B5 /* GameMenu.swift */; };
+		A7182861272EDB2C0002A8B5 /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = A7182860272EDB2C0002A8B5 /* GameMenu.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		A718284A272EDA330002A8B5 /* FloppyFishUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FloppyFishUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A718284E272EDA330002A8B5 /* FloppyFishUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloppyFishUITests.swift; sourceTree = "<group>"; };
 		A7182850272EDA330002A8B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A718285E272EDB070002A8B5 /* GameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
+		A7182860272EDB2C0002A8B5 /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +105,10 @@
 		A718282A272EDA300002A8B5 /* FloppyFish */ = {
 			isa = PBXGroup;
 			children = (
+				A718285D272EDA480002A8B5 /* GameMenu */,
+				A718285C272EDA430002A8B5 /* GameScene */,
 				A718282B272EDA300002A8B5 /* AppDelegate.swift */,
-				A718282D272EDA300002A8B5 /* GameScene.sks */,
 				A718282F272EDA300002A8B5 /* Actions.sks */,
-				A7182831272EDA300002A8B5 /* GameScene.swift */,
 				A7182833272EDA300002A8B5 /* GameViewController.swift */,
 				A7182835272EDA300002A8B5 /* Main.storyboard */,
 				A7182838272EDA330002A8B5 /* Assets.xcassets */,
@@ -129,6 +133,24 @@
 				A7182850272EDA330002A8B5 /* Info.plist */,
 			);
 			path = FloppyFishUITests;
+			sourceTree = "<group>";
+		};
+		A718285C272EDA430002A8B5 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				A718282D272EDA300002A8B5 /* GameScene.sks */,
+				A7182831272EDA300002A8B5 /* GameScene.swift */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
+		A718285D272EDA480002A8B5 /* GameMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A7182860272EDB2C0002A8B5 /* GameMenu.sks */,
+				A718285E272EDB070002A8B5 /* GameMenu.swift */,
+			);
+			path = GameMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7182861272EDB2C0002A8B5 /* GameMenu.sks in Resources */,
 				A7182837272EDA300002A8B5 /* Main.storyboard in Resources */,
 				A718282E272EDA300002A8B5 /* GameScene.sks in Resources */,
 				A7182839272EDA330002A8B5 /* Assets.xcassets in Resources */,
@@ -262,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A718285F272EDB070002A8B5 /* GameMenu.swift in Sources */,
 				A7182832272EDA300002A8B5 /* GameScene.swift in Sources */,
 				A7182834272EDA300002A8B5 /* GameViewController.swift in Sources */,
 				A718282C272EDA300002A8B5 /* AppDelegate.swift in Sources */,
