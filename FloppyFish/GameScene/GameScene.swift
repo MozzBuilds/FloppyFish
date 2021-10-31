@@ -27,10 +27,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setUp()
         
         //Generate Obstacles
-        Timer.scheduledTimer(timeInterval: TimeInterval(Float.random(in: 2.0...2.5)), target: self, selector: #selector(GameScene.renderItems), userInfo:nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(2.3), target: self, selector: #selector(GameScene.handleItemTimer), userInfo:nil, repeats: true)
         
-        //Remove items/cleanup
-//        Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
+//        Remove items/cleanup
+        Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
     }
     
     func setUp() {
@@ -42,7 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     @objc func cleanUp() {
         for child in children {
-            if child.position.x < -self.size.width - 500 {
+            if child.position.x < -self.size.width - 50 {
                 child.removeFromParent()
             }
         }
@@ -61,6 +61,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enumerateChildNodes(withName: "medium", using: itemBlock)
         enumerateChildNodes(withName: "large", using: itemBlock)
 
+    }
+    
+    @objc func handleItemTimer(timer: Timer) {
+        let identifier = Int.random(in: 1...8)
+        
+        switch identifier {
+        case 1...2:
+            renderItems(position: "top")
+        case 3...4:
+            renderItems(position: "bottom")
+        case 5...8:
+            renderItems(position: "both")
+        default:
+            break
+        }
     }
         
     private func renderBackground() {
@@ -94,13 +109,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    @objc private func renderItems() {
+    @objc private func renderItems(position: String) {
         var item: SKSpriteNode?
         
         let sizeCases = Int.random(in: 1...3)
         
         let maxHeight = self.scene?.size.height ?? 700
-        let width: CGFloat = 100
+        let width: CGFloat = 60
         let color: UIColor = .black
         
         let defaultSize = CGSize(width: width, height: 300)
@@ -108,11 +123,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch sizeCases {
         
         case 1:
-            let size = CGSize(width: width, height: maxHeight * 0.2)
+            let size = CGSize(width: width, height: maxHeight * 0.4)
             item = SKSpriteNode(color: color, size: size)
             item?.name = "small"
         case 2:
-            let size = CGSize(width: width, height: maxHeight * 0.4)
+            let size = CGSize(width: width, height: maxHeight * 0.5)
             item = SKSpriteNode(color: color, size: size)
             item?.name = "medium"
         case 3:
@@ -127,28 +142,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         item?.zPosition = 30
         item?.physicsBody = SKPhysicsBody(rectangleOf: item?.size ?? defaultSize)
         
-        let positionCases = Int.random(in: 1...2)
         let itemHeightMid = (item?.size.height ?? 300) / 2
         let screenHeightMid = (self.scene?.size.height ?? 1000) / 2
-            
-        switch positionCases {
-        case 1:
-//            let add = (self.scene?.size.height ?? 500) / 2 - (itemHeight)!
-//            item?.position.y = self.anchorPoint.y + add
-            //HEIGHT IN THIS CASE IS 1334.0
-            
-            item?.position.y = screenHeightMid - itemHeightMid
-        case 2:
-//            item?.position.y = -(self.scene?.size.height ?? 500) / 2 + (itemHeight)!
-            item?.position.y = -(screenHeightMid - itemHeightMid)
-        default: break
-        }
         
         item?.position.x = self.scene?.size.width ?? 300
         item?.physicsBody?.collisionBitMask = 0
         item?.physicsBody?.affectedByGravity = false
         
+        let item2: SKSpriteNode?
+        let positionTop: CGFloat = screenHeightMid - itemHeightMid
+        let positionBottom: CGFloat = -(positionTop)
+        
+        switch position {
+        case "top":
+            item?.position.y = positionTop
+        case "bottom":
+            item?.position.y = positionBottom
+        case "both":
+            item2 = item?.copy() as? SKSpriteNode
+            item2?.size.height *= 0.4
+            let item2Height = item2?.size.height ?? 300
+            
+            let randomPosition = Int.random(in: 1...2)
+            
+            if (randomPosition == 1) {
+                item?.position.y = positionTop
+                item2?.position.y = -(screenHeightMid - (item2Height / 2))
+            } else if (randomPosition == 2) {
+                item?.position.y = positionBottom
+                item2?.position.y = screenHeightMid - (item2Height / 2)
+            }
+            addChild(item2!)
+        default: break
+        }
+    
         addChild(item!)
     }
-    
 }
