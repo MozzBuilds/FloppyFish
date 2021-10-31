@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A718282C272EDA300002A8B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718282B272EDA300002A8B5 /* AppDelegate.swift */; };
+		A718282E272EDA300002A8B5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A718282D272EDA300002A8B5 /* GameScene.sks */; };
+		A7182830272EDA300002A8B5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A718282F272EDA300002A8B5 /* Actions.sks */; };
+		A7182832272EDA300002A8B5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7182831272EDA300002A8B5 /* GameScene.swift */; };
+		A7182834272EDA300002A8B5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7182833272EDA300002A8B5 /* GameViewController.swift */; };
+		A7182837272EDA300002A8B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7182835272EDA300002A8B5 /* Main.storyboard */; };
+		A7182839272EDA330002A8B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7182838272EDA330002A8B5 /* Assets.xcassets */; };
+		A7182844272EDA330002A8B5 /* FloppyFishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7182843272EDA330002A8B5 /* FloppyFishTests.swift */; };
+		A718284F272EDA330002A8B5 /* FloppyFishUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718284E272EDA330002A8B5 /* FloppyFishUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A7182840272EDA330002A8B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7182820272EDA2F0002A8B5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7182827272EDA300002A8B5;
+			remoteInfo = FloppyFish;
+		};
+		A718284B272EDA330002A8B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7182820272EDA2F0002A8B5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7182827272EDA300002A8B5;
+			remoteInfo = FloppyFish;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A7182828272EDA300002A8B5 /* FloppyFish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FloppyFish.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A718282B272EDA300002A8B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A718282D272EDA300002A8B5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		A718282F272EDA300002A8B5 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		A7182831272EDA300002A8B5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		A7182833272EDA300002A8B5 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		A7182836272EDA300002A8B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A7182838272EDA330002A8B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A718283A272EDA330002A8B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A718283F272EDA330002A8B5 /* FloppyFishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FloppyFishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7182843272EDA330002A8B5 /* FloppyFishTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloppyFishTests.swift; sourceTree = "<group>"; };
+		A7182845272EDA330002A8B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A718284A272EDA330002A8B5 /* FloppyFishUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FloppyFishUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A718284E272EDA330002A8B5 /* FloppyFishUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloppyFishUITests.swift; sourceTree = "<group>"; };
+		A7182850272EDA330002A8B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A7182825272EDA300002A8B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A718283C272EDA330002A8B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7182847272EDA330002A8B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A718281F272EDA2F0002A8B5 = {
+			isa = PBXGroup;
+			children = (
+				A718282A272EDA300002A8B5 /* FloppyFish */,
+				A7182842272EDA330002A8B5 /* FloppyFishTests */,
+				A718284D272EDA330002A8B5 /* FloppyFishUITests */,
+				A7182829272EDA300002A8B5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A7182829272EDA300002A8B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7182828272EDA300002A8B5 /* FloppyFish.app */,
+				A718283F272EDA330002A8B5 /* FloppyFishTests.xctest */,
+				A718284A272EDA330002A8B5 /* FloppyFishUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A718282A272EDA300002A8B5 /* FloppyFish */ = {
+			isa = PBXGroup;
+			children = (
+				A718282B272EDA300002A8B5 /* AppDelegate.swift */,
+				A718282D272EDA300002A8B5 /* GameScene.sks */,
+				A718282F272EDA300002A8B5 /* Actions.sks */,
+				A7182831272EDA300002A8B5 /* GameScene.swift */,
+				A7182833272EDA300002A8B5 /* GameViewController.swift */,
+				A7182835272EDA300002A8B5 /* Main.storyboard */,
+				A7182838272EDA330002A8B5 /* Assets.xcassets */,
+				A718283A272EDA330002A8B5 /* Info.plist */,
+			);
+			path = FloppyFish;
+			sourceTree = "<group>";
+		};
+		A7182842272EDA330002A8B5 /* FloppyFishTests */ = {
+			isa = PBXGroup;
+			children = (
+				A7182843272EDA330002A8B5 /* FloppyFishTests.swift */,
+				A7182845272EDA330002A8B5 /* Info.plist */,
+			);
+			path = FloppyFishTests;
+			sourceTree = "<group>";
+		};
+		A718284D272EDA330002A8B5 /* FloppyFishUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A718284E272EDA330002A8B5 /* FloppyFishUITests.swift */,
+				A7182850272EDA330002A8B5 /* Info.plist */,
+			);
+			path = FloppyFishUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A7182827272EDA300002A8B5 /* FloppyFish */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7182853272EDA330002A8B5 /* Build configuration list for PBXNativeTarget "FloppyFish" */;
+			buildPhases = (
+				A7182824272EDA300002A8B5 /* Sources */,
+				A7182825272EDA300002A8B5 /* Frameworks */,
+				A7182826272EDA300002A8B5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FloppyFish;
+			productName = FloppyFish;
+			productReference = A7182828272EDA300002A8B5 /* FloppyFish.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A718283E272EDA330002A8B5 /* FloppyFishTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7182856272EDA330002A8B5 /* Build configuration list for PBXNativeTarget "FloppyFishTests" */;
+			buildPhases = (
+				A718283B272EDA330002A8B5 /* Sources */,
+				A718283C272EDA330002A8B5 /* Frameworks */,
+				A718283D272EDA330002A8B5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A7182841272EDA330002A8B5 /* PBXTargetDependency */,
+			);
+			name = FloppyFishTests;
+			productName = FloppyFishTests;
+			productReference = A718283F272EDA330002A8B5 /* FloppyFishTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A7182849272EDA330002A8B5 /* FloppyFishUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7182859272EDA330002A8B5 /* Build configuration list for PBXNativeTarget "FloppyFishUITests" */;
+			buildPhases = (
+				A7182846272EDA330002A8B5 /* Sources */,
+				A7182847272EDA330002A8B5 /* Frameworks */,
+				A7182848272EDA330002A8B5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A718284C272EDA330002A8B5 /* PBXTargetDependency */,
+			);
+			name = FloppyFishUITests;
+			productName = FloppyFishUITests;
+			productReference = A718284A272EDA330002A8B5 /* FloppyFishUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A7182820272EDA2F0002A8B5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					A7182827272EDA300002A8B5 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					A718283E272EDA330002A8B5 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = A7182827272EDA300002A8B5;
+					};
+					A7182849272EDA330002A8B5 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = A7182827272EDA300002A8B5;
+					};
+				};
+			};
+			buildConfigurationList = A7182823272EDA2F0002A8B5 /* Build configuration list for PBXProject "FloppyFish" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A718281F272EDA2F0002A8B5;
+			productRefGroup = A7182829272EDA300002A8B5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A7182827272EDA300002A8B5 /* FloppyFish */,
+				A718283E272EDA330002A8B5 /* FloppyFishTests */,
+				A7182849272EDA330002A8B5 /* FloppyFishUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A7182826272EDA300002A8B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7182837272EDA300002A8B5 /* Main.storyboard in Resources */,
+				A718282E272EDA300002A8B5 /* GameScene.sks in Resources */,
+				A7182839272EDA330002A8B5 /* Assets.xcassets in Resources */,
+				A7182830272EDA300002A8B5 /* Actions.sks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A718283D272EDA330002A8B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7182848272EDA330002A8B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A7182824272EDA300002A8B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7182832272EDA300002A8B5 /* GameScene.swift in Sources */,
+				A7182834272EDA300002A8B5 /* GameViewController.swift in Sources */,
+				A718282C272EDA300002A8B5 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A718283B272EDA330002A8B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7182844272EDA330002A8B5 /* FloppyFishTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7182846272EDA330002A8B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A718284F272EDA330002A8B5 /* FloppyFishUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A7182841272EDA330002A8B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7182827272EDA300002A8B5 /* FloppyFish */;
+			targetProxy = A7182840272EDA330002A8B5 /* PBXContainerItemProxy */;
+		};
+		A718284C272EDA330002A8B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7182827272EDA300002A8B5 /* FloppyFish */;
+			targetProxy = A718284B272EDA330002A8B5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A7182835272EDA300002A8B5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7182836272EDA300002A8B5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A7182851272EDA330002A8B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A7182852272EDA330002A8B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A7182854272EDA330002A8B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FloppyFish/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFish";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A7182855272EDA330002A8B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FloppyFish/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFish";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A7182857272EDA330002A8B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FloppyFishTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFishTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FloppyFish.app/FloppyFish";
+			};
+			name = Debug;
+		};
+		A7182858272EDA330002A8B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FloppyFishTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFishTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FloppyFish.app/FloppyFish";
+			};
+			name = Release;
+		};
+		A718285A272EDA330002A8B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FloppyFishUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFishUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FloppyFish;
+			};
+			name = Debug;
+		};
+		A718285B272EDA330002A8B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FloppyFishUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFishUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FloppyFish;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7182823272EDA2F0002A8B5 /* Build configuration list for PBXProject "FloppyFish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7182851272EDA330002A8B5 /* Debug */,
+				A7182852272EDA330002A8B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7182853272EDA330002A8B5 /* Build configuration list for PBXNativeTarget "FloppyFish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7182854272EDA330002A8B5 /* Debug */,
+				A7182855272EDA330002A8B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7182856272EDA330002A8B5 /* Build configuration list for PBXNativeTarget "FloppyFishTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7182857272EDA330002A8B5 /* Debug */,
+				A7182858272EDA330002A8B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7182859272EDA330002A8B5 /* Build configuration list for PBXNativeTarget "FloppyFishUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A718285A272EDA330002A8B5 /* Debug */,
+				A718285B272EDA330002A8B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A7182820272EDA2F0002A8B5 /* Project object */;
+}
