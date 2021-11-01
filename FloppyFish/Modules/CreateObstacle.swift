@@ -15,11 +15,11 @@ enum ItemPositions: CaseIterable {
 }
 
 enum ItemSizes: CGFloat, CaseIterable {
-    case XS = 0.2
-    case S = 0.3
-    case M = 0.4
-    case L = 0.5
-    case XL = 0.6
+    case XS = 0.35
+    case S = 0.40
+    case M = 0.45
+    case L = 0.50
+    case XL = 0.55
 }
 
 class CreateObstacle {
@@ -31,7 +31,7 @@ class CreateObstacle {
     let defaultWidth: CGFloat = 60
     let defaultHeight: CGFloat = 300
     var defaultSize = CGSize(width: 60, height: 300)
-
+    let defaultColor: UIColor = .black
     
     init(delegator: SKScene) {
         
@@ -40,7 +40,7 @@ class CreateObstacle {
         defaultSize = CGSize(width: defaultWidth, height: 300)
     }
     
-    func renderItems() {
+    func renderItem() {
         
         ///Randomise the size of the obstacle
         setItemSize()
@@ -50,7 +50,7 @@ class CreateObstacle {
         item1?.physicsBody = SKPhysicsBody(rectangleOf: item1?.size ?? defaultSize)
         item1?.physicsBody?.collisionBitMask = 0
         item1?.physicsBody?.affectedByGravity = false
-        
+
         ///Randomise the position of the obstacle, be it top/bottom or both, according to enum
         let randomItemPosition = ItemPositions.allCases.randomElement()
         
@@ -64,17 +64,18 @@ class CreateObstacle {
         default:
             break
         }
-    
+            
+        item2?.removeFromParent()
+        
         item1 != nil ? delegator.addChild(item1!) : nil
         item2 != nil ? delegator.addChild(item2!) : nil
+        
     }
     
     func setItemSize() {
         
         let maxHeight = delegator.scene?.size.height ?? 700
-        
-        let standardColor: UIColor = .black
-        
+            
         ///Choose a random item from ItemSizes enum
         let randomItemSize = ItemSizes.allCases.randomElement()
         
@@ -82,9 +83,7 @@ class CreateObstacle {
         
         let size = CGSize(width: defaultWidth, height: maxHeight * randomItemSizeHeight)
         
-        item1 = SKSpriteNode(color: standardColor, size: size)
-        
-        item1?.name = "obstacle"
+        item1 = SKSpriteNode(color: defaultColor, size: size)
     }
     
     func chooseItemPosition(position: ItemPositions) {
@@ -96,7 +95,8 @@ class CreateObstacle {
         //Set x and z positions, and top position of item1
         item1?.position.x = delegator.scene?.size.width ?? 300
         item1?.zPosition = 30
-        let item1PositionTop = screenHeightMidpoint - item1HeightMidpoint
+        item1?.name = "obstacle1"
+        let item1PositionTop: CGFloat = screenHeightMidpoint - item1HeightMidpoint
         
         switch position {
         
@@ -110,10 +110,26 @@ class CreateObstacle {
                 
                 ///Set item2 to a copy of item1
                 item2 = item1?.copy() as? SKSpriteNode
-                
+
                 ///Scale the height so our traveller can get through the gap
                 item2?.size.height *= 0.4
-                let item2HeightMidpoint = (item2?.size.height ?? defaultHeight * 0.4) / 2
+                
+                //height 800, want 400 max
+                let gap = (item2?.size.height)! - (item1?.size.height)! - (delegator.scene?.size.height)!
+                
+                while gap > 400 {
+                    item2?.size.height += CGFloat(50)
+                }
+                
+                ///Set a different colour
+                item2?.color = .red
+                
+                ///Rename to avoid node conflicts
+                item2?.name = "obstacle2"
+//                item2?.physicsBody = SKPhysicsBody(rectangleOf: item2?.size ?? defaultSize)
+                        //THIS LINE IS THE PROBLEM. WHY THO?!?!
+                
+                let item2HeightMidpoint = (item2?.size.height ?? (defaultHeight * 0.4)) / 2
                 
                 ///Randomise the items being at top or bottom (one at each)
                 let randomPosition = Int.random(in: 1...2)
