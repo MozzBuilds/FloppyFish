@@ -18,7 +18,8 @@
 		A718284F272EDA330002A8B5 /* FloppyFishUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718284E272EDA330002A8B5 /* FloppyFishUITests.swift */; };
 		A718285F272EDB070002A8B5 /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718285E272EDB070002A8B5 /* GameMenu.swift */; };
 		A7182861272EDB2C0002A8B5 /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = A7182860272EDB2C0002A8B5 /* GameMenu.sks */; };
-		A7182864272F46CA0002A8B5 /* CreateObstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7182863272F46CA0002A8B5 /* CreateObstacle.swift */; };
+		A7182864272F46CA0002A8B5 /* ObstacleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */; };
+		A7C6CD3B273D0AF300B0815B /* BackgroundHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +57,8 @@
 		A7182850272EDA330002A8B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A718285E272EDB070002A8B5 /* GameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		A7182860272EDB2C0002A8B5 /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
-		A7182863272F46CA0002A8B5 /* CreateObstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateObstacle.swift; sourceTree = "<group>"; };
+		A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleCreator.swift; sourceTree = "<group>"; };
+		A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +161,8 @@
 		A7182862272F46A10002A8B5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				A7182863272F46CA0002A8B5 /* CreateObstacle.swift */,
+				A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */,
+				A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -297,7 +300,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A718285F272EDB070002A8B5 /* GameMenu.swift in Sources */,
-				A7182864272F46CA0002A8B5 /* CreateObstacle.swift in Sources */,
+				A7182864272F46CA0002A8B5 /* ObstacleCreator.swift in Sources */,
+				A7C6CD3B273D0AF300B0815B /* BackgroundHandler.swift in Sources */,
 				A7182832272EDA300002A8B5 /* GameScene.swift in Sources */,
 				A7182834272EDA300002A8B5 /* GameViewController.swift in Sources */,
 				A718282C272EDA300002A8B5 /* AppDelegate.swift in Sources */,

@@ -15,24 +15,30 @@ struct ColliderType {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    private var background: SKSpriteNode?
     private var traveller: SKSpriteNode?
     
-    var createObstacle: CreateObstacle?
+    var obstacleCreator: ObstacleCreator?
+    var backgroundHandler: BackgroundHandler?
     
     override func didMove(to view: SKView) {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         physicsWorld.contactDelegate = self
-
-        renderBackground()
+        
+        ///Render base background
+        backgroundHandler = BackgroundHandler()
+        backgroundHandler?.renderBackground()
+        
+        ///SetUp the traveller
         setUp()
-        createObstacle = CreateObstacle(delegator: self)
         
-        //Generate Obstacles
-        Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(GameScene.handleItemTimer), userInfo:nil, repeats: true)
+        ///Initialise obstacle creator
+        obstacleCreator = ObstacleCreator (delegator: self)
         
-//        Remove items/cleanup
+        ///Generate obstacles at timed intervals
+        Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
+        
+        ///Remove obstacles/cleanup
         Timer.scheduledTimer(timeInterval: TimeInterval(3.0), target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
     }
     
@@ -52,8 +58,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: CFTimeInterval) {
-        //called before each frame is rendered
-        moveBackground()
+        ///Called before each frame is rendered, moves background
+        backgroundHandler?.moveBackground()
         
         let itemBlock: (SKNode, UnsafeMutablePointer<ObjCBool> ) -> () = { (item, stop) in
             let newItem = item as! SKSpriteNode
@@ -64,35 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enumerateChildNodes(withName: "obstacle2", using: itemBlock)
     }
     
-    @objc func handleItemTimer(timer: Timer) {
-        createObstacle?.renderItem()
-    }
-        
-    private func renderBackground() {
-        
-        for i in 0...3 {
-            let background = SKSpriteNode(imageNamed: "background")
-            background.name = "Background"
-            background.size = CGSize(width: (self.scene?.size.width)!, height: (self.scene?.size.height)!)
-            background.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-            
-            let positionX = CGFloat(i) * background.size.width
-            background.position = CGPoint(x: positionX, y: 0)
-            self.addChild(background)
-            background.zPosition = 0
-        }
-    }
-    
-    private func moveBackground() {
-        
-        let block: (SKNode, UnsafeMutablePointer<ObjCBool>) -> () = { (node, error) in
-            
-            node.position.x -= 2
-            
-            if node.position.x < -((self.scene?.size.width)!) {
-                node.position.x += (self.scene?.size.width)! * 3
-            }
-        }
-        self.enumerateChildNodes(withName: "Background", using: block)
+    @objc func handleObstacleTimer(timer: Timer) {
+        obstacleCreator?.renderObstacle()
     }
 }
