@@ -111,14 +111,17 @@ class CreateObstacle {
                 ///Set item2 to a copy of item1
                 item2 = item1?.copy() as? SKSpriteNode
 
-                ///Scale the height so our traveller can get through the gap
+                ///Scale the initial height so our traveller can get through the gap and we can calculate the size of the gap currently
                 item2?.size.height *= 0.4
                 
-                //height 800, want 400 max
-                let gap = (item2?.size.height)! - (item1?.size.height)! - (delegator.scene?.size.height)!
+                ///Find the current gap between item 1 and 2
+                var gap = (delegator.scene?.size.height)! - (item1?.size.height)! - (item2?.size.height)!
                 
+                ///If gap > 400, it is too easy, so add 50 to item2 height till gap is no longer > 400
                 while gap > 400 {
                     item2?.size.height += CGFloat(50)
+                    gap = (delegator.scene?.size.height)! - (item1?.size.height)! - (item2?.size.height)!
+
                 }
                 
                 ///Set a different colour
@@ -127,7 +130,7 @@ class CreateObstacle {
                 ///Rename to avoid node conflicts
                 item2?.name = "obstacle2"
 //                item2?.physicsBody = SKPhysicsBody(rectangleOf: item2?.size ?? defaultSize)
-                        //THIS LINE IS THE PROBLEM. WHY THO?!?!
+                        //THIS LINE IS THE CRASH PROBLEM
                 
                 let item2HeightMidpoint = (item2?.size.height ?? (defaultHeight * 0.4)) / 2
                 
