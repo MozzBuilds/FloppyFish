@@ -1,0 +1,32 @@
+
+Traveller Physics
+* Angle the traveller is at when climbing/falling/steady
+
+Game rules
+* Hit object, game over
+* Hit floor, game over
+* Max height, not really that important
+
+UIs
+* Traveller needs an actual body
+* Obstacles need deco
+* Main menu is horrific
+
+Features
+* Running score
+
+Long term features
+* Save high score locally
+
+Bugs (or potential bugs)
+* Obstacle position is not yet exact. Hitting what I think is max y of screen height is actually beyond that, so they aren't full size, I don't think
+* Get rid of all force unwrapping and have defaults, by known iPhone 11 or 12 screen sizes as a base. Or detect phone? Idk
+
+Test
+* Test sizes, renders, methods, collisions
+
+Gameplay
+* We want two obstacles more often than 1/3 of the time. Currently its random, 1/3 top, 1/3 bottom 1/3 both
+    ** Really want it more 1/6 top, 2/6 bottom, 4/6 both. Or 1/5, 2/5, 3/5
+    ** Either adjust enum for more values, or get randomInt from 5 or 6 choices, and cases 1, cases 2-3.. etc
+    

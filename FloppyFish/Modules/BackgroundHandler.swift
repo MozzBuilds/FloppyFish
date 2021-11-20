@@ -7,19 +7,26 @@
 
 import SpriteKit
 
-class BackgroundHandler: SKScene {
+class BackgroundHandler {
+    
+    let delegate: SKScene?
+    
+    init(delegate: SKScene) {
+        
+        self.delegate = delegate
+    }
     
     func renderBackground() {
         
         for i in 0...3 {
             let background = SKSpriteNode(imageNamed: "background")
             background.name = "Background"
-            background.size = CGSize(width: (self.scene?.size.width)!, height: (self.scene?.size.height)!)
+            background.size = CGSize(width: (delegate?.scene?.size.width)!, height: (delegate?.scene?.size.height)!)
             background.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             
             let positionX = CGFloat(i) * background.size.width
             background.position = CGPoint(x: positionX, y: 0)
-            self.addChild(background)
+            delegate?.addChild(background)
             background.zPosition = 0
         }
     }
@@ -30,10 +37,10 @@ class BackgroundHandler: SKScene {
             
             node.position.x -= 2
             
-            if node.position.x < -((self.scene?.size.width)!) {
-                node.position.x += (self.scene?.size.width)! * 3
+            if node.position.x < -((self.delegate?.scene?.size.width)!) {
+                node.position.x += (self.delegate?.scene?.size.width)! * 3
             }
         }
-        self.enumerateChildNodes(withName: "Background", using: block)
+        delegate?.enumerateChildNodes(withName: "Background", using: block)
     }
 }

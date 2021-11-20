@@ -24,7 +24,7 @@ enum ObstacleSizes: CGFloat, CaseIterable {
 
 class ObstacleCreator {
     
-    let delegator: SKScene
+    let delegate: SKScene
     var obstacle1: SKSpriteNode?
     var obstacle2: SKSpriteNode?
     
@@ -33,23 +33,17 @@ class ObstacleCreator {
     var defaultSize = CGSize(width: 60, height: 300)
     let defaultColor: UIColor = .black
     
-    init(delegator: SKScene) {
+    init(delegate: SKScene) {
         
-        self.delegator = delegator
+        self.delegate = delegate
         
         defaultSize = CGSize(width: defaultWidth, height: 300)
     }
     
     func renderObstacle() {
-        
-        ///Randomise the size of the obstacle
+        ///Randomise the size of the obstacle and set anchor
         setObstacleSize()
-        
-        ///Set the physics. Done before setting position, as we make a copy of obstacle2 for two obstacles at the same time
         obstacle1?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        obstacle1?.physicsBody = SKPhysicsBody(rectangleOf: obstacle1?.size ?? defaultSize)
-        obstacle1?.physicsBody?.collisionBitMask = 0
-        obstacle1?.physicsBody?.affectedByGravity = false
 
         ///Randomise the position of the obstacle, be it top/bottom or both, according to enum
         let randomObstaclePosition = ObstaclePositions.allCases.randomElement()
@@ -67,14 +61,14 @@ class ObstacleCreator {
             
         obstacle2?.removeFromParent()
         
-        obstacle1 != nil ? delegator.addChild(obstacle1!) : nil
-        obstacle2 != nil ? delegator.addChild(obstacle2!) : nil
+        obstacle1 != nil ? delegate.addChild(obstacle1!) : nil
+        obstacle2 != nil ? delegate.addChild(obstacle2!) : nil
         
     }
     
     func setObstacleSize() {
         
-        let maxHeight = delegator.scene?.size.height ?? 700
+        let maxHeight = delegate.scene?.size.height ?? 700
             
         ///Choose a random obstacle from ItemSizes enum
         let randomObstacleSize = ObstacleSizes.allCases.randomElement()
@@ -90,10 +84,10 @@ class ObstacleCreator {
         
         ///Calculate middle points
         let obstacle1HeightMidpoint = (obstacle1?.size.height ?? defaultHeight) / 2
-        let screenHeightMidpoint = (delegator.scene?.size.height ?? 500) / 2
+        let screenHeightMidpoint = (delegate.scene?.size.height ?? 500) / 2
  
         //Set x and z positions, and top position of obstacle1
-        obstacle1?.position.x = delegator.scene?.size.width ?? 300
+        obstacle1?.position.x = delegate.scene?.size.width ?? 300
         obstacle1?.zPosition = 30
         obstacle1?.name = "obstacle1"
         let obstacle1PositionTop: CGFloat = screenHeightMidpoint - obstacle1HeightMidpoint
@@ -102,9 +96,17 @@ class ObstacleCreator {
         
             case .TOP:
                 obstacle1?.position.y = obstacle1PositionTop
+                obstacle1?.physicsBody = SKPhysicsBody(rectangleOf: obstacle1?.size ?? defaultSize)
+                obstacle1?.physicsBody?.collisionBitMask = 0
+                obstacle1?.physicsBody?.affectedByGravity = false
+                obstacle1?.physicsBody?.isDynamic = false
                 
             case .BOTTOM:
                 obstacle1?.position.y = -(obstacle1PositionTop)
+                obstacle1?.physicsBody = SKPhysicsBody(rectangleOf: obstacle1?.size ?? defaultSize)
+                obstacle1?.physicsBody?.collisionBitMask = 0
+                obstacle1?.physicsBody?.affectedByGravity = false
+                obstacle1?.physicsBody?.isDynamic = false
                 
             case .BOTH:
                 
@@ -115,12 +117,12 @@ class ObstacleCreator {
                 obstacle2?.size.height *= 0.4
                 
                 ///Find the current gap between obstacle 1 and 2
-                var gap = (delegator.scene?.size.height)! - (obstacle1?.size.height)! - (obstacle2?.size.height)!
+                var gap = (delegate.scene?.size.height)! - (obstacle1?.size.height)! - (obstacle2?.size.height)!
                 
                 ///If gap > 400, it is too easy, so add 50 to obstacle2 height till gap is no longer > 400
                 while gap > 400 {
                     obstacle2?.size.height += CGFloat(50)
-                    gap = (delegator.scene?.size.height)! - (obstacle1?.size.height)! - (obstacle2?.size.height)!
+                    gap = (delegate.scene?.size.height)! - (obstacle1?.size.height)! - (obstacle2?.size.height)!
 
                 }
                 
@@ -129,8 +131,18 @@ class ObstacleCreator {
                 
                 ///Rename to avoid node conflicts
                 obstacle2?.name = "obstacle2"
-//                obstacle2?.physicsBody = SKPhysicsBody(rectangleOf: obstacle2?.size ?? defaultSize)
-                        //THIS LINE IS THE CRASH PROBLEM
+                
+                ///Set the physics body sizes now size is complete
+                obstacle1?.position.y = obstacle1PositionTop
+                obstacle1?.physicsBody = SKPhysicsBody(rectangleOf: obstacle1?.size ?? defaultSize)
+                obstacle1?.physicsBody?.collisionBitMask = 0
+                obstacle1?.physicsBody?.affectedByGravity = false
+                obstacle1?.physicsBody?.isDynamic = false
+                
+                obstacle2?.physicsBody = SKPhysicsBody(rectangleOf: obstacle2?.size ?? defaultSize)
+                obstacle2?.physicsBody?.collisionBitMask = 0
+                obstacle2?.physicsBody?.affectedByGravity = false
+                obstacle2?.physicsBody?.isDynamic = false
                 
                 let obstacle2HeightMidpoint = (obstacle2?.size.height ?? (defaultHeight * 0.4)) / 2
                 
