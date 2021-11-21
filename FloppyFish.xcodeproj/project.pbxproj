@@ -19,6 +19,7 @@
 		A718285F272EDB070002A8B5 /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718285E272EDB070002A8B5 /* GameMenu.swift */; };
 		A7182861272EDB2C0002A8B5 /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = A7182860272EDB2C0002A8B5 /* GameMenu.sks */; };
 		A7182864272F46CA0002A8B5 /* ObstacleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */; };
+		A793E6712749D11A00F1596E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A793E6702749D11A00F1596E /* Settings.swift */; };
 		A7C6CD3B273D0AF300B0815B /* BackgroundHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */; };
 		A7C6CD3D273D117800B0815B /* ToDoList.txt in Resources */ = {isa = PBXBuildFile; fileRef = A7C6CD3C273D117800B0815B /* ToDoList.txt */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		A718285E272EDB070002A8B5 /* GameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		A7182860272EDB2C0002A8B5 /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
 		A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleCreator.swift; sourceTree = "<group>"; };
+		A793E6702749D11A00F1596E /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundHandler.swift; sourceTree = "<group>"; };
 		A7C6CD3C273D117800B0815B /* ToDoList.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ToDoList.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,6 +168,7 @@
 			children = (
 				A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */,
 				A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */,
+				A793E6702749D11A00F1596E /* Settings.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				A7182864272F46CA0002A8B5 /* ObstacleCreator.swift in Sources */,
 				A7C6CD3B273D0AF300B0815B /* BackgroundHandler.swift in Sources */,
 				A7182832272EDA300002A8B5 /* GameScene.swift in Sources */,
+				A793E6712749D11A00F1596E /* Settings.swift in Sources */,
 				A7182834272EDA300002A8B5 /* GameViewController.swift in Sources */,
 				A718282C272EDA300002A8B5 /* AppDelegate.swift in Sources */,
 			);

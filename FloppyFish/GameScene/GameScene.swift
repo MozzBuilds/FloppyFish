@@ -50,7 +50,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setUpScoreLabel() {
-//        scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
         scoreLabel?.text = String(0)
         scoreLabel?.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 3)
     }
@@ -125,15 +124,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: CFTimeInterval) {
         ///Auto called before each frame is rendered
         backgroundHandler?.moveBackground()
-            
-        let obstacleBlock: (SKNode, UnsafeMutablePointer<ObjCBool> ) -> () = { (obstacle, stop) in
-            let newItem = obstacle as! SKSpriteNode
-            newItem.position.x -= 5 ///set the X speed
-        }
         
         ///Look out for new nodes
-        enumerateChildNodes(withName: "obstacle", using: obstacleBlock)
-//        enumerateChildNodes(withName: "obstacle2", using: obstacleBlock)
+        enumerateChildNodes(withName: "obstacle", using: { (obstacle, stop) in
+            let newItem = obstacle as! SKSpriteNode
+            newItem.position.x -= 5 ///set the X speed
+        })
     }
     
     @objc func updateScore() {
@@ -158,6 +154,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         ///Auto called when two bodies contact eachother,
         ///Stop Game
+        
+        //Update game score
+        var settings = Settings.sharedInstance
+        if score > settings.highScore {
+            settings.highScore = score
+        }
         
         //Popup here with option to reset Scene
         resetScene()

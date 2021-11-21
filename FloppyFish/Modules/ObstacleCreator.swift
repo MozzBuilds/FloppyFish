@@ -17,9 +17,12 @@ enum ObstaclePositions: CaseIterable {
 enum ObstacleSizes: CGFloat, CaseIterable {
     case XS = 0.35
     case S = 0.40
-    case M = 0.45
-    case L = 0.50
-    case XL = 0.55
+    case SM = 0.43
+    case M = 0.46
+    case ML = 0.48
+    case L = 0.51
+    case XL = 0.54
+    case XXL = 0.58
 }
 
 class ObstacleCreator {
@@ -44,16 +47,15 @@ class ObstacleCreator {
         ///Randomise the size of the obstacle and set anchor
         setObstacleSize()
         obstacle1?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-
-        ///Randomise the position of the obstacle, be it top/bottom or both, according to enum
-        let randomObstaclePosition = ObstaclePositions.allCases.randomElement()
+        
+        let randomObstaclePosition = Int.random(in: 1...9)
         
         switch randomObstaclePosition {
-        case .TOP:
+        case 1...2:
             chooseObstaclePosition(position: ObstaclePositions.TOP)
-        case .BOTTOM:
+        case 3...4:
             chooseObstaclePosition(position: ObstaclePositions.BOTTOM)
-        case .BOTH:
+        case 5...9:
             chooseObstaclePosition(position: ObstaclePositions.BOTH)
         default:
             break
