@@ -63,7 +63,6 @@ class ObstacleCreator {
         
         obstacle1 != nil ? delegate.addChild(obstacle1!) : nil
         obstacle2 != nil ? delegate.addChild(obstacle2!) : nil
-        
     }
     
     func setObstacleSize() {
@@ -86,10 +85,10 @@ class ObstacleCreator {
         let obstacle1HeightMidpoint = (obstacle1?.size.height ?? defaultHeight) / 2
         let screenHeightMidpoint = (delegate.scene?.size.height ?? 500) / 2
  
-        //Set x and z positions, and top position of obstacle1
+        //Set start position, and z (below score label)
         obstacle1?.position.x = delegate.scene?.size.width ?? 300
-        obstacle1?.zPosition = 30
-        obstacle1?.name = "obstacle1"
+        obstacle1?.zPosition = 25
+        obstacle1?.name = "obstacle"
         let obstacle1PositionTop: CGFloat = screenHeightMidpoint - obstacle1HeightMidpoint
         
         switch position {
@@ -123,14 +122,10 @@ class ObstacleCreator {
                 while gap > 400 {
                     obstacle2?.size.height += CGFloat(50)
                     gap = (delegate.scene?.size.height)! - (obstacle1?.size.height)! - (obstacle2?.size.height)!
-
                 }
                 
                 ///Set a different colour
                 obstacle2?.color = .red
-                
-                ///Rename to avoid node conflicts
-                obstacle2?.name = "obstacle2"
                 
                 ///Set the physics body sizes now size is complete
                 obstacle1?.position.y = obstacle1PositionTop

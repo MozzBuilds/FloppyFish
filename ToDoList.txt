@@ -2,18 +2,11 @@
 Traveller Physics
 * Angle the traveller is at when climbing/falling/steady
 
-Game rules
-* Hit object, game over
-* Hit floor, game over
-* Max height, not really that important
-
 UIs
 * Traveller needs an actual body
 * Obstacles need deco
 * Main menu is horrific
 
-Features
-* Running score
 
 Long term features
 * Save high score locally

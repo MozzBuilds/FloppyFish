@@ -9,10 +9,10 @@ import SpriteKit
 import GameplayKit
 
 struct ColliderType {
-    static let TRAVELLER_COLLIDER: UInt32 = 0
-    static let OBSTACLE_COLLIDER: UInt32 = 1
-    static let MIN_BOUNDARY_COLLIDER: UInt32 = 2
-    static let MAX_BOUNDARY_COLLIDER: UInt32 = 3
+    static let traveller: UInt32 = 0
+    static let obstacle: UInt32 = 1
+    static let minBoundary: UInt32 = 2
+    static let maxBoundary: UInt32 = 3
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -22,15 +22,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var obstacleCreator: ObstacleCreator?
     private var backgroundHandler: BackgroundHandler?
     
-    private var playToggle = true
-            
+    private var score = 0
+    private var scoreLabel: SKLabelNode?
+                
     override func didMove(to view: SKView) {
-        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        ///Scale scene to screensize
         scene?.scaleMode = SKSceneScaleMode.resizeFill
+
+        ///Set base point for anchoring objects, from centerpoints
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
+        ///Initialise objects
         obstacleCreator = ObstacleCreator (delegate: self)
+        scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
 
         setUpBackground()
+        setUpScoreLabel()
         setUpWorld()
         setUpBoundaries()
         setUpTraveller()
@@ -42,50 +49,72 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundHandler?.renderBackground()
     }
     
+    func setUpScoreLabel() {
+//        scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
+        scoreLabel?.text = String(0)
+        scoreLabel?.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 3)
+    }
+    
     func setUpWorld() {
         physicsWorld.gravity = CGVector(dx: 0, dy: -8.0)
         physicsWorld.contactDelegate = self
     }
     
     func setUpBoundaries() {
-        guard let minBoundary = self.childNode(withName: "minBoundary") as? SKSpriteNode else { return }
+        ///Lower boundary for collision, and upper
+        guard let minBoundary = childNode(withName: "minBoundary") as? SKSpriteNode else { return }
         minBoundary.physicsBody = SKPhysicsBody(rectangleOf: minBoundary.size)
-        minBoundary.physicsBody?.categoryBitMask = ColliderType.MIN_BOUNDARY_COLLIDER
+        minBoundary.physicsBody?.categoryBitMask = ColliderType.minBoundary
         minBoundary.physicsBody?.collisionBitMask = 0
         minBoundary.physicsBody?.affectedByGravity = false
         minBoundary.physicsBody?.isDynamic = false
         
-        guard let maxBoundary = self.childNode(withName: "maxBoundary") as? SKSpriteNode else { return }
+        guard let maxBoundary = childNode(withName: "maxBoundary") as? SKSpriteNode else { return }
         maxBoundary.physicsBody = SKPhysicsBody(rectangleOf: maxBoundary.size)
-        maxBoundary.physicsBody?.categoryBitMask = ColliderType.MAX_BOUNDARY_COLLIDER
+        maxBoundary.physicsBody?.categoryBitMask = ColliderType.maxBoundary
         maxBoundary.physicsBody?.collisionBitMask = 0
         maxBoundary.physicsBody?.affectedByGravity = false
         maxBoundary.physicsBody?.isDynamic = false
     }
     
     func setUpTraveller() {
-        traveller = self.childNode(withName: "traveller") as? SKSpriteNode
+        ///Initialise from GameSceke.sks SpriteNode
+        traveller = childNode(withName: "traveller") as? SKSpriteNode
+        
+        ///Default start position
         traveller?.position = CGPoint(x: -frame.size.width / 3, y: 0)
+        
         traveller?.physicsBody = SKPhysicsBody(rectangleOf: traveller?.size ?? CGSize(width: 50, height: 50))
-        traveller?.physicsBody?.categoryBitMask = ColliderType.TRAVELLER_COLLIDER
-        traveller?.physicsBody?.contactTestBitMask = ColliderType.OBSTACLE_COLLIDER | ColliderType.MIN_BOUNDARY_COLLIDER | ColliderType.MAX_BOUNDARY_COLLIDER
-        traveller?.physicsBody?.collisionBitMask = ColliderType.OBSTACLE_COLLIDER | ColliderType.MIN_BOUNDARY_COLLIDER | ColliderType.MAX_BOUNDARY_COLLIDER
-        traveller?.physicsBody?.affectedByGravity = true
-        traveller?.physicsBody?.isDynamic = true
+        
+        ///Setting traveller physics category for interaction
+        traveller?.physicsBody?.categoryBitMask = ColliderType.traveller
+        
+        ///Check if they occupy the same space
+        traveller?.physicsBody?.contactTestBitMask = ColliderType.obstacle | ColliderType.minBoundary | ColliderType.maxBoundary
+        
+        ///Check if they have collided
+        traveller?.physicsBody?.collisionBitMask = ColliderType.obstacle | ColliderType.minBoundary | ColliderType.maxBoundary
     }
     
     func setUpTimers() {
-        if playToggle == true {
-            ///Generate obstacles at timed intervals
-            Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
-            
-            ///Remove obstacles/cleanup
-            Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
+        ///Var for timer interals
+        let timeInterval = TimeInterval(1.0)
+        let delay = DispatchTime.now() + 3.0
+        
+        ///Generate obstacles at timed intervals
+        Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
+        
+        ///Remove obstacles/cleanup
+        Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
+        
+        ///Update sccore
+        DispatchQueue.main.asyncAfter(deadline: delay) {
+            Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.updateScore), userInfo: nil, repeats: true)
         }
     }
     
     @objc func cleanUp() {
-        ///Removes nodes no longer visible on screen, looping through all nodes
+        ///Removes nodes no longer visible on screen
         for child in children {
             if child.position.x < -self.size.width - 50 {
                 child.removeFromParent()
@@ -94,26 +123,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: CFTimeInterval) {
-        ///Called before each frame is rendered, moves background
-        if playToggle == true {
-            backgroundHandler?.moveBackground()
+        ///Auto called before each frame is rendered
+        backgroundHandler?.moveBackground()
             
-            let obstacleBlock: (SKNode, UnsafeMutablePointer<ObjCBool> ) -> () = { (obstacle, stop) in
-                let newItem = obstacle as! SKSpriteNode
-                newItem.position.x -= 5 ///set the X speed
-            }
-            
-            enumerateChildNodes(withName: "obstacle1", using: obstacleBlock)
-            enumerateChildNodes(withName: "obstacle2", using: obstacleBlock)
+        let obstacleBlock: (SKNode, UnsafeMutablePointer<ObjCBool> ) -> () = { (obstacle, stop) in
+            let newItem = obstacle as! SKSpriteNode
+            newItem.position.x -= 5 ///set the X speed
         }
+        
+        ///Look out for new nodes
+        enumerateChildNodes(withName: "obstacle", using: obstacleBlock)
+//        enumerateChildNodes(withName: "obstacle2", using: obstacleBlock)
+    }
+    
+    @objc func updateScore() {
+        score += 1
+        scoreLabel?.text = String(score)
     }
     
     @objc func handleObstacleTimer(timer: Timer) {
-        ///Handler for the scheduled timer
-        playToggle == true ? obstacleCreator?.renderObstacle() : nil
+        ///At each scheduled timer interval, render obstacles
+        obstacleCreator?.renderObstacle()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        ///Auto called when user touches anywhere on screen
         for _ in touches {
             traveller?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
             let impulse = CGVector(dx: 0, dy: 140)
@@ -122,17 +156,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        ///Called when two bodies contact eachother,
-        
+        ///Auto called when two bodies contact eachother,
         ///Stop Game
-        playToggle = false
         
-        ///Popup here with option to reset Scene
+        //Popup here with option to reset Scene
         resetScene()
     }
     
     func resetScene() {
+        ///Wipes scene and starts fresh
         let gameScene = SKScene(fileNamed: "GameScene")!
         gameScene.scaleMode = .aspectFill
-        view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 0.9))    }
+        view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 0.5))
+    }
 }
