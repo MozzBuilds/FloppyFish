@@ -11,11 +11,10 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
-    var settings: Settings?
+    static var highScore = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.settings = Settings()
         
         if let view = self.view as! SKView? {
             /// Load the SKScene from 'GameScene.sks'
@@ -49,4 +48,5 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
 }

@@ -17,7 +17,8 @@ struct ColliderType {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    private var settings: Settings?
+    ///Stored for the life of the app. Needs moved eventually
+    static var highScore = 0
     
     private var traveller: SKSpriteNode?
     
@@ -31,11 +32,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         ///Set base point for anchoring objects, from centerpoints
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.scaleMode = .resizeFill
         
         ///Initialise objects
         obstacleCreator = ObstacleCreator (delegate: self)
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
-//        gameOverLabel = childNode(withName: "gameOverLabel") as? SKLabelNode
 
         setUpBackground()
         setUpScoreLabel()
@@ -170,11 +171,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var scoreMessage = "Final Score: \(score)"
         
         ///Update high score if required, and message
-        if score > settings.highScore {
-            settings.highScore = score
+        if score > GameScene.highScore {
+            GameScene.highScore = score
             scoreMessage += "\n New high score!"
         } else {
-            scoreMessage += "\n High Score: \(settings.highScore)"
+            scoreMessage += "\n High Score: \(GameScene.highScore)"
         }
         
         ///Popup with score
