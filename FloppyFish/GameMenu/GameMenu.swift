@@ -9,7 +9,7 @@ import SpriteKit
 import GameplayKit
 
 class GameMenu: SKScene {
-        
+            
     override func didMove(to view: SKView) {
         
 //        self.label = self.childNode(withName: "//titleLabel") as? SKLabelNode
@@ -17,7 +17,6 @@ class GameMenu: SKScene {
 //            label.alpha = 0.0
 //            label.run(SKAction.fadeIn(withDuration: 2.0))
 //        }
-        _ = Settings.sharedInstance
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

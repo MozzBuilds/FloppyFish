@@ -8,7 +8,5 @@
 import Foundation
 
 struct Settings {
-    static let sharedInstance = Settings()
-    
     var highScore = 0
 }

@@ -17,6 +17,8 @@ struct ColliderType {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    private var settings: Settings?
+    
     private var traveller: SKSpriteNode?
     
     private var obstacleCreator: ObstacleCreator?
@@ -26,8 +28,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var scoreLabel: SKLabelNode?
                 
     override func didMove(to view: SKView) {
-        ///Scale scene to screensize
-        scene?.scaleMode = SKSceneScaleMode.resizeFill
 
         ///Set base point for anchoring objects, from centerpoints
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -35,6 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Initialise objects
         obstacleCreator = ObstacleCreator (delegate: self)
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
+//        gameOverLabel = childNode(withName: "gameOverLabel") as? SKLabelNode
 
         setUpBackground()
         setUpScoreLabel()
@@ -122,47 +123,77 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: CFTimeInterval) {
-        ///Auto called before each frame is rendered
-        backgroundHandler?.moveBackground()
-        
-        ///Look out for new nodes
-        enumerateChildNodes(withName: "obstacle", using: { (obstacle, stop) in
-            let newItem = obstacle as! SKSpriteNode
-            newItem.position.x -= 5 ///set the X speed
-        })
+        if !isPaused {
+            ///Auto called before each frame is rendered
+            backgroundHandler?.moveBackground()
+
+            ///Look out for new nodes
+            enumerateChildNodes(withName: "obstacle", using: { (obstacle, stop) in
+                let newItem = obstacle as! SKSpriteNode
+                newItem.position.x -= 5 ///set the X speed
+            })
+            }
     }
     
     @objc func updateScore() {
-        score += 1
-        scoreLabel?.text = String(score)
+        if !isPaused {
+            score += 1
+            scoreLabel?.text = String(score)
+        }
     }
     
     @objc func handleObstacleTimer(timer: Timer) {
         ///At each scheduled timer interval, render obstacles
-        obstacleCreator?.renderObstacle()
+        if !isPaused {
+            obstacleCreator?.renderObstacle()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         ///Auto called when user touches anywhere on screen
-        for _ in touches {
-            traveller?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-            let impulse = CGVector(dx: 0, dy: 140)
-            traveller?.physicsBody?.applyImpulse(impulse)
+        if !isPaused {
+            for _ in touches {
+                traveller?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                let impulse = CGVector(dx: 0, dy: 140)
+                traveller?.physicsBody?.applyImpulse(impulse)
+            }
         }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
         ///Auto called when two bodies contact eachother,
-        ///Stop Game
         
-        //Update game score
-        var settings = Settings.sharedInstance
+        ///Pause game
+        isPaused = true
+        
+        ///Set final score message
+        var scoreMessage = "Final Score: \(score)"
+        
+        ///Update high score if required, and message
         if score > settings.highScore {
             settings.highScore = score
+            scoreMessage += "\n New high score!"
+        } else {
+            scoreMessage += "\n High Score: \(settings.highScore)"
         }
         
+        ///Popup with score
+        let gameOverAlert = UIAlertController(title: "Game over!",
+                                      message: scoreMessage,
+                                      preferredStyle: .alert)
+        
+        ///Action to start again, with handler block
+        gameOverAlert.addAction(UIAlertAction(title: "Play Again?",
+                                              style: .default,
+                                              handler: {_ in
+                                                self.resetScene()
+                                              }))
+        
+        ///Call view controller to present alert
+        self.view?.window?.rootViewController?.present(gameOverAlert, animated: true, completion: nil)
+        
         //Popup here with option to reset Scene
-        resetScene()
+//        resetScene()
     }
     
     func resetScene() {

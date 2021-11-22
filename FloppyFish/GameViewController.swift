@@ -10,17 +10,20 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    
+    var settings: Settings?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.settings = Settings()
         
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
+            /// Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameMenu") {
-                // Set the scale mode to scale to fit the window
+                /// Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                
-                // Present the scene
+
+                /// Present the scene
                 view.presentScene(scene)
             }
             
