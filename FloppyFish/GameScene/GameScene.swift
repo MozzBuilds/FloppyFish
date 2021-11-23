@@ -17,7 +17,7 @@ struct ColliderType {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    ///Stored for the life of the app. Needs moved eventually
+    ///Stored for the life of the app. Needs moved eventually, especially if we need it anywhere else
     static var highScore = 0
     
     private var traveller: SKSpriteNode?
@@ -36,10 +36,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ///Initialise objects
         obstacleCreator = ObstacleCreator (delegate: self)
-        scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
 
         setUpBackground()
         setUpScoreLabel()
+        setUpScoreBackground()
         setUpWorld()
         setUpBoundaries()
         setUpTraveller()
@@ -52,8 +52,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setUpScoreLabel() {
+        scoreLabel = SKLabelNode()
+        scoreLabel?.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 2.5)
+        scoreLabel?.zPosition = 50
         scoreLabel?.text = String(0)
-        scoreLabel?.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 3)
+
+        ///Styling Properties
+        scoreLabel?.fontSize = 50
+        scoreLabel?.fontColor = .black
+        
+        scoreLabel != nil ? addChild(scoreLabel!) : nil
+    }
+    
+    func setUpScoreBackground() {
+        let scoreBackgroundSize = CGSize(width: 120, height: 70)
+        let scoreBackground = SKShapeNode(rectOf: scoreBackgroundSize, cornerRadius: 10)
+        
+        ///Styling Properties
+        scoreBackground.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 2.5 + 20)
+        scoreBackground.zPosition = 35
+        scoreBackground.fillColor = .white
+        scoreBackground.alpha = 0.6
+        addChild(scoreBackground)
     }
     
     func setUpWorld() {
@@ -133,7 +153,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let newItem = obstacle as! SKSpriteNode
                 newItem.position.x -= 5 ///set the X speed
             })
-            }
+        }
     }
     
     @objc func updateScore() {
@@ -192,9 +212,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ///Call view controller to present alert
         self.view?.window?.rootViewController?.present(gameOverAlert, animated: true, completion: nil)
-        
-        //Popup here with option to reset Scene
-//        resetScene()
     }
     
     func resetScene() {

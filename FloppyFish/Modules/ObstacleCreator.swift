@@ -121,7 +121,7 @@ class ObstacleCreator {
                 var gap = (delegate.scene?.size.height)! - (obstacle1?.size.height)! - (obstacle2?.size.height)!
                 
                 ///If gap > 400, it is too easy, so add 50 to obstacle2 height till gap is no longer > 400
-                while gap > 400 {
+                while gap > 450 {
                     obstacle2?.size.height += CGFloat(50)
                     gap = (delegate.scene?.size.height)! - (obstacle1?.size.height)! - (obstacle2?.size.height)!
                 }
