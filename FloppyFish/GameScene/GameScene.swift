@@ -27,6 +27,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var score = 0
     private var scoreLabel: SKLabelNode?
+    
+    private var countDownTime = 3
                 
     override func didMove(to view: SKView) {
 
@@ -37,6 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Initialise objects
         obstacleCreator = ObstacleCreator (delegate: self)
 
+        ///Run all setUps
         setUpBackground()
         setUpScoreLabel()
         setUpScoreBackground()
@@ -115,12 +118,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ///Check if they have collided
         traveller?.physicsBody?.collisionBitMask = ColliderType.obstacle | ColliderType.minBoundary | ColliderType.maxBoundary
+        
+        ///Initial values only, changed after countdown
+        traveller?.physicsBody?.isDynamic = false
+        traveller?.physicsBody?.affectedByGravity = false
+    }
+    
+    @objc func setUpCountdown () {
+        if countDownTime > 0 {
+        
+            let countDownLabel = SKLabelNode()
+            
+            countDownLabel.fontSize = 100
+            countDownLabel.zPosition = 50
+            countDownLabel.text = String(countDownTime)
+            
+            addChild(countDownLabel)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                countDownLabel.removeFromParent()
+            })
+            
+            countDownTime -= 1
+
+        } else {
+            traveller?.physicsBody?.isDynamic = true
+            traveller?.physicsBody?.affectedByGravity = true
+        }
     }
     
     func setUpTimers() {
         ///Var for timer interals
         let timeInterval = TimeInterval(1.0)
         let delay = DispatchTime.now() + 3.0
+        
+        ///Generate countdown
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.6), target: self, selector: #selector(GameScene.setUpCountdown), userInfo: nil, repeats: true)
         
         ///Generate obstacles at timed intervals
         Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
