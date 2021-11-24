@@ -8,12 +8,6 @@
 import Foundation
 import SpriteKit
 
-enum ObstaclePositions: CaseIterable {
-    case TOP
-    case BOTTOM
-    case BOTH
-}
-
 enum ObstacleSizes: CGFloat, CaseIterable {
     case XS = 0.35
     case S = 0.40
@@ -27,134 +21,104 @@ enum ObstacleSizes: CGFloat, CaseIterable {
 
 class ObstacleCreator {
     
-    let delegate: SKScene
-    var obstacle1: SKSpriteNode?
-    var obstacle2: SKSpriteNode?
+    private var delegate: SKScene?
     
-    let defaultWidth: CGFloat = 60
-    let defaultHeight: CGFloat = 300
-    var defaultSize = CGSize(width: 60, height: 300)
-    let defaultColor: UIColor = .black
+    private var obstacle1: SKSpriteNode!
+    private var obstacle2: SKSpriteNode!
+    private var obstacles: [SKSpriteNode]!
+    
+    private let defaultWidth: CGFloat = 60
+    private let defaultHeight: CGFloat = 300
+    private var defaultSize = CGSize(width: 60, height: 300)
+    private let defaultColor: UIColor = .black
     
     init(delegate: SKScene) {
-        
         self.delegate = delegate
-        
         defaultSize = CGSize(width: defaultWidth, height: 300)
     }
     
-    func renderObstacle() {
-        ///Randomise the size of the obstacle and set anchor
-        setObstacleSize()
-        obstacle1?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+    func renderObstacles() {
+        obstacle1 = SKSpriteNode()
+        obstacle2 = SKSpriteNode()
+        obstacles = [obstacle1, obstacle2]
         
-        let randomObstaclePosition = Int.random(in: 1...9)
+        setSizes()
+        setPositions()
+        setPhysics()
+        setStyles()
         
-        switch randomObstaclePosition {
-        case 1...2:
-            chooseObstaclePosition(position: ObstaclePositions.TOP)
-        case 3...4:
-            chooseObstaclePosition(position: ObstaclePositions.BOTTOM)
-        case 5...9:
-            chooseObstaclePosition(position: ObstaclePositions.BOTH)
-        default:
-            break
+        obstacles.forEach {
+            delegate?.addChild($0)
         }
-            
-        obstacle2?.removeFromParent()
-        
-        obstacle1 != nil ? delegate.addChild(obstacle1!) : nil
-        obstacle2 != nil ? delegate.addChild(obstacle2!) : nil
     }
     
-    func setObstacleSize() {
-        
-        let maxHeight = delegate.scene?.size.height ?? 700
+    func setSizes() {
+        ///Find max screen height
+        let maxHeight = delegate?.scene?.size.height ?? 700
             
-        ///Choose a random obstacle from ItemSizes enum
-        let randomObstacleSize = ObstacleSizes.allCases.randomElement()
+        ///Choose a random size for obstacle 1 from ItemSizes enum
+        guard let randomSize = ObstacleSizes.allCases.randomElement()?.rawValue else { return }
+          
+        ///Obstacle Sizes (start point for obstacle 2)
+        obstacle1.size = CGSize(width: defaultWidth, height: maxHeight * randomSize)
+        obstacle2.size = CGSize(width: defaultWidth, height: obstacle1.size.height * 0.4)
         
-        let randomObstacleSizeHeight = randomObstacleSize?.rawValue ?? 0.4
-        
-        let size = CGSize(width: defaultWidth, height: maxHeight * randomObstacleSizeHeight)
-        
-        obstacle1 = SKSpriteNode(color: defaultColor, size: size)
+        ///Find the current gap between obstacle 1 and 2
+        var gap = (delegate?.scene?.size.height)! - (obstacle1.size.height) - (obstacle2.size.height)
+            
+        ///If gap > 450, it is too easy, so add 50 to obstacle2 height till gap is no longer > 400
+        while gap > 450 {
+            obstacle2.size.height += CGFloat(50)
+            gap = (delegate?.scene?.size.height)! - (obstacle1.size.height) - (obstacle2.size.height)
+        }
     }
     
-    func chooseObstaclePosition(position: ObstaclePositions) {
+    func setPositions() {
+        
+        ///Set the identical properties
+        obstacles.forEach{
+            $0.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+            $0.name = "obstacle"
+            $0.position.x = delegate?.scene?.size.width ?? 300
+            $0.zPosition = 25
+        }
         
         ///Calculate middle points
-        let obstacle1HeightMidpoint = (obstacle1?.size.height ?? defaultHeight) / 2
-        let screenHeightMidpoint = (delegate.scene?.size.height ?? 500) / 2
- 
-        //Set start position, and z (below score label)
-        obstacle1?.position.x = delegate.scene?.size.width ?? 300
-        obstacle1?.zPosition = 25
-        obstacle1?.name = "obstacle"
+        let obstacle1HeightMidpoint = obstacle1.size.height / 2
+        let screenHeightMidpoint = (delegate?.scene?.size.height ?? 500) / 2
+        
         let obstacle1PositionTop: CGFloat = screenHeightMidpoint - obstacle1HeightMidpoint
-        
-        switch position {
-        
-            case .TOP:
-                obstacle1?.position.y = obstacle1PositionTop
-                obstacle1?.physicsBody = SKPhysicsBody(rectangleOf: obstacle1?.size ?? defaultSize)
-                obstacle1?.physicsBody?.collisionBitMask = 0
-                obstacle1?.physicsBody?.affectedByGravity = false
-                obstacle1?.physicsBody?.isDynamic = false
-                
-            case .BOTTOM:
-                obstacle1?.position.y = -(obstacle1PositionTop)
-                obstacle1?.physicsBody = SKPhysicsBody(rectangleOf: obstacle1?.size ?? defaultSize)
-                obstacle1?.physicsBody?.collisionBitMask = 0
-                obstacle1?.physicsBody?.affectedByGravity = false
-                obstacle1?.physicsBody?.isDynamic = false
-                
-            case .BOTH:
-                
-                ///Set obstacle2 to a copy of obstacle1
-                obstacle2 = obstacle1?.copy() as? SKSpriteNode
+        obstacle1.position.y = obstacle1PositionTop
 
-                ///Scale the initial height so our traveller can get through the gap and we can calculate the size of the gap currently
-                obstacle2?.size.height *= 0.4
-                
-                ///Find the current gap between obstacle 1 and 2
-                var gap = (delegate.scene?.size.height)! - (obstacle1?.size.height)! - (obstacle2?.size.height)!
-                
-                ///If gap > 400, it is too easy, so add 50 to obstacle2 height till gap is no longer > 400
-                while gap > 450 {
-                    obstacle2?.size.height += CGFloat(50)
-                    gap = (delegate.scene?.size.height)! - (obstacle1?.size.height)! - (obstacle2?.size.height)!
-                }
-                
-                ///Set a different colour
-                obstacle2?.color = .red
-                
-                ///Set the physics body sizes now size is complete
-                obstacle1?.position.y = obstacle1PositionTop
-                obstacle1?.physicsBody = SKPhysicsBody(rectangleOf: obstacle1?.size ?? defaultSize)
-                obstacle1?.physicsBody?.collisionBitMask = 0
-                obstacle1?.physicsBody?.affectedByGravity = false
-                obstacle1?.physicsBody?.isDynamic = false
-                
-                obstacle2?.physicsBody = SKPhysicsBody(rectangleOf: obstacle2?.size ?? defaultSize)
-                obstacle2?.physicsBody?.collisionBitMask = 0
-                obstacle2?.physicsBody?.affectedByGravity = false
-                obstacle2?.physicsBody?.isDynamic = false
-                
-                let obstacle2HeightMidpoint = (obstacle2?.size.height ?? (defaultHeight * 0.4)) / 2
-                
-                ///Randomise the obstacles being at top or bottom (one at each)
-                let randomPosition = Int.random(in: 1...2)
-                
-                if (randomPosition == 1) {
-                    obstacle1?.position.y = obstacle1PositionTop
-                    obstacle2?.position.y = -(screenHeightMidpoint - obstacle2HeightMidpoint)
-                }
-                
-                else if (randomPosition == 2) {
-                    obstacle1?.position.y = -(obstacle1PositionTop)
-                    obstacle2?.position.y = screenHeightMidpoint - obstacle2HeightMidpoint
-                }
+        let obstacle2HeightMidpoint = obstacle2.size.height / 2
+        
+        ///Randomise the obstacles being at top or bottom (one at each)
+        let randomPosition = Int.random(in: 1...2)
+        
+        if (randomPosition == 1) {
+            obstacle1.position.y = obstacle1PositionTop
+            obstacle2.position.y = -(screenHeightMidpoint - obstacle2HeightMidpoint)
         }
+            
+        else if (randomPosition == 2) {
+            obstacle1.position.y = -(obstacle1PositionTop)
+            obstacle2.position.y = screenHeightMidpoint - obstacle2HeightMidpoint
+        }
+    }
+    
+    func setPhysics() {
+        obstacle1.physicsBody = SKPhysicsBody(rectangleOf: obstacle1.size)
+        obstacle2.physicsBody = SKPhysicsBody(rectangleOf: obstacle2.size)
+        
+        obstacles.forEach{
+            $0.physicsBody?.collisionBitMask = 0
+            $0.physicsBody?.affectedByGravity = false
+            $0.physicsBody?.isDynamic = false
+        }
+    }
+    
+    func setStyles() {
+        obstacle1.color = .black
+        obstacle2.color = .red
     }
 }

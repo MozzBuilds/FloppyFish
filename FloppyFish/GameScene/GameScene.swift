@@ -137,7 +137,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     @objc func cleanUp() {
         ///Removes nodes no longer visible on screen
         for child in children {
-            if child.position.x < -self.size.width - 50 {
+            if child.position.x < -self.size.width - 30 {
                 child.removeFromParent()
             }
         }
@@ -166,7 +166,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     @objc func handleObstacleTimer(timer: Timer) {
         ///At each scheduled timer interval, render obstacles
         if !isPaused {
-            obstacleCreator?.renderObstacle()
+            obstacleCreator?.renderObstacles()
         }
     }
     
