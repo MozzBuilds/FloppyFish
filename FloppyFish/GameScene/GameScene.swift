@@ -17,8 +17,7 @@ struct ColliderType {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    ///Stored for the life of the app. Needs moved eventually, especially if we need it anywhere else
-    static var highScore = 0
+    private var highScore = 0
     
     private var traveller: SKSpriteNode?
     
@@ -42,6 +41,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Make buttons hidden to start off with
         self.childNode(withName: "pauseNode")?.isHidden = true
         self.childNode(withName: "gameOverBackground")?.isHidden = true
+        
+        ///Retrieve high score
+        highScore = UserDefaults.standard.integer(forKey: "highScore")
 
         ///Run all setUps
         setUpBackground()
@@ -245,24 +247,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isPaused = true
         
         ///Set final score message
-        let scoreMessage = "\(score)"
-        var highScoreMessage = ""
+        let scoreMessage = "Final Score: \(score)"
+        var highScoreMessage = "High Score: \(highScore)"
         
         ///Update high score if required, and message
-        if score > GameScene.highScore {
-            GameScene.highScore = score
+        if score > highScore {
+            highScore = score
+            UserDefaults.standard.set(highScore, forKey: "highScore")
             highScoreMessage = "New High Score!"
-        }
-        
-        if GameScene.highScore > 0 {
-            highScoreMessage = "High Score: \(GameScene.highScore)"
         }
         
         ///Unhide game over node and set text
         let gameOverNode = childNode(withName: "gameOverBackground")
         gameOverNode?.isHidden = false
         (gameOverNode?.childNode(withName: "gameOverScoreLabel") as? SKLabelNode)?.text = scoreMessage
-        (gameOverNode?.childNode(withName: "gameOverHighScoreLabel") as? SKLabelNode)?.text = highScoreMessage
+        (gameOverNode?.childNode(withName: "highScoreLabel") as? SKLabelNode)?.text = highScoreMessage
     }
     
     func resetScene() {
