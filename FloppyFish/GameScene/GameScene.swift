@@ -38,6 +38,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ///Initialise objects
         obstacleCreator = ObstacleCreator (delegate: self)
+        
+        ///Make buttons hidden to start off with
+        self.childNode(withName: "pauseNode")?.isHidden = true
 
         ///Run all setUps
         setUpBackground()
@@ -144,6 +147,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             traveller?.physicsBody?.isDynamic = true
             traveller?.physicsBody?.affectedByGravity = true
+            self.childNode(withName: "pauseNode")?.isHidden = false
         }
     }
     
@@ -205,13 +209,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         ///Auto called when user touches anywhere on screen
-        if !isPaused {
-            for _ in touches {
-                traveller?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                let impulse = CGVector(dx: 0, dy: 140)
-                traveller?.physicsBody?.applyImpulse(impulse)
+            for touch in touches {
+                
+                let touchLocation = touch.location(in: self)
+                
+                switch atPoint(touchLocation).name {
+                
+                case "pauseNode":
+                    isPaused.toggle()
+
+                default :
+                    if !isPaused {
+                        traveller?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                        let impulse = CGVector(dx: 0, dy: 140)
+                        traveller?.physicsBody?.applyImpulse(impulse)
+                    }
+                }
             }
-        }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -226,13 +240,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Update high score if required, and message
         if score > GameScene.highScore {
             GameScene.highScore = score
-            scoreMessage += "\n New high score!"
+            scoreMessage += "\n New High Score!"
         } else {
             scoreMessage += "\n High Score: \(GameScene.highScore)"
         }
         
         ///Popup with score
-        let gameOverAlert = UIAlertController(title: "Game over!",
+        let gameOverAlert = UIAlertController(title: "Game Over!",
                                       message: scoreMessage,
                                       preferredStyle: .alert)
         

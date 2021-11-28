@@ -28,8 +28,8 @@ class GameMenu: SKScene {
             case "playLabel":
                 let gameScene = SKScene(fileNamed: "GameScene")!
                 gameScene.scaleMode = .aspectFill
-                view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 0.9))
-
+                view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 1.0))
+                
             default: break
 
             }

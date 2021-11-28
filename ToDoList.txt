@@ -4,15 +4,25 @@ Traveller Physics
 
 UIs
 * Traveller needs an actual body
-* Obstacles need deco
-* Main menu is horrific
+* Obstacles decoration
+* Own background
+* Main menu prettyness
+    ** Background
+    ** Buttons
+    ** Font, logos
+    ** Button press animations
+* Count down animation
+* How to animation on the main menu
+* Pause button logo
+* Countdown going big to small, like THREEeee, TWWOOoo, OOOOnnee...
 
 Long term features
-* Save high score locally
+* Save high score locally upon app closure
 
 Test
 * Test sizes, renders, methods, collisions
 
 Gameplay
-* Countdown going big to small, like THREEeee, TWWOOoo, OOOOnnee... as the game plays. Maybe toggle traveller gravity to false, then true after countdown?
-    
+* (Maybe) Separate background and ground. Ground becomes obstacle. Results in more physics, but might help with different screen sizes (guessing!), and better U
+* Main menu button
+
