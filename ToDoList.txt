@@ -23,6 +23,9 @@ Test
 * Test sizes, renders, methods, collisions
 
 Gameplay
+* Game over button is actually a node, that has two nodes within it. Play again and main menu
+
+UI Requiring Gameplay changes
+* Border at the top for buttons? All tube y positions will have to change by border height.. like deletgate.childNode(withName: topBorder).size.height
 * (Maybe) Separate background and ground. Ground becomes obstacle. Results in more physics, but might help with different screen sizes (guessing!), and better U
-* Main menu button
 

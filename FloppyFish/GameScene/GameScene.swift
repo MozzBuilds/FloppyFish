@@ -217,6 +217,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 case "pauseNode":
                     isPaused.toggle()
+                    
+                case "menuNode":
+                    guard let menuScene = SKScene(fileNamed: "GameMenu") else { return }
+                    menuScene.scaleMode = .aspectFill
+                    view?.presentScene(menuScene, transition: SKTransition.fade(withDuration: 0.5))
 
                 default :
                     if !isPaused {
@@ -255,6 +260,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                               style: .default,
                                               handler: {_ in
                                                 self.resetScene()
+                                              }))
+        
+        ///And to access main menu
+        gameOverAlert.addAction(UIAlertAction(title: "Main Manu",
+                                              style: .default,
+                                              handler: {_ in
+                                                guard let menuScene = SKScene(fileNamed: "GameMenu") else { return }
+                                                menuScene.scaleMode = .aspectFill
+                                                self.view?.presentScene(menuScene, transition: SKTransition.fade(withDuration: 0.5))
                                               }))
         
         ///Call view controller to present alert

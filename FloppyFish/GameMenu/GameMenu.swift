@@ -25,10 +25,10 @@ class GameMenu: SKScene {
             
             switch atPoint(touchLocation).name {
 
-            case "playLabel":
+            case "playLabel", "playBackground":
                 let gameScene = SKScene(fileNamed: "GameScene")!
                 gameScene.scaleMode = .aspectFill
-                view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 1.0))
+                view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 0.5))
                 
             default: break
 
