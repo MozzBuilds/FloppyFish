@@ -41,6 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ///Make buttons hidden to start off with
         self.childNode(withName: "pauseNode")?.isHidden = true
+        self.childNode(withName: "gameOverBackground")?.isHidden = true
 
         ///Run all setUps
         setUpBackground()
@@ -208,6 +209,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         ///Auto called when user touches anywhere on screen
             for touch in touches {
                 
@@ -218,11 +220,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 case "pauseNode":
                     isPaused.toggle()
                     
-                case "menuNode":
+                case "menuNode", "gameOverMenuLabel":
                     guard let menuScene = SKScene(fileNamed: "GameMenu") else { return }
                     menuScene.scaleMode = .aspectFill
                     view?.presentScene(menuScene, transition: SKTransition.fade(withDuration: 0.5))
-
+                    
+                case "playAgainLabel":
+                    resetScene()
+                    
                 default :
                     if !isPaused {
                         traveller?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
@@ -240,39 +245,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isPaused = true
         
         ///Set final score message
-        var scoreMessage = "Final Score: \(score)"
+        let scoreMessage = "\(score)"
+        var highScoreMessage = ""
         
         ///Update high score if required, and message
         if score > GameScene.highScore {
             GameScene.highScore = score
-            scoreMessage += "\n New High Score!"
-        } else {
-            scoreMessage += "\n High Score: \(GameScene.highScore)"
+            highScoreMessage = "New High Score!"
         }
         
-        ///Popup with score
-        let gameOverAlert = UIAlertController(title: "Game Over!",
-                                      message: scoreMessage,
-                                      preferredStyle: .alert)
+        if GameScene.highScore > 0 {
+            highScoreMessage = "High Score: \(GameScene.highScore)"
+        }
         
-        ///Action to start again, with handler block
-        gameOverAlert.addAction(UIAlertAction(title: "Play Again?",
-                                              style: .default,
-                                              handler: {_ in
-                                                self.resetScene()
-                                              }))
-        
-        ///And to access main menu
-        gameOverAlert.addAction(UIAlertAction(title: "Main Manu",
-                                              style: .default,
-                                              handler: {_ in
-                                                guard let menuScene = SKScene(fileNamed: "GameMenu") else { return }
-                                                menuScene.scaleMode = .aspectFill
-                                                self.view?.presentScene(menuScene, transition: SKTransition.fade(withDuration: 0.5))
-                                              }))
-        
-        ///Call view controller to present alert
-        self.view?.window?.rootViewController?.present(gameOverAlert, animated: true, completion: nil)
+        ///Unhide game over node and set text
+        let gameOverNode = childNode(withName: "gameOverBackground")
+        gameOverNode?.isHidden = false
+        (gameOverNode?.childNode(withName: "gameOverScoreLabel") as? SKLabelNode)?.text = scoreMessage
+        (gameOverNode?.childNode(withName: "gameOverHighScoreLabel") as? SKLabelNode)?.text = highScoreMessage
     }
     
     func resetScene() {
