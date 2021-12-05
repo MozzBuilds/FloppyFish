@@ -114,7 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Default start position
         traveller?.position = CGPoint(x: -frame.size.width / 3, y: 0)
         
-        traveller?.physicsBody = SKPhysicsBody(rectangleOf: traveller?.size ?? CGSize(width: 50, height: 50))
+        traveller?.physicsBody = SKPhysicsBody(rectangleOf: traveller?.size ?? CGSize(width: 125, height: 100))
         
         ///Setting traveller physics category for interaction
         traveller?.physicsBody?.categoryBitMask = ColliderType.traveller
@@ -165,6 +165,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Generate obstacles at timed intervals
         Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
         
+        ///Set traveller rotation
+        Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(GameScene.travellerRotator), userInfo: nil, repeats: true)
+        
         ///Remove obstacles/cleanup
         Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
         
@@ -210,6 +213,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    @objc func travellerRotator() {
+        if (traveller?.physicsBody?.velocity.dy)! < 0 {
+            traveller?.zRotation = -0.4
+        } else if (traveller?.physicsBody?.velocity.dy)! > 0 {
+        traveller?.zRotation = 0.4
+        } else { traveller?.zRotation = 0 }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         ///Auto called when user touches anywhere on screen
@@ -233,8 +244,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 default :
                     if !isPaused {
                         traveller?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                        let impulse = CGVector(dx: 0, dy: 140)
-                        traveller?.physicsBody?.applyImpulse(impulse)
+                        traveller?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 250))
                     }
                 }
             }
@@ -245,6 +255,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ///Pause game
         isPaused = true
+        
+        ///Set traveller to other image
+        traveller?.texture = SKTexture(imageNamed: "Fish_Dead")
         
         ///Set final score message
         let scoreMessage = "Final Score: \(score)"
