@@ -38,9 +38,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Initialise objects
         obstacleCreator = ObstacleCreator (delegate: self)
         
-        ///Make buttons hidden to start off with
+        ///Make hidden to start off with
         self.childNode(withName: "pauseNode")?.isHidden = true
-        self.childNode(withName: "gameOverContainer")?.isHidden = true
         
         ///Retrieve high score
         highScore = UserDefaults.standard.integer(forKey: "highScore")
@@ -276,12 +275,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ///Initiate game over labels, injecting the score
         let _ = GameEndedView(delegate: self, score: score, highScore: highScore)
-        
-        ///Unhide game over node and set text
-//        let gameOverNode = childNode(withName: "gameOverBackground")
-//        gameOverNode?.isHidden = false
-//        (gameOverNode?.childNode(withName: "gameOverScoreLabel") as? SKLabelNode)?.text = scoreMessage
-//        (gameOverNode?.childNode(withName: "highScoreLabel") as? SKLabelNode)?.text = highScoreMessage
     }
     
     func resetScene() {
