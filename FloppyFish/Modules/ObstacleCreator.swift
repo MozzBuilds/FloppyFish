@@ -27,19 +27,19 @@ class ObstacleCreator {
     private var obstacle2: SKSpriteNode!
     private var obstacles: [SKSpriteNode]!
     
-    private let defaultWidth: CGFloat = 60
+    private let defaultWidth: CGFloat = 80
     private let defaultHeight: CGFloat = 300
-    private var defaultSize = CGSize(width: 60, height: 300)
+    private let defaultSize: CGSize
     private let defaultColor: UIColor = .black
     
     init(delegate: SKScene) {
         self.delegate = delegate
-        defaultSize = CGSize(width: defaultWidth, height: 300)
+        defaultSize = CGSize(width: defaultWidth, height: defaultHeight)
     }
     
     func renderObstacles() {
-        obstacle1 = SKSpriteNode()
-        obstacle2 = SKSpriteNode()
+        obstacle1 = SKSpriteNode(imageNamed: "Rock")
+        obstacle2 = SKSpriteNode(imageNamed: "Rock")
         obstacles = [obstacle1, obstacle2]
         
         setSizes()
@@ -97,12 +97,16 @@ class ObstacleCreator {
         
         if (randomPosition == 1) {
             obstacle1.position.y = obstacle1PositionTop
+            obstacle1.zRotation = .pi
+            obstacle1.xScale = 1.0
             obstacle2.position.y = -(screenHeightMidpoint - obstacle2HeightMidpoint)
         }
             
         else if (randomPosition == 2) {
             obstacle1.position.y = -(obstacle1PositionTop)
             obstacle2.position.y = screenHeightMidpoint - obstacle2HeightMidpoint
+            obstacle2.xScale = 1.0
+            obstacle2.zRotation = .pi
         }
     }
     

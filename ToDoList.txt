@@ -1,8 +1,8 @@
 UIs
 * Traveller
     -   Fish needs some animation for swimming, 2d swimming
-    -   When dead, eyes go like X
-* Obstacles decoration
+* Obstacle
+    -   Trim instead of resize. Or position differently so its always full size, but can go off screen
 * Own background
 * Main menu prettyness
     ** Background
@@ -15,10 +15,12 @@ UIs
 * Countdown going big to small, like THREEeee, TWWOOoo, OOOOnnee...
 * Move buttons to sensible places to prevent accidental touch
 * Some bubbles from the fish maybe?
+* Make obstacle, traveller, labels, dependent on screen size instead of fixed
 
 Gameplay
 * When pause is pressed, a big play button appears on screen
 * Move high score to some parent or handler struct so game menu can access it
+* Traveller impulse dependent on screen height? But then might want max gap dependent also
 
 Test
 * Test sizes, renders, methods, collisions
@@ -28,6 +30,7 @@ UI Requiring Gameplay changes
 * (Maybe) Separate background and ground. Ground becomes obstacle. Results in more physics, but might help with different screen sizes (guessing!), and better U
 
 Performance
-* Countdown is only needed for first 3 seconds, how can we disable this. Ideally find a way to also be able to run a countdown after pausing
+* Countdown is only needed for first 3 seconds, but the timer runs indefinitely. Need to disable this.
+* Ideally also find a way to also be able to run a countdown after pausing
 
 

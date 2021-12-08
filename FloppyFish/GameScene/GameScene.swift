@@ -111,23 +111,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Initialise from GameSceke.sks SpriteNode
         traveller = childNode(withName: "traveller") as? SKSpriteNode
         
-        ///Default start position
-        traveller?.position = CGPoint(x: -frame.size.width / 3, y: 0)
+        guard let traveller = traveller else { return }
         
-        traveller?.physicsBody = SKPhysicsBody(rectangleOf: traveller?.size ?? CGSize(width: 125, height: 100))
+        ///Default start position
+        traveller.position = CGPoint(x: -frame.size.width / 3, y: 0)
+        
+        ///Physics body a bit smaller than the actual body, because traveller is not a perfect rectangle
+        let physicsBodySize = CGSize(width: traveller.size.width * 0.8, height: traveller.size.height * 0.8)
+        
+        traveller.physicsBody = SKPhysicsBody(rectangleOf: physicsBodySize)
         
         ///Setting traveller physics category for interaction
-        traveller?.physicsBody?.categoryBitMask = ColliderType.traveller
+        traveller.physicsBody?.categoryBitMask = ColliderType.traveller
         
         ///Check if they occupy the same space
-        traveller?.physicsBody?.contactTestBitMask = ColliderType.obstacle | ColliderType.minBoundary | ColliderType.maxBoundary
+        traveller.physicsBody?.contactTestBitMask = ColliderType.obstacle | ColliderType.minBoundary | ColliderType.maxBoundary
         
         ///Check if they have collided
-        traveller?.physicsBody?.collisionBitMask = ColliderType.obstacle | ColliderType.minBoundary | ColliderType.maxBoundary
+        traveller.physicsBody?.collisionBitMask = ColliderType.obstacle | ColliderType.minBoundary | ColliderType.maxBoundary
         
         ///Initial values only, changed after countdown
-        traveller?.physicsBody?.isDynamic = false
-        traveller?.physicsBody?.affectedByGravity = false
+        traveller.physicsBody?.isDynamic = false
+        traveller.physicsBody?.affectedByGravity = false
     }
     
     @objc func setUpCountdown () {
@@ -156,7 +161,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setUpTimers() {
         ///Var for timer interals
-        let timeInterval = TimeInterval(1.0)
+        let timeInterval = TimeInterval(1.2)
         let delay = DispatchTime.now() + 3.0
         
         ///Generate countdown
@@ -244,7 +249,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 default :
                     if !isPaused {
                         traveller?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                        traveller?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 250))
+                        let impulseY = (traveller?.size.height)! * 2 //FORCE UNWRAP
+                        traveller?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulseY))
                     }
                 }
             }
