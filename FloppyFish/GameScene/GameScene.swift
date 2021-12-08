@@ -40,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ///Make buttons hidden to start off with
         self.childNode(withName: "pauseNode")?.isHidden = true
-        self.childNode(withName: "gameOverBackground")?.isHidden = true
+        self.childNode(withName: "gameOverContainer")?.isHidden = true
         
         ///Retrieve high score
         highScore = UserDefaults.standard.integer(forKey: "highScore")
@@ -62,15 +62,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setUpScoreLabel() {
         scoreLabel = SKLabelNode()
-        scoreLabel?.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 2.5)
-        scoreLabel?.zPosition = 50
-        scoreLabel?.text = String(0)
+        
+        guard let scoreLabel = scoreLabel else { return }
+        
+        scoreLabel.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 2.5)
+        scoreLabel.zPosition = 50
+        scoreLabel.text = String(0)
 
         ///Styling Properties
-        scoreLabel?.fontSize = 50
-        scoreLabel?.fontColor = .black
+        scoreLabel.fontSize = 50
+        scoreLabel.fontColor = .black
         
-        scoreLabel != nil ? addChild(scoreLabel!) : nil
+        addChild(scoreLabel)
     }
     
     func setUpScoreBackground() {
@@ -265,22 +268,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Set traveller to other image
         traveller?.texture = SKTexture(imageNamed: "Fish_Dead")
         
-        ///Set final score message
-        let scoreMessage = "Final Score: \(score)"
-        var highScoreMessage = "High Score: \(highScore)"
-        
-        ///Update high score if required, and message
+        ///Update high score if required
         if score > highScore {
             highScore = score
             UserDefaults.standard.set(highScore, forKey: "highScore")
-            highScoreMessage = "New High Score!"
         }
         
+        ///Initiate game over labels, injecting the score
+        let _ = GameEndedView(delegate: self, score: score, highScore: highScore)
+        
         ///Unhide game over node and set text
-        let gameOverNode = childNode(withName: "gameOverBackground")
-        gameOverNode?.isHidden = false
-        (gameOverNode?.childNode(withName: "gameOverScoreLabel") as? SKLabelNode)?.text = scoreMessage
-        (gameOverNode?.childNode(withName: "highScoreLabel") as? SKLabelNode)?.text = highScoreMessage
+//        let gameOverNode = childNode(withName: "gameOverBackground")
+//        gameOverNode?.isHidden = false
+//        (gameOverNode?.childNode(withName: "gameOverScoreLabel") as? SKLabelNode)?.text = scoreMessage
+//        (gameOverNode?.childNode(withName: "highScoreLabel") as? SKLabelNode)?.text = highScoreMessage
     }
     
     func resetScene() {

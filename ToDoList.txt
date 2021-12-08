@@ -1,6 +1,7 @@
 UIs
 * Traveller
-    -   Fish needs some animation for swimming, 2d swimming
+    -   Fish needs some animation for swimming, 2D swimming
+    -   Or just redraw it so it looks 2.5D all the time
 * Obstacle
     -   Trim instead of resize. Or position differently so its always full size, but can go off screen
 * Own background
