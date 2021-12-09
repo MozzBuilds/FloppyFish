@@ -240,12 +240,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 case "pauseNode":
                     isPaused.toggle()
                     
-                case "menuNode", "gameOverMenuLabel":
+                case "menuNode", "gameOverMenuLabel", "gameOverMenuBackground":
                     guard let menuScene = SKScene(fileNamed: "GameMenu") else { return }
                     menuScene.scaleMode = .aspectFill
                     view?.presentScene(menuScene, transition: SKTransition.fade(withDuration: 0.5))
                     
-                case "playAgainLabel":
+                case "playAgainLabel", "playAgainBackground":
                     resetScene()
                     
                 default :

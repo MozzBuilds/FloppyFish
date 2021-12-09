@@ -80,6 +80,9 @@ class GameEndedView {
     func commonLabelProperties() {
         labels.forEach{
             $0.zPosition = 125
+            $0.verticalAlignmentMode = .center
+            $0.horizontalAlignmentMode = .center
+            
             $0.fontName = "Arial"
             $0.fontSize = 72
             $0.fontColor = .black
@@ -90,6 +93,7 @@ class GameEndedView {
         backgrounds.forEach{
             $0.zPosition = 100
             $0.alpha = 0.8
+            //Need to add borders, shading, rounded edges
         }
     }
     
@@ -100,13 +104,10 @@ class GameEndedView {
     
     func renderGameOverBackground() {
         gameOverBackground.name = "gameOverBackground"
-        gameOverBackground.size = CGSize(width: maxWidth, height: maxHeight * 0.3)
+        gameOverBackground.size = CGSize(width: maxWidth, height: maxHeight * 0.5)
         gameOverBackground.position = CGPoint(x: 0, y: maxHeight * 0.5)
         gameOverBackground.color = .blue
         
-//        gameOverLabel.position = CGPoint(x: gameOverBackground.position.x,
-//                                         y: gameOverBackground.position.y)
-//        
         gameOverBackground.addChild(gameOverLabel)
         delegate.addChild(gameOverBackground)
     }
@@ -127,7 +128,7 @@ class GameEndedView {
     func renderScoreBackground() {
         scoreBackground.name = "scoreBackground"
         scoreBackground.size = CGSize(width: maxWidth, height: maxHeight * 0.5)
-        scoreBackground.position = CGPoint(x: 0, y: 0)
+        scoreBackground.position = .zero
         scoreBackground.color = .red
         
         scoreLabel.position = CGPoint(x: scoreBackground.position.x,
@@ -150,9 +151,6 @@ class GameEndedView {
         playAgainBackground.size = CGSize(width: maxWidth * 0.5, height: maxHeight * 0.2)
         playAgainBackground.position = CGPoint(x: 0, y: -maxHeight * 0.5)
         playAgainBackground.color = .green
-        
-//        playAgainLabel.position = CGPoint(x: playAgainBackground.position.x,
-//                                          y: playAgainBackground.position.y)
                 
         playAgainBackground.addChild(playAgainLabel)
         delegate.addChild(playAgainBackground)
@@ -164,16 +162,11 @@ class GameEndedView {
     }
     
     func renderMenuBackground() {
-        menuBackground.name = "menuBackground"
+        menuBackground.name = "gameOverMenuBackground"
         menuBackground.size = CGSize(width: maxWidth * 0.5, height: maxHeight * 0.2)
         menuBackground.position = CGPoint(x: 0, y: -maxHeight * 0.7)
         menuBackground.color = .brown
-        
-//        menuLabel.position = CGPoint(x: menuBackground.position.x,
-//                                     y: menuBackground.position.y)
-        
-//        menuLabel.position = CGPoint(x: 0,y: 0)
-        
+
         menuBackground.addChild(menuLabel)
         delegate.addChild(menuBackground)
     }
