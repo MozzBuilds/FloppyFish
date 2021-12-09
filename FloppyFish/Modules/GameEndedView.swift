@@ -20,55 +20,98 @@ class GameEndedView {
     let maxHeight: CGFloat
     let maxWidth: CGFloat
     
+    var gameOverLabel: SKLabelNode
     var scoreLabel: SKLabelNode
     var highScoreLabel: SKLabelNode
+    var playAgainLabel: SKLabelNode
+    var menuLabel: SKLabelNode
     
+    var gameOverBackground: SKSpriteNode
+    var scoreBackground: SKSpriteNode
+    var playAgainBackground: SKSpriteNode
+    var menuBackground: SKSpriteNode
+    
+    let labels: [SKLabelNode]
+    let backgrounds: [SKSpriteNode]
+        
     init(delegate: SKScene, score: Int, highScore: Int) {
         
         self.delegate = delegate
         self.score = score
         self.highScore = highScore
         
-        maxHeight = delegate.frame.size.height
-        maxWidth = delegate.frame.size.width
-        
+        maxHeight = delegate.frame.size.height / 2
+        maxWidth = delegate.frame.size.width / 2
+                
+        gameOverLabel = SKLabelNode()
         scoreLabel = SKLabelNode()
         highScoreLabel = SKLabelNode()
+        playAgainLabel = SKLabelNode()
+        menuLabel = SKLabelNode()
+        
+        labels = [gameOverLabel, scoreLabel, highScoreLabel, playAgainLabel, menuLabel]
+        
+        gameOverBackground = SKSpriteNode()
+        scoreBackground = SKSpriteNode()
+        playAgainBackground = SKSpriteNode()
+        menuBackground = SKSpriteNode()
+        
+        backgrounds = [gameOverBackground, scoreBackground, playAgainBackground, menuBackground]
+        
+        //Do I need to initialise all these, or can I just set them immediately in the class vars? Makes init a lot shorter
         
         setUpUI()
     }
     
     func setUpUI() {
-        gameOverLabel()
-        gameOverBackground()
-        scoreLabels()
-        scoreBackground()
-        playAgainLabel()
-        playAgainBackground()
-        menuLabel()
-        menuBackground()
+        commonLabelProperties()
+        commonBackgroundProperties()
+        
+        renderGameOverLabel()
+        renderGameOverBackground()
+        renderScoreLabels()
+        renderScoreBackground()
+        renderPlayAgainLabel()
+        renderPlayAgainBackground()
+        renderMenuLabel()
+        renderMenuBackground()
     }
     
-    func gameOverLabel() {
-        let label = SKLabelNode()
-        label.name = "gameOverLabel"
-        
-        label.position = CGPoint(x: 0, y: maxHeight * 0.2)
-        label.zPosition = 100
-        label.text = "Game Over!"
-        
-        label.fontName = "Arial"
-        label.fontSize = 72
-        label.fontColor = .black
-        
-        delegate.addChild(label)
+    func commonLabelProperties() {
+        labels.forEach{
+            $0.zPosition = 125
+            $0.fontName = "Arial"
+            $0.fontSize = 72
+            $0.fontColor = .black
+        }
     }
     
-    func gameOverBackground() {
-        
+    func commonBackgroundProperties() {
+        backgrounds.forEach{
+            $0.zPosition = 100
+            $0.alpha = 0.8
+        }
     }
     
-    func scoreLabels() {
+    func renderGameOverLabel() {
+        gameOverLabel.name = "gameOverLabel"
+        gameOverLabel.text = "Game Over!"
+    }
+    
+    func renderGameOverBackground() {
+        gameOverBackground.name = "gameOverBackground"
+        gameOverBackground.size = CGSize(width: maxWidth, height: maxHeight * 0.3)
+        gameOverBackground.position = CGPoint(x: 0, y: maxHeight * 0.5)
+        gameOverBackground.color = .blue
+        
+//        gameOverLabel.position = CGPoint(x: gameOverBackground.position.x,
+//                                         y: gameOverBackground.position.y)
+//        
+        gameOverBackground.addChild(gameOverLabel)
+        delegate.addChild(gameOverBackground)
+    }
+    
+    func renderScoreLabels() {
         scoreLabel.name = "gameOverScoreLabel"
         highScoreLabel.name = "gameOverHighScoreLabel"
         
@@ -79,71 +122,59 @@ class GameEndedView {
         } else {
             highScoreLabel.text = "Highest: \(highScore)"
         }
+    }
+    
+    func renderScoreBackground() {
+        scoreBackground.name = "scoreBackground"
+        scoreBackground.size = CGSize(width: maxWidth, height: maxHeight * 0.5)
+        scoreBackground.position = CGPoint(x: 0, y: 0)
+        scoreBackground.color = .red
+        
+        scoreLabel.position = CGPoint(x: scoreBackground.position.x,
+                                      y: scoreBackground.position.y + 50)
+        highScoreLabel.position = CGPoint(x: scoreBackground.position.x,
+                                          y: scoreBackground.position.y - 50)
+        
+        scoreBackground.addChild(highScoreLabel)
+        scoreBackground.addChild(scoreLabel)
+        delegate.addChild(scoreBackground)
+    }
+    
+    func renderPlayAgainLabel() {
+        playAgainLabel.name = "playAgainLabel"
+        playAgainLabel.text = "Play?"
+    }
+    
+    func renderPlayAgainBackground() {
+        playAgainBackground.name = "playAgainBackground"
+        playAgainBackground.size = CGSize(width: maxWidth * 0.5, height: maxHeight * 0.2)
+        playAgainBackground.position = CGPoint(x: 0, y: -maxHeight * 0.5)
+        playAgainBackground.color = .green
+        
+//        playAgainLabel.position = CGPoint(x: playAgainBackground.position.x,
+//                                          y: playAgainBackground.position.y)
                 
-        [scoreLabel, highScoreLabel].forEach{
-            $0.zPosition = 125
-            $0.fontName = "Arial"
-            $0.fontSize = 72
-            $0.fontColor = .black
-        }
+        playAgainBackground.addChild(playAgainLabel)
+        delegate.addChild(playAgainBackground)
     }
     
-    func scoreBackground() {
-        let background = SKSpriteNode()
-        background.name = "scoreBackground"
-        
-        background.size = CGSize(width: maxWidth * 0.6, height: maxHeight * 0.3)
-        background.position = CGPoint(x: 0, y: 0)
-        background.zPosition = 100
-        
-        background.color = .red
-        background.alpha = 0.8
-        
-        scoreLabel.position = CGPoint(x: background.position.x,
-                                      y: background.position.y + 50)
-        highScoreLabel.position = CGPoint(x: background.position.x,
-                                          y: background.position.y - 50)
-        
-        background.addChild(highScoreLabel)
-        background.addChild(scoreLabel)
-        delegate.addChild(background)
+    func renderMenuLabel() {
+        menuLabel.name = "gameOverMenuLabel"
+        menuLabel.text = "Menu"
     }
     
-    func playAgainLabel() {
-        let label = SKLabelNode()
-        label.name = "playAgainLabel"
+    func renderMenuBackground() {
+        menuBackground.name = "menuBackground"
+        menuBackground.size = CGSize(width: maxWidth * 0.5, height: maxHeight * 0.2)
+        menuBackground.position = CGPoint(x: 0, y: -maxHeight * 0.7)
+        menuBackground.color = .brown
         
-        label.position = CGPoint(x: 0, y: -maxHeight * 0.2)
-        label.zPosition = 100
-        label.text = "Play?"
+//        menuLabel.position = CGPoint(x: menuBackground.position.x,
+//                                     y: menuBackground.position.y)
         
-        label.fontName = "Arial"
-        label.fontSize = 72
-        label.fontColor = .black
+//        menuLabel.position = CGPoint(x: 0,y: 0)
         
-        delegate.addChild(label)
-    }
-    
-    func playAgainBackground() {
-        
-    }
-    
-    func menuLabel() {
-        let label = SKLabelNode()
-        label.name = "gameOverMenuLabel"
-        
-        label.position = CGPoint(x: 0, y: -maxHeight * 0.3)
-        label.zPosition = 100
-        label.text = "Menu"
-        
-        label.fontName = "Arial"
-        label.fontSize = 72
-        label.fontColor = .black
-        
-        delegate.addChild(label)
-    }
-    
-    func menuBackground() {
-        
+        menuBackground.addChild(menuLabel)
+        delegate.addChild(menuBackground)
     }
 }
