@@ -7,10 +7,6 @@
 
 import SpriteKit
 
-//This class will render all our labels and background nodes
-//Will also update with the score, which we can inject
-//Can either call this class early, hide it, update score manually, or just initiate when needed
-
 class GameEndedView {
     
     let delegate: SKScene
@@ -19,6 +15,7 @@ class GameEndedView {
     
     let maxHeight: CGFloat
     let maxWidth: CGFloat
+    let defaultRadius = CGFloat(15)
     
     var gameOverLabel: SKLabelNode
     var scoreLabel: SKLabelNode
@@ -26,13 +23,7 @@ class GameEndedView {
     var playAgainLabel: SKLabelNode
     var menuLabel: SKLabelNode
     
-    var gameOverBackground: SKSpriteNode
-    var scoreBackground: SKSpriteNode
-    var playAgainBackground: SKSpriteNode
-    var menuBackground: SKSpriteNode
-    
     let labels: [SKLabelNode]
-    let backgrounds: [SKSpriteNode]
         
     init(delegate: SKScene, score: Int, highScore: Int) {
         
@@ -51,21 +42,11 @@ class GameEndedView {
         
         labels = [gameOverLabel, scoreLabel, highScoreLabel, playAgainLabel, menuLabel]
         
-        gameOverBackground = SKSpriteNode()
-        scoreBackground = SKSpriteNode()
-        playAgainBackground = SKSpriteNode()
-        menuBackground = SKSpriteNode()
-        
-        backgrounds = [gameOverBackground, scoreBackground, playAgainBackground, menuBackground]
-        
-        //Do I need to initialise all these, or can I just set them immediately in the class vars? Makes init a lot shorter
-        
         setUpUI()
     }
     
     func setUpUI() {
-        commonLabelProperties()
-        commonBackgroundProperties()
+        commonInitialLabelProperties()
         
         renderGameOverLabel()
         renderGameOverBackground()
@@ -77,7 +58,18 @@ class GameEndedView {
         renderMenuBackground()
     }
     
-    func commonLabelProperties() {
+    //MARK: - Helpers
+    
+    func labelFontSizeToFit(label:SKLabelNode, background:SKSpriteNode) {
+
+        let scalingFactor = min(background.size.width / label.frame.width, background.size.height / label.frame.height)
+
+        label.fontSize *= scalingFactor
+    }
+    
+    //MARK: - Render Labels and Backgrounds
+    
+    func commonInitialLabelProperties() {
         labels.forEach{
             $0.zPosition = 125
             $0.verticalAlignmentMode = .center
@@ -89,12 +81,12 @@ class GameEndedView {
         }
     }
     
-    func commonBackgroundProperties() {
-        backgrounds.forEach{
-            $0.zPosition = 100
-            $0.alpha = 0.8
-            //Need to add borders, shading, rounded edges
-        }
+    func commonFinalBackgroundProperties(background: SKShapeNode) {
+        background.zPosition = 100
+        background.lineWidth = 5
+        
+        background.strokeColor = .black
+        background.alpha = 0.8
     }
     
     func renderGameOverLabel() {
@@ -103,10 +95,14 @@ class GameEndedView {
     }
     
     func renderGameOverBackground() {
+        let gameOverBackground = SKShapeNode(rectOf: CGSize(width: maxWidth, height: maxHeight * 0.5),
+                                        cornerRadius: defaultRadius)
+        
         gameOverBackground.name = "gameOverBackground"
-        gameOverBackground.size = CGSize(width: maxWidth, height: maxHeight * 0.5)
         gameOverBackground.position = CGPoint(x: 0, y: maxHeight * 0.5)
-        gameOverBackground.color = .blue
+        gameOverBackground.fillColor = .blue
+        
+        commonFinalBackgroundProperties(background: gameOverBackground)
         
         gameOverBackground.addChild(gameOverLabel)
         delegate.addChild(gameOverBackground)
@@ -126,13 +122,18 @@ class GameEndedView {
     }
     
     func renderScoreBackground() {
+        let scoreBackground = SKShapeNode(rectOf: CGSize(width: maxWidth, height: maxHeight * 0.5),
+                                          cornerRadius: defaultRadius)
+        
         scoreBackground.name = "scoreBackground"
-        scoreBackground.size = CGSize(width: maxWidth, height: maxHeight * 0.5)
         scoreBackground.position = .zero
-        scoreBackground.color = .red
+        scoreBackground.fillColor = .red
+        
+        commonFinalBackgroundProperties(background: scoreBackground)
         
         scoreLabel.position = CGPoint(x: scoreBackground.position.x,
                                       y: scoreBackground.position.y + 50)
+        
         highScoreLabel.position = CGPoint(x: scoreBackground.position.x,
                                           y: scoreBackground.position.y - 50)
         
@@ -147,10 +148,14 @@ class GameEndedView {
     }
     
     func renderPlayAgainBackground() {
+        let playAgainBackground = SKShapeNode(rectOf: CGSize(width: maxWidth * 0.5, height: maxHeight * 0.2),
+                                              cornerRadius: defaultRadius)
+        
         playAgainBackground.name = "playAgainBackground"
-        playAgainBackground.size = CGSize(width: maxWidth * 0.5, height: maxHeight * 0.2)
         playAgainBackground.position = CGPoint(x: 0, y: -maxHeight * 0.5)
-        playAgainBackground.color = .green
+        playAgainBackground.fillColor = .green
+        
+        commonFinalBackgroundProperties(background: playAgainBackground)
                 
         playAgainBackground.addChild(playAgainLabel)
         delegate.addChild(playAgainBackground)
@@ -162,12 +167,52 @@ class GameEndedView {
     }
     
     func renderMenuBackground() {
+        let menuBackground = SKShapeNode(rectOf: CGSize(width: maxWidth * 0.5, height: maxHeight * 0.2),
+                                         cornerRadius: defaultRadius)
+        
         menuBackground.name = "gameOverMenuBackground"
-        menuBackground.size = CGSize(width: maxWidth * 0.5, height: maxHeight * 0.2)
         menuBackground.position = CGPoint(x: 0, y: -maxHeight * 0.7)
-        menuBackground.color = .brown
+        menuBackground.fillColor = .brown
+        
+        commonFinalBackgroundProperties(background: menuBackground)
 
         menuBackground.addChild(menuLabel)
         delegate.addChild(menuBackground)
     }
 }
+
+//extension SKSpriteNode {
+//    func addBorder(color: UIColor, width: CGFloat) {
+//        let border = SKShapeNode(rectOf: size, cornerRadius: 25)
+//
+//        border.zPosition = 110
+//        border.lineWidth = width
+//
+//        border.fillColor = .clear
+//        border.strokeColor = color
+//        border.alpha = 0.9
+//
+//        addChild(border)
+//    }
+//
+//    func addShadow(width: CGFloat) {
+//        let shadow = SKShapeNode(rectOf: size, cornerRadius: 35)
+//        shadow.zPosition = 100
+//        shadow.lineWidth = width
+//
+//        shadow.fillColor = .clear
+//        shadow.strokeColor = .darkGray
+//        shadow.alpha = 0.2
+//
+//        addChild(shadow)
+//    }
+//
+//    func cropCorners() {
+//        let cropNode = SKCropNode()
+//        let maskNode = SKShapeNode(rectOf: size, cornerRadius: 20)
+//        maskNode.fillColor = .black
+//        cropNode.maskNode = maskNode
+//        addChild(cropNode)
+//
+//    }
+//}
