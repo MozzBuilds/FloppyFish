@@ -230,8 +230,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        ///Auto called when user touches anywhere on screen
-            for touch in touches {
+        for touch in touches {
                 
                 let touchLocation = touch.location(in: self)
                 
@@ -259,9 +258,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        ///Auto called when two bodies contact eachother,
-        
         ///Pause game
+        self.childNode(withName: "pauseNode")?.isHidden = true
         isPaused = true
         
         ///Set traveller to other image

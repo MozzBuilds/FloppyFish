@@ -22,6 +22,8 @@ Gameplay
 * When pause is pressed, a big play button appears on screen
 * Move high score to some parent or handler struct so game menu can access it
 * Traveller impulse dependent on screen height? But then might want max gap dependent also
+* Pause button needs to be hidden when game ends. Not working currently
+* Can't press playAgainBackground or menuGameOverBackground??? Why? Worked before?
 
 Test
 * Test sizes, renders, methods, collisions

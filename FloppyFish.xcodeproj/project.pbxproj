@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A70F363D27614B7800E51BD9 /* GameEndedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70F363C27614B7800E51BD9 /* GameEndedView.swift */; };
+		A70F363F2763C63F00E51BD9 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70F363E2763C63F00E51BD9 /* ClassExtensions.swift */; };
 		A718282C272EDA300002A8B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718282B272EDA300002A8B5 /* AppDelegate.swift */; };
 		A718282E272EDA300002A8B5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A718282D272EDA300002A8B5 /* GameScene.sks */; };
 		A7182830272EDA300002A8B5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A718282F272EDA300002A8B5 /* Actions.sks */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		A70F363C27614B7800E51BD9 /* GameEndedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndedView.swift; sourceTree = "<group>"; };
+		A70F363E2763C63F00E51BD9 /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		A7182828272EDA300002A8B5 /* FloppyFish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FloppyFish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A718282B272EDA300002A8B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A718282D272EDA300002A8B5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */,
 				A70F363C27614B7800E51BD9 /* GameEndedView.swift */,
 				A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */,
+				A70F363E2763C63F00E51BD9 /* ClassExtensions.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				A70F363D27614B7800E51BD9 /* GameEndedView.swift in Sources */,
 				A7182832272EDA300002A8B5 /* GameScene.swift in Sources */,
 				A7182834272EDA300002A8B5 /* GameViewController.swift in Sources */,
+				A70F363F2763C63F00E51BD9 /* ClassExtensions.swift in Sources */,
 				A718282C272EDA300002A8B5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
