@@ -18,8 +18,10 @@ class GameEndedView {
     let defaultRadius = CGFloat(20)
     
     var gameOverLabel: SKLabelNode
-    var scoreLabel: SKLabelNode
-    var highScoreLabel: SKLabelNode
+    var scoreLabelText: SKLabelNode
+    var highScoreLabelText: SKLabelNode
+    var scoreLabelValue: SKLabelNode
+    var highScoreLabelValue: SKLabelNode
     var playAgainLabel: SKLabelNode
     var menuLabel: SKLabelNode
     
@@ -35,12 +37,14 @@ class GameEndedView {
         maxWidth = delegate.frame.size.width / 2
                 
         gameOverLabel = SKLabelNode()
-        scoreLabel = SKLabelNode()
-        highScoreLabel = SKLabelNode()
+        scoreLabelText = SKLabelNode()
+        highScoreLabelText = SKLabelNode()
+        scoreLabelValue = SKLabelNode()
+        highScoreLabelValue = SKLabelNode()
         playAgainLabel = SKLabelNode()
         menuLabel = SKLabelNode()
         
-        labels = [gameOverLabel, scoreLabel, highScoreLabel, playAgainLabel, menuLabel]
+        labels = [gameOverLabel, scoreLabelText, highScoreLabelText, playAgainLabel, menuLabel]
         
         setUpUI()
     }
@@ -49,9 +53,9 @@ class GameEndedView {
         commonInitialLabelProperties()
         
         renderGameOverLabel()
-//        renderGameOverBackground()
         
-        renderScoreLabels()
+        renderScoreTextLabels()
+        renderScoreValueLabels()
         renderScoreBackground()
         
         renderPlayAgainLabel()
@@ -61,15 +65,6 @@ class GameEndedView {
         renderMenuBackground()
     }
     
-    //MARK: - Helpers
-    
-//    func labelFontSizeToFit(label:SKLabelNode, background:SKSpriteNode) {
-//
-//        let scalingFactor = min(background.size.width / label.frame.width, background.size.height / label.frame.height)
-//
-//        label.fontSize *= scalingFactor
-//    }
-    
     //MARK: - Render Labels
     
     func commonInitialLabelProperties() {
@@ -77,9 +72,6 @@ class GameEndedView {
             $0.zPosition = 125
             $0.verticalAlignmentMode = .center
             $0.horizontalAlignmentMode = .center
-            $0.fontName = "Arial"
-            $0.fontSize = 72
-            $0.fontColor = .black
         }
     }
     
@@ -88,33 +80,76 @@ class GameEndedView {
         gameOverLabel.position = CGPoint(x: 0, y: maxHeight * 0.4)
         
         let shadow = NSShadow()
-        shadow.shadowBlurRadius = 8
-        shadow.shadowOffset = CGSize(width: 15, height: 15)
+        shadow.shadowBlurRadius = 20
+        shadow.shadowOffset = CGSize(width: 10, height: 10)
         shadow.shadowColor = UIColor.black
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Chalkduster", size: 96) ?? UIFont.systemFont(ofSize: 96),
+            .font: UIFont(name: "Thonburi-Bold", size: 96) ?? UIFont.systemFont(ofSize: 96),
             .foregroundColor: UIColor.orange,
             .shadow: shadow,
         ]
         
-        gameOverLabel.attributedText = NSAttributedString(string: "Game Over",
+        gameOverLabel.attributedText = NSAttributedString(string: "GAME OVER",
                                                           attributes: attributes)
                 
         delegate.addChild(gameOverLabel)
     }
     
-    func renderScoreLabels() {
-        scoreLabel.name = "gameOverScoreLabel"
-        highScoreLabel.name = "gameOverHighScoreLabel"
+    func renderScoreTextLabels() {
+        scoreLabelText.name = "gameOverScoreLabel"
+        highScoreLabelText.name = "gameOverHighScoreLabel"
         
-        scoreLabel.text = "Score: \(score)"
+        let textFontSize = CGFloat(45)
+        scoreLabelText.fontSize = textFontSize
 
-        if highScore == score {
-            highScoreLabel.text = "New High Score!"
-        } else {
-            highScoreLabel.text = "Highest: \(highScore)"
-        }
+        let textShadow = NSShadow()
+        textShadow.shadowBlurRadius = 6
+        textShadow.shadowOffset = CGSize(width: 4, height: 4)
+        textShadow.shadowColor = UIColor.black
+
+        
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Thonburi",
+                          size: textFontSize) ?? UIFont.systemFont(ofSize: textFontSize),
+            .foregroundColor: UIColor.orange,
+            .shadow: textShadow,
+        ]
+                
+        let scoreTextAttributed = NSAttributedString(string: "Your Score",
+                                                       attributes: textAttributes)
+        
+        let highScoreTextAttributed = NSAttributedString(string: "High Score",
+                                                       attributes: textAttributes)
+        
+        scoreLabelText.attributedText = scoreTextAttributed
+        highScoreLabelText.attributedText = highScoreTextAttributed
+    }
+    
+    func renderScoreValueLabels() {
+        scoreLabelValue.name = "gameOverScoreLabelValue"
+        highScoreLabelValue.name = "gameOverHighScoreLabelValue"
+        
+        let valueShadow = NSShadow()
+        valueShadow.shadowBlurRadius = 3
+        valueShadow.shadowOffset = CGSize(width: 3, height: 3)
+        valueShadow.shadowColor = UIColor.black
+        
+        let valueAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Thonburi-Bold",
+                          size: 60) ?? UIFont.systemFont(ofSize: 60),
+            .foregroundColor: UIColor.white,
+            .shadow: valueShadow,
+        ]
+        
+        let scoreValueAttributedText = NSAttributedString(string: "\(score)",
+                                                      attributes: valueAttributes)
+        
+        let highScoreValueAttributedText = NSAttributedString(string: "\(highScore)",
+                                                      attributes: valueAttributes)
+        
+        scoreLabelValue.attributedText = scoreValueAttributedText
+        highScoreLabelValue.attributedText = highScoreValueAttributedText
     }
     
     func renderPlayAgainLabel() {
@@ -170,39 +205,27 @@ class GameEndedView {
                           width: shadowWidth,
                           cornerRadius: defaultRadius)
     }
-    
-//    func renderGameOverBackground() {
-//        let gameOverBackgroundSize = CGSize(width: maxWidth, height: maxHeight * 0.5)
-//        let gameOverBackground = SKShapeNode(rectOf: gameOverBackgroundSize, cornerRadius: defaultRadius)
-//
-//        gameOverBackground.name = "gameOverBackground"
-//        gameOverBackground.position = CGPoint(x: 0, y: maxHeight * 0.5)
-//        gameOverBackground.fillColor = .blue
-//
-//        commonFinalBackgroundProperties(background: gameOverBackground, size: gameOverBackgroundSize)
-//
-//        gameOverBackground.addChild(gameOverLabel)
-//        delegate.addChild(gameOverBackground)
-//    }
 
     func renderScoreBackground() {
-        let scoreBackgroundSize = CGSize(width: maxWidth, height: maxHeight * 0.5)
+        let scoreBackgroundSize = CGSize(width: maxWidth * 0.7, height: maxHeight * 0.5)
         let scoreBackground = SKShapeNode(rectOf: scoreBackgroundSize, cornerRadius: defaultRadius)
         
         scoreBackground.name = "scoreGameOverBackground"
         scoreBackground.position = .zero
-        scoreBackground.fillColor = .red
+        scoreBackground.fillColor = UIColor(r: 250, g: 225, b: 100)
+        scoreBackground.alpha = 0.9
         
         commonFinalBackgroundProperties(background: scoreBackground, size: scoreBackgroundSize)
         
-        scoreLabel.position = CGPoint(x: scoreBackground.position.x,
-                                      y: scoreBackground.position.y + 50)
+        scoreLabelText.position.y = (scoreBackgroundSize.height / 2) - scoreLabelText.fontSize
+        scoreLabelValue.position.y = scoreLabelText.position.y - (scoreLabelText.fontSize * 2)
+        highScoreLabelText.position.y = scoreLabelValue.position.y - (scoreLabelText.fontSize * 1.5)
+        highScoreLabelValue.position.y = highScoreLabelText.position.y - (scoreLabelText.fontSize * 2)
         
-        highScoreLabel.position = CGPoint(x: scoreBackground.position.x,
-                                          y: scoreBackground.position.y - 50)
-        
-        scoreBackground.addChild(highScoreLabel)
-        scoreBackground.addChild(scoreLabel)
+        scoreBackground.addChild(scoreLabelText)
+        scoreBackground.addChild(scoreLabelValue)
+        scoreBackground.addChild(highScoreLabelText)
+        scoreBackground.addChild(highScoreLabelValue)
         delegate.addChild(scoreBackground)
     }
 
