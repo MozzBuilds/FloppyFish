@@ -13,10 +13,11 @@ class GameEndedView {
     let score: Int
     let highScore: Int
     
+    ///Background SKShapeNode properties
     let maxHeight: CGFloat
     let maxWidth: CGFloat
     let defaultRadius = CGFloat(20)
-    
+
     var gameOverLabel: SKLabelNode
     var scoreLabelText: SKLabelNode
     var highScoreLabelText: SKLabelNode
@@ -65,50 +66,6 @@ class GameEndedView {
         renderMenuBackground()
     }
     
-    //MARK: - Helper Fuctions
-    
-    func attributedShadowedText(string: String, font: String, size: CGFloat, color: UIColor, shadowSize: CGFloat, shadowColor: UIColor) -> NSAttributedString {
-        
-        let shadow = NSShadow()
-        shadow.shadowBlurRadius = shadowSize
-        shadow.shadowOffset = CGSize(width: shadowSize, height: shadowSize)
-        shadow.shadowColor = shadowColor
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: font, size: size) ?? UIFont.systemFont(ofSize: size),
-            .foregroundColor: color,
-            .shadow: shadow
-        ]
-        
-        return NSAttributedString(string: string, attributes: attributes)
-    }
-    
-    func commonInitialLabelProperties() {
-        labels.forEach{
-            $0.zPosition = 125
-            $0.verticalAlignmentMode = .center
-            $0.horizontalAlignmentMode = .center
-        }
-    }
-    
-    func commonFinalBackgroundProperties(background: SKShapeNode, size: CGSize) {
-        background.zPosition = 100
-        background.lineWidth = 3
-        background.strokeColor = .darkGray
-        background.glowWidth = 1
-//        background.becomeFirstResponder()
-//        background.isUserInteractionEnabled = true
-
-        let shadowWidth = CGFloat(6)
-        let shadowSize = CGSize(width: size.width + shadowWidth,
-                                height: size.height + shadowWidth)
-
-        background.shadow(color: .gray,
-                          size: shadowSize,
-                          width: shadowWidth,
-                          cornerRadius: defaultRadius)
-    }
-    
     //MARK: - Render Labels
     
     func renderGameOverLabel() {
@@ -125,7 +82,7 @@ class GameEndedView {
         highScoreLabelText.name = "gameOverHighScoreLabel"
         
         let fontSize = CGFloat(45)
-        scoreLabelText.fontSize = fontSize //Vital. Used for size references later
+        scoreLabelText.fontSize = fontSize // Used for size references later
         
         scoreLabelText.attributedText = attributedShadowedText(string: "Your Score", font: "Thonburi", size: fontSize, color: .orange, shadowSize: CGFloat(4), shadowColor: .black)
         
@@ -160,9 +117,16 @@ class GameEndedView {
         let scoreBackground = SKShapeNode(rectOf: scoreBackgroundSize, cornerRadius: defaultRadius)
         
         scoreBackground.name = "scoreGameOverBackground"
-//        scoreBackground.position = .zero
         scoreBackground.fillColor = UIColor(r: 250, g: 225, b: 100)
         scoreBackground.alpha = 0.9
+        let shadowWidth = CGFloat(6)
+        let shadowSize = CGSize(width: scoreBackgroundSize.width + shadowWidth,
+                                height: scoreBackgroundSize.height + shadowWidth)
+
+        scoreBackground.shadow(color: .gray,
+                          size: shadowSize,
+                          width: shadowWidth,
+                          cornerRadius: defaultRadius)
         
         commonFinalBackgroundProperties(background: scoreBackground, size: scoreBackgroundSize)
         
@@ -204,8 +168,41 @@ class GameEndedView {
         menuBackground.alpha = 0.8
         
         commonFinalBackgroundProperties(background: menuBackground, size: menuBackgroundSize)
-
+        
         menuBackground.addChild(menuLabel)
         delegate.addChild(menuBackground)
+    }
+    
+    //MARK: - Helper Fuctions
+    
+    func attributedShadowedText(string: String, font: String, size: CGFloat, color: UIColor, shadowSize: CGFloat, shadowColor: UIColor) -> NSAttributedString {
+        
+        let shadow = NSShadow()
+        shadow.shadowBlurRadius = shadowSize
+        shadow.shadowOffset = CGSize(width: shadowSize, height: shadowSize)
+        shadow.shadowColor = shadowColor
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: font, size: size) ?? UIFont.systemFont(ofSize: size),
+            .foregroundColor: color,
+            .shadow: shadow
+        ]
+        
+        return NSAttributedString(string: string, attributes: attributes)
+    }
+    
+    func commonInitialLabelProperties() {
+        labels.forEach{
+            $0.zPosition = 125
+            $0.verticalAlignmentMode = .center
+            $0.horizontalAlignmentMode = .center
+        }
+    }
+    
+    func commonFinalBackgroundProperties(background: SKShapeNode, size: CGSize) {
+        background.zPosition = 115
+        background.lineWidth = 3
+        background.strokeColor = .darkGray
+        background.glowWidth = 2
     }
 }
