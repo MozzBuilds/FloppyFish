@@ -31,11 +31,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
     override func didMove(to view: SKView) {
 
-        ///Set base point for anchoring objects, from centerpoints
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.scaleMode = .resizeFill
         
-        ///Initialise objects
         obstacleCreator = ObstacleCreator (delegate: self)
         
         ///Make hidden to start off with
@@ -44,7 +42,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Retrieve high score
         highScore = UserDefaults.standard.integer(forKey: "highScore")
 
-        ///Run all setUps
         setUpBackground()
         setUpScoreLabel()
         setUpScoreBackground()
@@ -63,12 +60,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel = SKLabelNode()
         
         guard let scoreLabel = scoreLabel else { return }
+        scoreLabel.name = "scoreLabel"
         
         scoreLabel.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 2.5)
         scoreLabel.zPosition = 50
         scoreLabel.text = String(0)
 
-        ///Styling Properties
         scoreLabel.fontSize = 50
         scoreLabel.fontColor = .black
         
@@ -79,7 +76,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let scoreBackgroundSize = CGSize(width: 120, height: 70)
         let scoreBackground = SKShapeNode(rectOf: scoreBackgroundSize, cornerRadius: 10)
         
-        ///Styling Properties
         scoreBackground.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 2.5 + 20)
         scoreBackground.zPosition = 35
         scoreBackground.fillColor = .white
@@ -93,7 +89,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setUpBoundaries() {
-        ///Lower boundary for collision, and upper
         guard let minBoundary = childNode(withName: "minBoundary") as? SKSpriteNode else { return }
         minBoundary.physicsBody = SKPhysicsBody(rectangleOf: minBoundary.size)
         minBoundary.physicsBody?.categoryBitMask = ColliderType.minBoundary
@@ -260,6 +255,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         ///Pause game
         self.childNode(withName: "pauseNode")?.isHidden = true
+        self.childNode(withName: "scoreLabel")?.isHidden = true
+
         isPaused = true
         
         ///Set traveller to other image
