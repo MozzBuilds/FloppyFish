@@ -1,22 +1,10 @@
 UIs
-* Traveller
-    -   Fish needs some animation for swimming, 2D swimming
-    -   Or just redraw it so it looks 2.5D all the time
-* Obstacle
-    -   Trim instead of resize. Or position differently so its always full size, but can go off screen
 * Own background
-* Main menu prettyness
-    ** Background
-    ** Buttons
-    ** Font, logos
-    ** Button press animations
 * Count down animation
 * How to play animation on the main menu
 * Pause button logo
 * Countdown going big to small, like THREEeee, TWWOOoo, OOOOnnee...
-* Move buttons to sensible places to prevent accidental touch
 * Some bubbles from the fish maybe?
-* Make obstacle, traveller, labels, dependent on screen size instead of fixed
 
 Gameplay
 * When pause is pressed, a big play button appears on screen
@@ -24,12 +12,10 @@ Gameplay
 * Traveller impulse dependent on screen height? But then might want max gap dependent also
 * Pause button needs to be hidden when game ends. Not working currently
 
-
 Test
 * Test sizes, renders, methods, collisions
 
 UI Requiring Gameplay changes
-* Border at the top for buttons? All tube y positions will have to change by border height.. like deletgate.childNode(withName: topBorder).size.height
 * (Maybe) Separate background and ground. Ground becomes obstacle. Results in more physics, but might help with different screen sizes (guessing!), and better U
 
 Performance

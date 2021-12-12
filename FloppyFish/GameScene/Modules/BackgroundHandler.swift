@@ -19,7 +19,7 @@ class BackgroundHandler {
     func renderBackground() {
         
         for i in 0...3 {
-            let background = SKSpriteNode(imageNamed: "background")
+            let background = SKSpriteNode(imageNamed: "Game_Background")
             background.name = "background"
             background.size = CGSize(width: delegate.size.width,
                                      height: delegate.size.height)
