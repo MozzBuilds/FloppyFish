@@ -42,7 +42,6 @@ struct MenuButton {
         menuBackground.zPosition = 35
         menuBackground.fillColor = .white
         menuBackground.alpha = 0.6
-        menuBackground.shadow(color: .black, size: menuBackgroundSize, width: 3, cornerRadius: 5)
         
         rendermenuLabel(parent: menuBackground)
         parent.addChild(menuBackground)

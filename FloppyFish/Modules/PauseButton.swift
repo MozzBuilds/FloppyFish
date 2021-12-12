@@ -42,7 +42,6 @@ struct PauseButton {
         pauseBackground.zPosition = 35
         pauseBackground.fillColor = .white
         pauseBackground.alpha = 0.6
-        pauseBackground.shadow(color: .black, size: pauseBackgroundSize, width: 3, cornerRadius: 5)
         
         renderPauseLabel(parent: pauseBackground)
         parent.addChild(pauseBackground)

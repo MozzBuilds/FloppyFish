@@ -21,7 +21,7 @@ enum ObstacleSizes: CGFloat, CaseIterable {
 
 class ObstacleCreator {
     
-    private var delegate: SKScene?
+    private var delegate: SKScene!
     
     private var obstacle1: SKSpriteNode!
     private var obstacle2: SKSpriteNode!
@@ -45,16 +45,15 @@ class ObstacleCreator {
         setSizes()
         setPositions()
         setPhysics()
-        setStyles()
         
         obstacles.forEach {
-            delegate?.addChild($0)
+            delegate.addChild($0)
         }
     }
     
-    func setSizes() {
+    private func setSizes() {
         ///Find max screen height
-        let maxHeight = delegate?.scene?.size.height ?? 700
+        let maxHeight = delegate.size.height
             
         ///Choose a random size for obstacle 1 from ItemSizes enum
         guard let randomSize = ObstacleSizes.allCases.randomElement()?.rawValue else { return }
@@ -64,28 +63,28 @@ class ObstacleCreator {
         obstacle2.size = CGSize(width: defaultWidth, height: obstacle1.size.height * 0.4)
         
         ///Find the current gap between obstacle 1 and 2
-        var gap = (delegate?.scene?.size.height)! - (obstacle1.size.height) - (obstacle2.size.height)
+        var gap = delegate.size.height - (obstacle1.size.height) - (obstacle2.size.height)
             
         ///If gap > 450, it is too easy, so add 50 to obstacle2 height till gap is no longer > 400
         while gap > 450 {
             obstacle2.size.height += CGFloat(50)
-            gap = (delegate?.scene?.size.height)! - (obstacle1.size.height) - (obstacle2.size.height)
+            gap = delegate.size.height - (obstacle1.size.height) - (obstacle2.size.height)
         }
     }
     
-    func setPositions() {
+    private func setPositions() {
         
         ///Set the identical properties
         obstacles.forEach{
             $0.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             $0.name = "obstacle"
-            $0.position.x = delegate?.scene?.size.width ?? 300
+            $0.position.x = delegate.size.width
             $0.zPosition = 25
         }
         
         ///Calculate middle points
         let obstacle1HeightMidpoint = obstacle1.size.height / 2
-        let screenHeightMidpoint = (delegate?.scene?.size.height ?? 500) / 2
+        let screenHeightMidpoint = delegate.size.height / 2
         
         let obstacle1PositionTop: CGFloat = screenHeightMidpoint - obstacle1HeightMidpoint
         obstacle1.position.y = obstacle1PositionTop
@@ -110,7 +109,7 @@ class ObstacleCreator {
         }
     }
     
-    func setPhysics() {
+    private func setPhysics() {
         obstacle1.physicsBody = SKPhysicsBody(rectangleOf: obstacle1.size)
         obstacle2.physicsBody = SKPhysicsBody(rectangleOf: obstacle2.size)
         
@@ -119,10 +118,5 @@ class ObstacleCreator {
             $0.physicsBody?.affectedByGravity = false
             $0.physicsBody?.isDynamic = false
         }
-    }
-    
-    func setStyles() {
-        obstacle1.color = .black
-        obstacle2.color = .red
     }
 }

@@ -11,8 +11,15 @@ class TravellerCreator {
     
     private var traveller: SKSpriteNode
     
+    let delegate: SKScene
+    
     init(delegate: SKScene) {
-        traveller = SKSpriteNode(texture: SKTexture(imageNamed: "Fish_Alive"))
+        self.delegate = delegate
+        traveller = SKSpriteNode(imageNamed: "Fish_Alive")
+    }
+    
+    func setUpTraveller() {
+        traveller.zPosition = 30
         traveller.size = CGSize(width: 125, height: 100)
         traveller.position = CGPoint(x: -delegate.size.width / 3, y: 0)
         setPhysics()

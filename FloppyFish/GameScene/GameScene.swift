@@ -36,6 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ///Initiate our creators and handlers
         obstacleCreator = ObstacleCreator(delegate: self)
         worldPhysics = WorldPhysics(delegate: self)
+        
         travellerCreator = TravellerCreator(delegate: self)
         
         setUpScene()
@@ -77,6 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setUpTraveller() {
+        travellerCreator.setUpTraveller()
         travellerCreator.pauseTraveller()
     }
     
@@ -118,7 +120,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setUpTimers() {
-        ///Var for timer interals
         let timeInterval = TimeInterval(1.2)
         let delay = DispatchTime.now() + 3.0
         
@@ -141,7 +142,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func cleanUp() {
-        ///Removes nodes no longer visible on screen
         for child in children {
             if child.position.x < -self.size.width - 30 {
                 child.removeFromParent()
@@ -151,7 +151,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: CFTimeInterval) {
         if !isPaused {
-            ///Auto called before each frame is rendered
             backgroundHandler?.moveBackground()
 
             ///Look out for new nodes
@@ -187,10 +186,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 switch atPoint(touchLocation).name {
                 
-                case "pauseNode":
+                case "pauseLabel", "pauseBackground":
                     isPaused.toggle()
                     
-                case "menuNode", "gameOverMenuLabel", "gameOverMenuBackground":
+                case "menuLabel", "menuBackground", "gameOverMenuLabel", "gameOverMenuBackground":
                     guard let menuScene = SKScene(fileNamed: "GameMenu") else { return }
                     menuScene.scaleMode = .aspectFill
                     view?.presentScene(menuScene, transition: SKTransition.fade(withDuration: 0.5))
