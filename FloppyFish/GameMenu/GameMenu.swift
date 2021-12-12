@@ -10,6 +10,11 @@ import GameplayKit
 
 class GameMenu: SKScene {
     
+    override func didMove(to view: SKView) {
+        _ = MainMenuBackground(delegate: self)
+        _ = MainMenuPlayButton(delegate: self)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let touchLocation = touch.location(in: self)

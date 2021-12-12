@@ -168,7 +168,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func handleObstacleTimer(timer: Timer) {
-        ///At each scheduled timer interval, render obstacles
         if !isPaused {
             obstacleCreator?.renderObstacles()
         }

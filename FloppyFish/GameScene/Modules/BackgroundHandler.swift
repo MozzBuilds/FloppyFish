@@ -9,7 +9,7 @@ import SpriteKit
 
 class BackgroundHandler {
     
-    let delegate: SKScene!
+    let delegate: SKScene
     
     init(delegate: SKScene) {
         
