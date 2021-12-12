@@ -12,6 +12,7 @@ class GameMenu: SKScene {
     
     override func didMove(to view: SKView) {
         _ = MainMenuBackground(delegate: self)
+        _ = MainMenuLogo(delegate: self)
         _ = MainMenuPlayButton(delegate: self)
     }
     

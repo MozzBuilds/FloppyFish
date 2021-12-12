@@ -21,7 +21,7 @@ struct MainMenuPlayButton {
                                      cornerRadius: 0)
         
         playBackground.name = "playBackground"
-        playBackground.zPosition = 0
+        playBackground.zPosition = 5
         
         playBackground.fillColor = .gray
         playBackground.glowWidth = 3
@@ -37,6 +37,7 @@ struct MainMenuPlayButton {
         let playLabel = SKLabelNode()
         
         playLabel.name = "playLabel"
+        playLabel.zPosition = 10
         playLabel.horizontalAlignmentMode = .center
         playLabel.verticalAlignmentMode = .center
         
