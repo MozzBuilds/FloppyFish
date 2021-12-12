@@ -23,6 +23,11 @@
 		A7182864272F46CA0002A8B5 /* ObstacleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */; };
 		A7C6CD3B273D0AF300B0815B /* BackgroundHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */; };
 		A7C6CD3D273D117800B0815B /* ToDoList.txt in Resources */ = {isa = PBXBuildFile; fileRef = A7C6CD3C273D117800B0815B /* ToDoList.txt */; };
+		A7FA4D4F27662AD7006A0031 /* ScoreHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */; };
+		A7FA4D51276631ED006A0031 /* PauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D50276631ED006A0031 /* PauseButton.swift */; };
+		A7FA4D532766326F006A0031 /* WorldPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D522766326F006A0031 /* WorldPhysics.swift */; };
+		A7FA4D5527664056006A0031 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D5427664056006A0031 /* MenuButton.swift */; };
+		A7FA4D57276642D1006A0031 /* TravellerCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D56276642D1006A0031 /* TravellerCreator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +70,11 @@
 		A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleCreator.swift; sourceTree = "<group>"; };
 		A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundHandler.swift; sourceTree = "<group>"; };
 		A7C6CD3C273D117800B0815B /* ToDoList.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ToDoList.txt; sourceTree = "<group>"; };
+		A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreHandler.swift; sourceTree = "<group>"; };
+		A7FA4D50276631ED006A0031 /* PauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButton.swift; sourceTree = "<group>"; };
+		A7FA4D522766326F006A0031 /* WorldPhysics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldPhysics.swift; sourceTree = "<group>"; };
+		A7FA4D5427664056006A0031 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		A7FA4D56276642D1006A0031 /* TravellerCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravellerCreator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +105,7 @@
 		A718281F272EDA2F0002A8B5 = {
 			isa = PBXGroup;
 			children = (
+				A7FA4D56276642D1006A0031 /* TravellerCreator.swift */,
 				A7C6CD3C273D117800B0815B /* ToDoList.txt */,
 				A718282A272EDA300002A8B5 /* FloppyFish */,
 				A7182842272EDA330002A8B5 /* FloppyFishTests */,
@@ -152,6 +163,7 @@
 			children = (
 				A718282D272EDA300002A8B5 /* GameScene.sks */,
 				A7182831272EDA300002A8B5 /* GameScene.swift */,
+				A70F363C27614B7800E51BD9 /* GameEndedView.swift */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
@@ -168,8 +180,11 @@
 		A7182862272F46A10002A8B5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */,
+				A7FA4D50276631ED006A0031 /* PauseButton.swift */,
+				A7FA4D5427664056006A0031 /* MenuButton.swift */,
+				A7FA4D522766326F006A0031 /* WorldPhysics.swift */,
 				A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */,
-				A70F363C27614B7800E51BD9 /* GameEndedView.swift */,
 				A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */,
 				A70F363E2763C63F00E51BD9 /* ClassExtensions.swift */,
 			);
@@ -312,10 +327,15 @@
 				A718285F272EDB070002A8B5 /* GameMenu.swift in Sources */,
 				A7182864272F46CA0002A8B5 /* ObstacleCreator.swift in Sources */,
 				A7C6CD3B273D0AF300B0815B /* BackgroundHandler.swift in Sources */,
+				A7FA4D57276642D1006A0031 /* TravellerCreator.swift in Sources */,
 				A70F363D27614B7800E51BD9 /* GameEndedView.swift in Sources */,
 				A7182832272EDA300002A8B5 /* GameScene.swift in Sources */,
+				A7FA4D532766326F006A0031 /* WorldPhysics.swift in Sources */,
 				A7182834272EDA300002A8B5 /* GameViewController.swift in Sources */,
 				A70F363F2763C63F00E51BD9 /* ClassExtensions.swift in Sources */,
+				A7FA4D5527664056006A0031 /* MenuButton.swift in Sources */,
+				A7FA4D4F27662AD7006A0031 /* ScoreHandler.swift in Sources */,
+				A7FA4D51276631ED006A0031 /* PauseButton.swift in Sources */,
 				A718282C272EDA300002A8B5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

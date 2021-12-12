@@ -23,8 +23,7 @@ Gameplay
 * Move high score to some parent or handler struct so game menu can access it
 * Traveller impulse dependent on screen height? But then might want max gap dependent also
 * Pause button needs to be hidden when game ends. Not working currently
-* Can't press playAgainBackground or menuGameOverBackground??? Why? Worked before?
-* Make top left score hidden after game ended
+
 
 Test
 * Test sizes, renders, methods, collisions
