@@ -9,14 +9,11 @@ import SpriteKit
 import GameplayKit
 
 class GameMenu: SKScene {
-            
+    
     override func didMove(to view: SKView) {
-        
-//        self.label = self.childNode(withName: "//titleLabel") as? SKLabelNode
-//        if let label = self.label {
-//            label.alpha = 0.0
-//            label.run(SKAction.fadeIn(withDuration: 2.0))
-//        }
+        _ = MainMenuBackground(delegate: self)
+        _ = MainMenuLogo(delegate: self)
+        _ = MainMenuPlayButton(delegate: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -25,11 +22,11 @@ class GameMenu: SKScene {
             
             switch atPoint(touchLocation).name {
 
-            case "playLabel":
+            case "playLabel", "playBackground":
                 let gameScene = SKScene(fileNamed: "GameScene")!
                 gameScene.scaleMode = .aspectFill
-                view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 0.9))
-
+                view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 0.5))
+                
             default: break
 
             }

@@ -1,18 +1,25 @@
-
-Traveller Physics
-* Angle the traveller is at when climbing/falling/steady
-
 UIs
-* Traveller needs an actual body
-* Obstacles need deco
-* Main menu is horrific
+* Own background
+* Count down animation
+* How to play animation on the main menu
+* Pause button logo
+* Countdown going big to small, like THREEeee, TWWOOoo, OOOOnnee...
+* Some bubbles from the fish maybe?
 
-Long term features
-* Save high score locally
+Gameplay
+* When pause is pressed, a big play button appears on screen
+* Move high score to some parent or handler struct so game menu can access it
+* Traveller impulse dependent on screen height? But then might want max gap dependent also
+* Pause button needs to be hidden when game ends. Not working currently
 
 Test
 * Test sizes, renders, methods, collisions
 
-Gameplay
-* Countdown going big to small, like THREEeee, TWWOOoo, OOOOnnee... as the game plays. Maybe toggle traveller gravity to false, then true after countdown?
-    
+UI Requiring Gameplay changes
+* (Maybe) Separate background and ground. Ground becomes obstacle. Results in more physics, but might help with different screen sizes (guessing!), and better U
+
+Performance
+* Countdown is only needed for first 3 seconds, but the timer runs indefinitely. Need to disable this.
+* Ideally also find a way to also be able to run a countdown after pausing
+
+

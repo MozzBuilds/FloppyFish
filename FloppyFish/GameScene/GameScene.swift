@@ -16,35 +16,38 @@ struct ColliderType {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
-    ///Stored for the life of the app. Needs moved eventually, especially if we need it anywhere else
-    static var highScore = 0
-    
-    private var traveller: SKSpriteNode?
-    
-    private var obstacleCreator: ObstacleCreator?
+            
+    private var obstacleCreator: ObstacleCreator!
     private var backgroundHandler: BackgroundHandler?
+    private var worldPhysics: WorldPhysics!
+    private var travellerCreator: TravellerCreator!
     
-    private var score = 0
-    private var scoreLabel: SKLabelNode?
+    private var scoreHandler: ScoreHandler?
+    private var pauseButton: PauseButton?
+    private var menuButton: MenuButton?
     
     private var countDownTime = 3
                 
     override func didMove(to view: SKView) {
 
-        ///Set base point for anchoring objects, from centerpoints
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.scaleMode = .resizeFill
         
-        ///Initialise objects
-        obstacleCreator = ObstacleCreator (delegate: self)
-
-        ///Run all setUps
+        ///Initiate our creators and handlers
+        obstacleCreator = ObstacleCreator(delegate: self)
+        worldPhysics = WorldPhysics(delegate: self)
+        
+        travellerCreator = TravellerCreator(delegate: self)
+        
+        setUpScene()
+    }
+    
+    func setUpScene() {
         setUpBackground()
-        setUpScoreLabel()
-        setUpScoreBackground()
+        setUpPauseButton()
+        setUpMenuButton()
+        setUpScoreHandler()
         setUpWorld()
-        setUpBoundaries()
         setUpTraveller()
         setUpTimers()
     }
@@ -54,102 +57,70 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundHandler?.renderBackground()
     }
     
-    func setUpScoreLabel() {
-        scoreLabel = SKLabelNode()
-        scoreLabel?.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 2.5)
-        scoreLabel?.zPosition = 50
-        scoreLabel?.text = String(0)
-
-        ///Styling Properties
-        scoreLabel?.fontSize = 50
-        scoreLabel?.fontColor = .black
-        
-        scoreLabel != nil ? addChild(scoreLabel!) : nil
+    func setUpPauseButton() {
+        pauseButton = PauseButton(delegate: self)
+        pauseButton?.hide()
     }
     
-    func setUpScoreBackground() {
-        let scoreBackgroundSize = CGSize(width: 120, height: 70)
-        let scoreBackground = SKShapeNode(rectOf: scoreBackgroundSize, cornerRadius: 10)
-        
-        ///Styling Properties
-        scoreBackground.position = CGPoint(x: -frame.size.width / 3, y: frame.size.height / 2.5 + 20)
-        scoreBackground.zPosition = 35
-        scoreBackground.fillColor = .white
-        scoreBackground.alpha = 0.6
-        addChild(scoreBackground)
+    func setUpMenuButton() {
+        menuButton = MenuButton(delegate: self)
+        menuButton?.hide()
+    }
+    
+    func setUpScoreHandler() {
+        scoreHandler = ScoreHandler(delegate: self)
+        scoreHandler?.hide()
     }
     
     func setUpWorld() {
-        physicsWorld.gravity = CGVector(dx: 0, dy: -8.0)
-        physicsWorld.contactDelegate = self
-    }
-    
-    func setUpBoundaries() {
-        ///Lower boundary for collision, and upper
-        guard let minBoundary = childNode(withName: "minBoundary") as? SKSpriteNode else { return }
-        minBoundary.physicsBody = SKPhysicsBody(rectangleOf: minBoundary.size)
-        minBoundary.physicsBody?.categoryBitMask = ColliderType.minBoundary
-        minBoundary.physicsBody?.collisionBitMask = 0
-        minBoundary.physicsBody?.affectedByGravity = false
-        minBoundary.physicsBody?.isDynamic = false
-        
-        guard let maxBoundary = childNode(withName: "maxBoundary") as? SKSpriteNode else { return }
-        maxBoundary.physicsBody = SKPhysicsBody(rectangleOf: maxBoundary.size)
-        maxBoundary.physicsBody?.categoryBitMask = ColliderType.maxBoundary
-        maxBoundary.physicsBody?.collisionBitMask = 0
-        maxBoundary.physicsBody?.affectedByGravity = false
-        maxBoundary.physicsBody?.isDynamic = false
+        worldPhysics.setUpPhysicsWorld()
+        worldPhysics.addBoundaries()
     }
     
     func setUpTraveller() {
-        ///Initialise from GameSceke.sks SpriteNode
-        traveller = childNode(withName: "traveller") as? SKSpriteNode
-        
-        ///Default start position
-        traveller?.position = CGPoint(x: -frame.size.width / 3, y: 0)
-        
-        traveller?.physicsBody = SKPhysicsBody(rectangleOf: traveller?.size ?? CGSize(width: 50, height: 50))
-        
-        ///Setting traveller physics category for interaction
-        traveller?.physicsBody?.categoryBitMask = ColliderType.traveller
-        
-        ///Check if they occupy the same space
-        traveller?.physicsBody?.contactTestBitMask = ColliderType.obstacle | ColliderType.minBoundary | ColliderType.maxBoundary
-        
-        ///Check if they have collided
-        traveller?.physicsBody?.collisionBitMask = ColliderType.obstacle | ColliderType.minBoundary | ColliderType.maxBoundary
-        
-        ///Initial values only, changed after countdown
-        traveller?.physicsBody?.isDynamic = false
-        traveller?.physicsBody?.affectedByGravity = false
+        travellerCreator.setUpTraveller()
+        travellerCreator.pauseTraveller()
+    }
+    
+    func hideGameplayNodes() {
+        pauseButton?.hide()
+        menuButton?.hide()
+        scoreHandler?.hide()
+    }
+    
+    func showGameplayNodes() {
+        pauseButton?.show()
+        menuButton?.show()
+        scoreHandler?.show()
     }
     
     @objc func setUpCountdown () {
-        if countDownTime > 0 {
-        
-            let countDownLabel = SKLabelNode()
+        if !isPaused {
+            if countDownTime > 0 {
             
-            countDownLabel.fontSize = 100
-            countDownLabel.zPosition = 50
-            countDownLabel.text = String(countDownTime)
-            
-            addChild(countDownLabel)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                countDownLabel.removeFromParent()
-            })
-            
-            countDownTime -= 1
+                let countDownLabel = SKLabelNode()
+                
+                countDownLabel.fontSize = 100
+                countDownLabel.zPosition = 50
+                countDownLabel.text = String(countDownTime)
+                
+                addChild(countDownLabel)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    countDownLabel.removeFromParent()
+                })
+                
+                countDownTime -= 1
 
-        } else {
-            traveller?.physicsBody?.isDynamic = true
-            traveller?.physicsBody?.affectedByGravity = true
+            } else {
+                travellerCreator.unpauseTraveller()
+                showGameplayNodes()
+            }
         }
     }
     
     func setUpTimers() {
-        ///Var for timer interals
-        let timeInterval = TimeInterval(1.0)
+        let timeInterval = TimeInterval(1.2)
         let delay = DispatchTime.now() + 3.0
         
         ///Generate countdown
@@ -157,6 +128,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ///Generate obstacles at timed intervals
         Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
+        
+        ///Set traveller rotation
+        Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(GameScene.travellerRotator), userInfo: nil, repeats: true)
         
         ///Remove obstacles/cleanup
         Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
@@ -168,7 +142,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func cleanUp() {
-        ///Removes nodes no longer visible on screen
         for child in children {
             if child.position.x < -self.size.width - 30 {
                 child.removeFromParent()
@@ -178,7 +151,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: CFTimeInterval) {
         if !isPaused {
-            ///Auto called before each frame is rendered
             backgroundHandler?.moveBackground()
 
             ///Look out for new nodes
@@ -191,64 +163,57 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     @objc func updateScore() {
         if !isPaused {
-            score += 1
-            scoreLabel?.text = String(score)
+            scoreHandler?.updateScore()
         }
     }
     
     @objc func handleObstacleTimer(timer: Timer) {
-        ///At each scheduled timer interval, render obstacles
         if !isPaused {
             obstacleCreator?.renderObstacles()
         }
     }
     
+    @objc func travellerRotator() {
+        travellerCreator.rotate()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        ///Auto called when user touches anywhere on screen
-        if !isPaused {
-            for _ in touches {
-                traveller?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                let impulse = CGVector(dx: 0, dy: 140)
-                traveller?.physicsBody?.applyImpulse(impulse)
+        
+        for touch in touches {
+                
+                let touchLocation = touch.location(in: self)
+                
+                switch atPoint(touchLocation).name {
+                
+                case "pauseLabel", "pauseBackground":
+                    isPaused.toggle()
+                    
+                case "menuLabel", "menuBackground", "gameOverMenuLabel", "gameOverMenuBackground":
+                    guard let menuScene = SKScene(fileNamed: "GameMenu") else { return }
+                    menuScene.scaleMode = .aspectFill
+                    view?.presentScene(menuScene, transition: SKTransition.fade(withDuration: 0.5))
+                    
+                case "playAgainLabel", "playAgainBackground":
+                    resetScene()
+                    
+                default :
+                    if !isPaused {
+                        travellerCreator.applyImpulse()
+                    }
+                }
             }
-        }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        ///Auto called when two bodies contact eachother,
-        
-        ///Pause game
         isPaused = true
+        hideGameplayNodes()
+        travellerCreator.updateTexture()
+        scoreHandler?.checkHighScore()
         
-        ///Set final score message
-        var scoreMessage = "Final Score: \(score)"
-        
-        ///Update high score if required, and message
-        if score > GameScene.highScore {
-            GameScene.highScore = score
-            scoreMessage += "\n New high score!"
-        } else {
-            scoreMessage += "\n High Score: \(GameScene.highScore)"
-        }
-        
-        ///Popup with score
-        let gameOverAlert = UIAlertController(title: "Game over!",
-                                      message: scoreMessage,
-                                      preferredStyle: .alert)
-        
-        ///Action to start again, with handler block
-        gameOverAlert.addAction(UIAlertAction(title: "Play Again?",
-                                              style: .default,
-                                              handler: {_ in
-                                                self.resetScene()
-                                              }))
-        
-        ///Call view controller to present alert
-        self.view?.window?.rootViewController?.present(gameOverAlert, animated: true, completion: nil)
+        let _ = GameEndedView(delegate: self, score: scoreHandler!.score, highScore: scoreHandler!.highScore)
     }
     
     func resetScene() {
-        ///Wipes scene and starts fresh
         let gameScene = SKScene(fileNamed: "GameScene")!
         gameScene.scaleMode = .aspectFill
         view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 0.5))
