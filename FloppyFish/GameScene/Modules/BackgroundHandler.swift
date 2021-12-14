@@ -23,12 +23,11 @@ class BackgroundHandler {
             background.name = "background"
             background.size = CGSize(width: delegate.size.width,
                                      height: delegate.size.height)
-            background.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             
             let positionX = CGFloat(i) * background.size.width
             background.position = CGPoint(x: positionX, y: 0)
-            delegate.addChild(background)
             background.zPosition = 0
+            delegate.addChild(background)
         }
     }
     
@@ -42,6 +41,7 @@ class BackgroundHandler {
                 node.position.x += self.delegate.size.width * 3
             }
         }
+        
         delegate.enumerateChildNodes(withName: "background", using: block)
     }
 }
