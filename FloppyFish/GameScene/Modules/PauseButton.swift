@@ -28,7 +28,6 @@ struct PauseButton {
             pauseLogoBackground.zPosition = 35
             pauseLogoBackground.fillColor = .white
             pauseLogoBackground.alpha = 0.6
-            pauseLogoBackground.shadow(color: .black, size: pauseLogoBackgroundSize, width: 3, cornerRadius: 5)
 
             renderPauseLogo(parent: pauseLogoBackground)
             parent.addChild(pauseLogoBackground)

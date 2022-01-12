@@ -48,7 +48,6 @@ class ScoreHandler {
         scoreBackground.zPosition = 35
         scoreBackground.fillColor = .white
         scoreBackground.alpha = 0.6
-        scoreBackground.shadow(color: .black, size: scoreBackgroundSize, width: 3, cornerRadius: 5)
         
         renderScoreLabel(parent: scoreBackground)
         parent.addChild(scoreBackground)
