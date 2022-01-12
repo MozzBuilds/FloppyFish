@@ -23,10 +23,8 @@ struct MainMenuPlayButton {
         playBackground.name = "playBackground"
         playBackground.zPosition = 5
         
-        playBackground.fillColor = .gray
-        playBackground.glowWidth = 3
-        playBackground.strokeColor = .black
-        playBackground.lineWidth = 5
+        playBackground.fillColor = .clear
+        playBackground.strokeColor = .clear
         
         renderLabel(parent: playBackground)
         
@@ -41,7 +39,14 @@ struct MainMenuPlayButton {
         playLabel.horizontalAlignmentMode = .center
         playLabel.verticalAlignmentMode = .center
         
-        playLabel.attributedText = attributedShadowedText(string: "Play", font: "Thonburi-Bold", size: CGFloat(96), color: .black, shadowSize: 2, shadowColor: .black)
+        let playLabelColor = UIColor(r: 255, g: 80, b: 0)
+        
+        playLabel.attributedText = attributedShadowedText(string: "Play",
+                                                          font: "Thonburi-Bold",
+                                                          size: CGFloat(144),
+                                                          color: playLabelColor,
+                                                          shadowSize: 5,
+                                                          shadowColor: .black)
         
         parent.addChild(playLabel)
     }

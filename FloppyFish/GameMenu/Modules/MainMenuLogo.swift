@@ -10,57 +10,26 @@ import SpriteKit
 struct MainMenuLogo {
     
     init(delegate: SKScene) {
-        renderBackground(parent: delegate)
+        renderLabelImage(parent: delegate)
     }
     
-    private func renderBackground(parent: SKScene) {
+    private func renderLabelImage(parent: SKScene) {
         let size = CGSize(width: parent.size.width * 0.8,
-                          height: parent.size.height * 0.15)
+                          height: parent.size.height * 0.25)
         
-        let logoBackground = SKShapeNode(rectOf: size,
-                                     cornerRadius: 0)
+        let logo = SKShapeNode(rectOf: size)
         
-        logoBackground.position.y = parent.size.height * 0.25
+        logo.fillTexture = SKTexture(imageNamed: "Menu_Logo")
         
-        logoBackground.name = "logoBackground"
-        logoBackground.zPosition = 5
+        logo.position.y = parent.size.height * 0.25
         
-        logoBackground.fillColor = .gray
-        logoBackground.glowWidth = 3
-        logoBackground.strokeColor = .black
-        logoBackground.lineWidth = 5
+        logo.name = "menuLogo"
+        logo.zPosition = 5
         
-        renderLabel(parent: logoBackground)
-        
-        parent.addChild(logoBackground)
+        logo.fillColor = .white
+        logo.strokeColor = .clear
+                
+        parent.addChild(logo)
     }
-    
-    private func renderLabel(parent: SKShapeNode) {
-        let logoLabel = SKLabelNode()
-        
-        logoLabel.name = "logoLabel"
-        logoLabel.horizontalAlignmentMode = .center
-        logoLabel.verticalAlignmentMode = .center
-        logoLabel.zPosition = 10
-        
-        logoLabel.attributedText = attributedShadowedText(string: "Flappy Fish", font: "Thonburi-Bold", size: CGFloat(110), color: .black, shadowSize: 2, shadowColor: .black)
-        
-        parent.addChild(logoLabel)
-    }
-    
-    private func attributedShadowedText(string: String, font: String, size: CGFloat, color: UIColor, shadowSize: CGFloat, shadowColor: UIColor) -> NSAttributedString {
-        
-        let shadow = NSShadow()
-        shadow.shadowBlurRadius = shadowSize
-        shadow.shadowOffset = CGSize(width: shadowSize, height: shadowSize)
-        shadow.shadowColor = shadowColor
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: font, size: size) ?? UIFont.systemFont(ofSize: size),
-            .foregroundColor: color,
-            .shadow: shadow
-        ]
-        
-        return NSAttributedString(string: string, attributes: attributes)
-    }
+
 }

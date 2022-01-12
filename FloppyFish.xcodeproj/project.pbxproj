@@ -26,7 +26,6 @@
 		A7FA4D4F27662AD7006A0031 /* ScoreHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */; };
 		A7FA4D51276631ED006A0031 /* PauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D50276631ED006A0031 /* PauseButton.swift */; };
 		A7FA4D532766326F006A0031 /* WorldPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D522766326F006A0031 /* WorldPhysics.swift */; };
-		A7FA4D5527664056006A0031 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D5427664056006A0031 /* MenuButton.swift */; };
 		A7FA4D57276642D1006A0031 /* TravellerCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D56276642D1006A0031 /* TravellerCreator.swift */; };
 		A7FA4D5A27664E6D006A0031 /* MainMenuPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D5927664E6D006A0031 /* MainMenuPlayButton.swift */; };
 		A7FA4D5C27664E7A006A0031 /* MainMenuLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D5B27664E7A006A0031 /* MainMenuLogo.swift */; };
@@ -76,7 +75,6 @@
 		A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreHandler.swift; sourceTree = "<group>"; };
 		A7FA4D50276631ED006A0031 /* PauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButton.swift; sourceTree = "<group>"; };
 		A7FA4D522766326F006A0031 /* WorldPhysics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldPhysics.swift; sourceTree = "<group>"; };
-		A7FA4D5427664056006A0031 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		A7FA4D56276642D1006A0031 /* TravellerCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravellerCreator.swift; sourceTree = "<group>"; };
 		A7FA4D5927664E6D006A0031 /* MainMenuPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuPlayButton.swift; sourceTree = "<group>"; };
 		A7FA4D5B27664E7A006A0031 /* MainMenuLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuLogo.swift; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 			children = (
 				A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */,
 				A7FA4D50276631ED006A0031 /* PauseButton.swift */,
-				A7FA4D5427664056006A0031 /* MenuButton.swift */,
 				A7FA4D522766326F006A0031 /* WorldPhysics.swift */,
 				A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */,
 				A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */,
@@ -352,7 +349,6 @@
 				A7FA4D532766326F006A0031 /* WorldPhysics.swift in Sources */,
 				A7182834272EDA300002A8B5 /* GameViewController.swift in Sources */,
 				A70F363F2763C63F00E51BD9 /* ClassExtensions.swift in Sources */,
-				A7FA4D5527664056006A0031 /* MenuButton.swift in Sources */,
 				A7FA4D4F27662AD7006A0031 /* ScoreHandler.swift in Sources */,
 				A7FA4D51276631ED006A0031 /* PauseButton.swift in Sources */,
 				A7FA4D5A27664E6D006A0031 /* MainMenuPlayButton.swift in Sources */,

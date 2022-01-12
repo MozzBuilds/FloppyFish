@@ -11,7 +11,6 @@ import GameplayKit
 class GameMenu: SKScene {
     
     override func didMove(to view: SKView) {
-//        scaleMode = .resizeFill
         _ = MainMenuBackground(delegate: self)
         _ = MainMenuLogo(delegate: self)
         _ = MainMenuPlayButton(delegate: self)

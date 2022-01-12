@@ -1,16 +1,15 @@
-UIs
-* Own background
+UI - Features
 * Count down animation
-* How to play animation on the main menu
-* Pause button logo
+* How to play animation or instruction on the main menu
 * Countdown going big to small, like THREEeee, TWWOOoo, OOOOnnee...
-* Some bubbles from the fish maybe?
+* Some bubbles from the fish
+* Countdown different font
 
 Gameplay
-* When pause is pressed, a big play button appears on screen
-* Move high score to some parent or handler struct so game menu can access it
+* When pause is pressed, a big play button appears on screen to unpause it
+* When play is pressed after a pause, game remains paused for 3 seconds, with a countdown
 * Traveller impulse dependent on screen height? But then might want max gap dependent also
-* Pause button needs to be hidden when game ends. Not working currently
+* Max score of 999 which when reached, game stops, and a message is displayed
 
 Test
 * Test sizes, renders, methods, collisions
