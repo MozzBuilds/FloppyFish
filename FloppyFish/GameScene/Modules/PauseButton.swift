@@ -13,45 +13,46 @@ struct PauseButton {
         
     init(delegate: SKScene) {
         self.delegate = delegate
-        renderPauseBackground(parent: delegate)
+        renderPauseLogoBackground(parent: delegate)
     }
     
-    private func renderPauseLabel(parent: SKShapeNode) {
-        let pauseLabel = SKLabelNode()
-        pauseLabel.name = "pauseLabel"
-        pauseLabel.zPosition = 50
-        pauseLabel.horizontalAlignmentMode = .center
-        pauseLabel.verticalAlignmentMode = .center
-        
-        pauseLabel.fontName = "Arial"
-        pauseLabel.fontSize = 50
-        pauseLabel.fontColor = .black
-        pauseLabel.text = "P"
-        
-        parent.addChild(pauseLabel)
-    }
+        private func renderPauseLogoBackground(parent: SKScene) {
+            let pauseLogoBackgroundSize = CGSize(width: 90, height: 70)
+            let pauseLogoBackground = SKShapeNode(rectOf: pauseLogoBackgroundSize, cornerRadius: 10)
     
-    private func renderPauseBackground(parent: SKScene) {
-        let pauseBackgroundSize = CGSize(width: 70, height: 70)
-        let pauseBackground = SKShapeNode(rectOf: pauseBackgroundSize, cornerRadius: 10)
+            pauseLogoBackground.name = "pauseLogoBackground"
+            
+            pauseLogoBackground.position = CGPoint(x: parent.size.width * 0.3,
+                                               y: parent.size.height * 0.4)
+            
+            pauseLogoBackground.zPosition = 35
+            pauseLogoBackground.fillColor = .white
+            pauseLogoBackground.alpha = 0.6
+
+            renderPauseLogo(parent: pauseLogoBackground)
+            parent.addChild(pauseLogoBackground)
+        }
+    
+    private func renderPauseLogo(parent: SKShapeNode) {
+        let pauseLogoSize = CGSize(width: 70, height: 50)
+        let pauseLogo = SKShapeNode(rectOf: pauseLogoSize, cornerRadius: 10)
         
-        pauseBackground.name = "pauseBackground"
+        pauseLogo.name = "pauseLogo"
+        pauseLogo.zPosition = 50
+        pauseLogo.fillTexture = SKTexture(imageNamed: "Pause_Button")
+        pauseLogo.fillColor = .white
+        pauseLogo.strokeColor = .clear
         
-        pauseBackground.position = CGPoint(x: parent.size.width * 0.3,
-                                           y: parent.size.height * 0.4)
-        pauseBackground.zPosition = 35
-        pauseBackground.fillColor = .white
-        pauseBackground.alpha = 0.6
-        
-        renderPauseLabel(parent: pauseBackground)
-        parent.addChild(pauseBackground)
+        parent.addChild(pauseLogo)
     }
     
     func hide() {
-        delegate.childNode(withName: "pauseBackground")?.isHidden = true
+        delegate.childNode(withName: "pauseLogoBackground")?.isHidden = true
     }
     
     func show() {
-        delegate.childNode(withName: "pauseBackground")?.isHidden = false
+        delegate.childNode(withName: "pauseLogoBackground")?.isHidden = false
     }
 }
+
+

@@ -28,12 +28,13 @@ class ScoreHandler {
         scoreLabel.horizontalAlignmentMode = .center
         scoreLabel.verticalAlignmentMode = .center
         
-        scoreLabel.fontName = "Arial"
-        scoreLabel.fontSize = 50
-        scoreLabel.fontColor = .black
+        scoreLabel.fontName = "Arial-BoldMT"
+        scoreLabel.fontSize = 60
+        scoreLabel.fontColor = UIColor(r: 255, g: 80, b: 0)
         scoreLabel.text = String(0)
         
         parent.addChild(scoreLabel)
+
     }
     
     private func renderScoreBackground(parent: SKScene) {
@@ -47,7 +48,6 @@ class ScoreHandler {
         scoreBackground.zPosition = 35
         scoreBackground.fillColor = .white
         scoreBackground.alpha = 0.6
-        scoreBackground.shadow(color: .black, size: scoreBackgroundSize, width: 3, cornerRadius: 5)
         
         renderScoreLabel(parent: scoreBackground)
         parent.addChild(scoreBackground)
@@ -71,5 +71,21 @@ class ScoreHandler {
     
     func show() {
         delegate.childNode(withName: "scoreBackground")?.isHidden = false
+    }
+    
+    private func attributedShadowedText(string: String, font: String, size: CGFloat, color: UIColor, shadowSize: CGFloat, shadowColor: UIColor) -> NSAttributedString {
+        
+        let shadow = NSShadow()
+        shadow.shadowBlurRadius = shadowSize
+        shadow.shadowOffset = CGSize(width: shadowSize, height: shadowSize)
+        shadow.shadowColor = shadowColor
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: font, size: size) ?? UIFont.systemFont(ofSize: size),
+            .foregroundColor: color,
+            .shadow: shadow
+        ]
+        
+        return NSAttributedString(string: string, attributes: attributes)
     }
 }

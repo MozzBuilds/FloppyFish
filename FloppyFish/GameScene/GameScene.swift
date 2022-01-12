@@ -24,13 +24,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var scoreHandler: ScoreHandler?
     private var pauseButton: PauseButton?
-    private var menuButton: MenuButton?
     
     private var countDownTime = 3
                 
     override func didMove(to view: SKView) {
 
-        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.scaleMode = .resizeFill
         
         ///Initiate our creators and handlers
@@ -45,7 +43,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setUpScene() {
         setUpBackground()
         setUpPauseButton()
-        setUpMenuButton()
         setUpScoreHandler()
         setUpWorld()
         setUpTraveller()
@@ -60,11 +57,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setUpPauseButton() {
         pauseButton = PauseButton(delegate: self)
         pauseButton?.hide()
-    }
-    
-    func setUpMenuButton() {
-        menuButton = MenuButton(delegate: self)
-        menuButton?.hide()
     }
     
     func setUpScoreHandler() {
@@ -84,13 +76,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func hideGameplayNodes() {
         pauseButton?.hide()
-        menuButton?.hide()
         scoreHandler?.hide()
     }
     
     func showGameplayNodes() {
         pauseButton?.show()
-        menuButton?.show()
         scoreHandler?.show()
     }
     
@@ -100,7 +90,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
                 let countDownLabel = SKLabelNode()
                 
-                countDownLabel.fontSize = 100
+                countDownLabel.fontSize = 144
+                countDownLabel.fontName = "ArialMT"
+                countDownLabel.fontColor = UIColor(red: 1, green: 90/255, blue: 0, alpha: 0.8)
                 countDownLabel.zPosition = 50
                 countDownLabel.text = String(countDownTime)
                 
@@ -185,10 +177,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 switch atPoint(touchLocation).name {
                 
-                case "pauseLabel", "pauseBackground":
+                case "pauseLogo", "pauseLogoBackground":
                     isPaused.toggle()
                     
-                case "menuLabel", "menuBackground", "gameOverMenuLabel", "gameOverMenuBackground":
+                case "gameOverMenuLabel", "gameOverMenuBackground":
                     guard let menuScene = SKScene(fileNamed: "GameMenu") else { return }
                     menuScene.scaleMode = .aspectFill
                     view?.presentScene(menuScene, transition: SKTransition.fade(withDuration: 0.5))

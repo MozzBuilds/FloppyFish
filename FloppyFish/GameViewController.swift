@@ -11,18 +11,15 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
-    static var highScore = 0
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
-            /// Load the SKScene from 'GameScene.sks'
+
             if let scene = SKScene(fileNamed: "GameMenu") {
-                /// Set the scale mode to scale to fit the window
+
                 scene.scaleMode = .aspectFill
 
-                /// Present the scene
                 view.presentScene(scene)
             }
             

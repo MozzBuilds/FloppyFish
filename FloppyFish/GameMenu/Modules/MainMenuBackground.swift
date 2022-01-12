@@ -15,17 +15,16 @@ struct MainMenuBackground {
     
     private func renderBackground(parent: SKScene) {
         let size = CGSize(width: parent.size.width,
-                          height: parent.size.height)
+                          height: parent.size.height * 0.85)
         
         let background = SKShapeNode(rectOf: size,
                                      cornerRadius: 0)
-        
+                
         background.name = "mainMenuBackground"
         background.zPosition = 0
         
-        background.fillColor = .lightGray
-        background.glowWidth = 100
-        background.strokeColor = .gray
+        background.fillTexture = SKTexture(imageNamed: "Game_Background")
+        background.fillColor = .white
         
         parent.addChild(background)
     }
