@@ -122,7 +122,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
         
         ///Set traveller rotation
-        Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(GameScene.travellerRotator), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(GameScene.travellerRotator), userInfo: nil, repeats: true)
         
         ///Remove obstacles/cleanup
         Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)

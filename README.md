@@ -38,7 +38,7 @@ This is my first Swift app, and first mobile app at all. It was built from the g
 * Started with a square block for a fish, and rectangle blocks for the rock obstacles
 * Added physics like the movement of the background and rectangle blocks (the fish stays in the same X position)
 * Added gravity and jump ability for the fish
-* Added in the collisions between the fish and the obstacles, including min/max Y boundaries if the block goes off screen
+* Added in the collisions between the fish and the obstacles, including min/max Y boundaries if the fish goes off screen
 * Score tracking and functionality
 * Pause button, and making the button and score hidden at certain times
 * Performance enhancements
@@ -48,6 +48,10 @@ This is my first Swift app, and first mobile app at all. It was built from the g
 ### Images and Artwork
 All the images you see have been hand drawn in Krita. The fish, the background, sand, rocks, pause button, menu logo. All of it. No copyright infringement on my watch (hopefully).
 
+### Reusability
+The code is designed to be simple and reusable, and  particular methods and variables are named as such. The fish object isn't actually a fish, it's a "traveller", and the rocks are "obstacles". A small thing, but it means that if I wanted to, I could redo the game with a space ship avoiding asteroids, and the only thing I'd need to change are the image tags. Maybe a player could even choose their own type of fish. Maybe I flood the app store with 10,000 variations of the same code and have to fix x10,000 as many bugs, who knows.
+
+This means I can change the fish to a mouse, background to a farm, obstacles to bales of hay, just by changing the image links themselves, and no part of the code will still refer to fish or rocks or the sea. Or  space ship avoiding asteroids (hey there's a good idea..). So we can flood the app store with 10,000 of them 
 
 ## Next Steps
 Personal to do list for future development of the app
