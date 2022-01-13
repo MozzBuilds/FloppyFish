@@ -7,19 +7,23 @@
 
 import SpriteKit
 
-struct MainMenuBackground {
+class MainMenuBackground {
+    
+    private(set) var background: SKShapeNode?
     
     init(delegate: SKScene) {
         renderBackground(parent: delegate)
     }
     
-    private func renderBackground(parent: SKScene) {
+    func renderBackground(parent: SKScene) {
         let size = CGSize(width: parent.size.width,
                           height: parent.size.height * 0.85)
         
-        let background = SKShapeNode(rectOf: size,
+        background = SKShapeNode(rectOf: size,
                                      cornerRadius: 0)
                 
+        guard let background = background else { return }
+        
         background.name = "mainMenuBackground"
         background.zPosition = 0
         

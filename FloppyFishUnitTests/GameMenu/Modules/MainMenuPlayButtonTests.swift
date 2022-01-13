@@ -19,7 +19,7 @@ class MainMenuPlayButtonSpy: MainMenuPlayButton {
     
     private(set) var addChildCallCount = 0
     private(set) var addChildNodeAdded: SKLabelNode?
-    
+        
     override func renderBackground(parent: SKScene) {
         
         super.renderBackground(parent: parent)
@@ -55,7 +55,7 @@ final class MainMenuPlayButtonTests: XCTestCase {
         playLabel = playButton.playLabel
     }
     
-    private func testInitialiser_callsRenderBackground_withDelegate() {
+    func testInitialiser_callsRenderBackground_withDelegate() {
         
         playButtonSpy = MainMenuPlayButtonSpy(delegate: mainMenuSceneSpy)
 
@@ -63,30 +63,43 @@ final class MainMenuPlayButtonTests: XCTestCase {
         XCTAssertEqual(playButtonSpy.renderBackgroundParent, mainMenuSceneSpy, "SKScenes should be equal")
     }
     
-    private func testRenderBackground_createsShapeNode() throws {
+    func testRenderBackground_createsShapeNode() throws {
         
         XCTAssert(try XCTUnwrap(playBackground) .isKind(of: SKShapeNode.self))
     }
     
-    private func testRenderBackground_setsBackgroundProperties() throws {
+    func testRenderBackground_setsBackgroundProperty_Size() throws {
         
-        let expectedWidth = CGFloat(mainMenuSceneSpy.frame.size.width * 0.4)
-        let expectedHeight = mainMenuSceneSpy.frame.size.height
+        let expectedWidth = CGFloat(mainMenuSceneSpy.frame.size.width * 0.5)
+        let expectedHeight = mainMenuSceneSpy.frame.size.height * 0.1
         let actualWidth = try XCTUnwrap(playBackground?.frame.size.width)
         let actualHeight = try XCTUnwrap(playBackground?.frame.size.height)
-        let accuracy = CGFloat(1)
-        let clearColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        let accuracy = CGFloat(0.01)
         
         XCTAssertEqual(actualWidth, expectedWidth, accuracy: accuracy)
         XCTAssertEqual(actualHeight, expectedHeight, accuracy: accuracy)
-        XCTAssertEqual(playBackground?.position, CGPoint(x:0, y:0))
-        XCTAssertEqual(playBackground?.name, "playBackground")
-        XCTAssertEqual(playBackground?.zPosition, 5)
+    }
+    
+    func testRenderBackground_setsBackgroundProperty_Colors() throws {
+    
+        let clearColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        
         XCTAssertEqual(playBackground?.fillColor, clearColor)
         XCTAssertEqual(playBackground?.strokeColor, clearColor)
     }
+    
+    func testRenderBackground_setsBackgroundProperty_Positions() throws {
+    
+        XCTAssertEqual(playBackground?.position, CGPoint(x:0, y:0))
+        XCTAssertEqual(playBackground?.zPosition, 5)
+    }
+    
+    func testRenderBackground_setsBackgroundProperty_Name() throws {
         
-    private func testRenderBackground_callsRenderLabel_withSelfAsParent() {
+        XCTAssertEqual(playBackground?.name, "playBackground")
+    }
+        
+    func testRenderBackground_callsRenderLabel_withSelfAsParent() {
         
         playButtonSpy = MainMenuPlayButtonSpy(delegate: mainMenuSceneSpy)
 
@@ -94,28 +107,36 @@ final class MainMenuPlayButtonTests: XCTestCase {
         XCTAssertEqual(playButtonSpy.renderLabelParent, playButtonSpy.playBackground.self)
     }
     
-    private func testRenderBackground_addsChildToDelegate() {
+    func testRenderBackground_addsChildToDelegate() {
         
         XCTAssertEqual(mainMenuSceneSpy.addChildCallCount, 1)
         XCTAssertEqual(mainMenuSceneSpy.addChildNodesAdded, [playBackground])
         XCTAssertEqual(mainMenuSceneSpy.childNode(withName: "playBackground"), playBackground)
     }
     
-    private func testRenderLabel_createsLabelNode() {
+    func testRenderLabel_createsLabelNode() {
         
         XCTAssert(try XCTUnwrap(playLabel) .isKind(of: SKLabelNode.self))
     }
     
-    private func testRenderLabel_setsLabelProperties() {
+    func testRenderLabel_setsLabelName() {
                 
         XCTAssertEqual(playLabel?.name, "playLabel")
+    }
+    
+    func testRenderLabel_setsLabelPositions() {
+                
         XCTAssertEqual(playLabel?.zPosition, 10)
         XCTAssertEqual(playLabel?.horizontalAlignmentMode, .center)
         XCTAssertEqual(playLabel?.verticalAlignmentMode, .center)
+    }
+    
+    func testRenderLabel_setsLabelAttributedText() {
+                
         XCTAssertEqual(playLabel?.attributedText?.string, "Play")
     }
 
-    private func testRenderLabel_addsChildToDelegate() {
+    func testRenderLabel_addsChildToDelegate() {
 
         XCTAssertEqual(playBackground?.children.first, playLabel)
     }

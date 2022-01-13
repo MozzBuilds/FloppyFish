@@ -29,6 +29,8 @@
 		A7DE5880278F9D9A0068F108 /* TravellerCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE587F278F9D9A0068F108 /* TravellerCreator.swift */; };
 		A7EA74E22790B3BE00AE8D82 /* GameSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74E12790B3BE00AE8D82 /* GameSceneTests.swift */; };
 		A7EA74E42790B43E00AE8D82 /* GameMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74E32790B43E00AE8D82 /* GameMenuTests.swift */; };
+		A7EA74E62790BBA100AE8D82 /* MainMenuLogoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74E52790BBA100AE8D82 /* MainMenuLogoTests.swift */; };
+		A7EA74E82790CB4700AE8D82 /* MainMenuBackgroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74E72790CB4700AE8D82 /* MainMenuBackgroundTests.swift */; };
 		A7FA4D4F27662AD7006A0031 /* ScoreHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */; };
 		A7FA4D51276631ED006A0031 /* PauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D50276631ED006A0031 /* PauseButton.swift */; };
 		A7FA4D532766326F006A0031 /* WorldPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D522766326F006A0031 /* WorldPhysics.swift */; };
@@ -74,6 +76,8 @@
 		A7EA74D1279056E300AE8D82 /* FloppyFishUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FloppyFishUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7EA74E12790B3BE00AE8D82 /* GameSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneTests.swift; sourceTree = "<group>"; };
 		A7EA74E32790B43E00AE8D82 /* GameMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuTests.swift; sourceTree = "<group>"; };
+		A7EA74E52790BBA100AE8D82 /* MainMenuLogoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuLogoTests.swift; sourceTree = "<group>"; };
+		A7EA74E72790CB4700AE8D82 /* MainMenuBackgroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuBackgroundTests.swift; sourceTree = "<group>"; };
 		A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreHandler.swift; sourceTree = "<group>"; };
 		A7FA4D50276631ED006A0031 /* PauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButton.swift; sourceTree = "<group>"; };
 		A7FA4D522766326F006A0031 /* WorldPhysics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldPhysics.swift; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				A7BB50F82790393000E2EA96 /* MainMenuPlayButtonTests.swift */,
+				A7EA74E52790BBA100AE8D82 /* MainMenuLogoTests.swift */,
+				A7EA74E72790CB4700AE8D82 /* MainMenuBackgroundTests.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -374,9 +380,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7EA74E62790BBA100AE8D82 /* MainMenuLogoTests.swift in Sources */,
 				A7EA74E22790B3BE00AE8D82 /* GameSceneTests.swift in Sources */,
 				A7BB51082790399A00E2EA96 /* MainMenuPlayButtonTests.swift in Sources */,
 				A7EA74E42790B43E00AE8D82 /* GameMenuTests.swift in Sources */,
+				A7EA74E82790CB4700AE8D82 /* MainMenuBackgroundTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

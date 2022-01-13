@@ -7,17 +7,21 @@
 
 import SpriteKit
 
-struct MainMenuLogo {
+class MainMenuLogo {
+    
+    private(set) var logo: SKShapeNode?
     
     init(delegate: SKScene) {
-        renderLabelImage(parent: delegate)
+        renderLogo(parent: delegate)
     }
     
-    private func renderLabelImage(parent: SKScene) {
+    func renderLogo(parent: SKScene) {
         let size = CGSize(width: parent.size.width * 0.8,
                           height: parent.size.height * 0.25)
         
-        let logo = SKShapeNode(rectOf: size)
+        logo = SKShapeNode(rectOf: size)
+        
+        guard let logo = logo else { return }
         
         logo.fillTexture = SKTexture(imageNamed: "Menu_Logo")
         

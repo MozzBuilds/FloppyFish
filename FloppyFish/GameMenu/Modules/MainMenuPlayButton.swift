@@ -17,7 +17,7 @@ class MainMenuPlayButton {
     }
     
     func renderBackground(parent: SKScene) {
-        let size = CGSize(width: parent.size.width * 0.4,
+        let size = CGSize(width: parent.size.width * 0.5,
                           height: parent.size.height * 0.1)
         
         playBackground = SKShapeNode(rectOf: size,
