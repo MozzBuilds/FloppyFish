@@ -7,32 +7,39 @@
 
 import SpriteKit
 
-struct MainMenuPlayButton {
+class MainMenuPlayButton {
+    
+    private(set) var playBackground: SKShapeNode?
+    private(set) var playLabel: SKLabelNode?
     
     init(delegate: SKScene) {
         renderBackground(parent: delegate)
     }
     
-    private func renderBackground(parent: SKScene) {
+    func renderBackground(parent: SKScene) {
         let size = CGSize(width: parent.size.width * 0.4,
                           height: parent.size.height * 0.1)
         
-        let playBackground = SKShapeNode(rectOf: size,
+        playBackground = SKShapeNode(rectOf: size,
                                      cornerRadius: 0)
+        
+        guard let playBackground = playBackground else { return }
         
         playBackground.name = "playBackground"
         playBackground.zPosition = 5
         
         playBackground.fillColor = .clear
         playBackground.strokeColor = .clear
-        
+    
         renderLabel(parent: playBackground)
         
         parent.addChild(playBackground)
     }
     
-    private func renderLabel(parent: SKShapeNode) {
-        let playLabel = SKLabelNode()
+    func renderLabel(parent: SKShapeNode) {
+        playLabel = SKLabelNode()
+        
+        guard let playLabel = playLabel else { return }
         
         playLabel.name = "playLabel"
         playLabel.zPosition = 10
