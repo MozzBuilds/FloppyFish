@@ -14,32 +14,19 @@ class ScoreHandler {
     private(set) var score = Int(0)
     private(set) var highScore = UserDefaults.standard.integer(forKey: "highScore")
 
-    private var scoreLabel: SKLabelNode
+    private(set) var scoreLabel: SKLabelNode?
+    private(set) var scoreBackground: SKShapeNode?
     
     init(delegate: SKScene) {
         self.delegate = delegate
-        scoreLabel = SKLabelNode()
         renderScoreBackground(parent: delegate)
     }
     
-    private func renderScoreLabel(parent: SKShapeNode) {
-        scoreLabel.name = "scoreLabel"
-        scoreLabel.zPosition = 50
-        scoreLabel.horizontalAlignmentMode = .center
-        scoreLabel.verticalAlignmentMode = .center
-        
-        scoreLabel.fontName = "Arial-BoldMT"
-        scoreLabel.fontSize = 60
-        scoreLabel.fontColor = UIColor(r: 255, g: 80, b: 0)
-        scoreLabel.text = String(0)
-        
-        parent.addChild(scoreLabel)
-
-    }
-    
-    private func renderScoreBackground(parent: SKScene) {
+    func renderScoreBackground(parent: SKScene) {
         let scoreBackgroundSize = CGSize(width: 120, height: 70)
-        let scoreBackground = SKShapeNode(rectOf: scoreBackgroundSize, cornerRadius: 10)
+        scoreBackground = SKShapeNode(rectOf: scoreBackgroundSize, cornerRadius: 10)
+        
+        guard let scoreBackground = scoreBackground else { return }
         
         scoreBackground.name = "scoreBackground"
         
@@ -52,10 +39,28 @@ class ScoreHandler {
         renderScoreLabel(parent: scoreBackground)
         parent.addChild(scoreBackground)
     }
+
+    func renderScoreLabel(parent: SKShapeNode) {
+        scoreLabel = SKLabelNode()
+        
+        guard let scoreLabel = scoreLabel else { return }
+        
+        scoreLabel.name = "scoreLabel"
+        scoreLabel.zPosition = 50
+        scoreLabel.horizontalAlignmentMode = .center
+        scoreLabel.verticalAlignmentMode = .center
+        
+        scoreLabel.fontName = "Arial-BoldMT"
+        scoreLabel.fontSize = 60
+        scoreLabel.fontColor = UIColor(r: 255, g: 80, b: 0)
+        scoreLabel.text = String(0)
+        
+        parent.addChild(scoreLabel)
+    }
     
     func updateScore() {
         score += 1
-        scoreLabel.text = String(score)
+        scoreLabel?.text = String(score)
     }
     
     func checkHighScore() {

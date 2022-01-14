@@ -31,9 +31,9 @@ final class GameMenuTests: XCTestCase {
         gameMenu = GameMenu()
     }
     
-    func testDidMove_addsThreeChildren_toSelf() {
+//    func testDidMove_addsThreeChildren_toSelf() {
         
-        XCTAssertEqual(gameMenu.children.count, 3)
+//        XCTAssertEqual(gameMenu.children.count, 3)
         
 //        XCTAssert(gameMenu.children[0] is SKShapeNode)
 //        XCTAssert(gameMenu.children[1] is SKShapeNode)
@@ -42,5 +42,13 @@ final class GameMenuTests: XCTestCase {
 //        XCTAssertEqual(gameMenu.children[0].name, "mainMenuBackground")
 //        XCTAssertEqual(gameMenu.children[1].name, "menuLogo")
 //        XCTAssertEqual(gameMenu.children[2].name, "playLabel")
-    }
+//    }
+    
+//    func testTouchesBegan_onPlayLabel() {
+//
+//        let touch = Set<UITouch>()
+//        let event = UIEvent()
+//
+//    }
+    
 }

@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-struct PauseButton {
+class PauseButton {
     
     private let delegate: SKScene
         

@@ -42,13 +42,11 @@ final class MainMenuLogoTests: XCTestCase {
         
         XCTAssertEqual(mainMenuLogoSpy.renderLogoCallCount, 1)
         XCTAssertEqual(mainMenuLogoSpy.renderLogoParent, delegate)
-
     }
     
     func testRenderLogo_initialisesShapeNode() {
         
         XCTAssert(try XCTUnwrap(logo) .isKind(of: SKShapeNode.self))
-
     }
     
     func testRenderLogo_setsLogoFillTexture_toSomething() {

@@ -11,8 +11,24 @@ import XCTest
 
 final class GameSceneSpy: GameScene {
     
+    private(set) var addChildCallCount = 0
+    private(set) var addChildNodesAdded: [SKNode] = []
+    
+    override func addChild(_ node: SKNode) {
+        
+        super.addChild(node)
+        
+        addChildCallCount += 1
+        addChildNodesAdded.append(node)
+    }
 }
 
 final class GameSceneTests: XCTestCase {
     
+    private var gameScene: GameScene?
+    
+    override func setUp() {
+        
+
+    }
 }
