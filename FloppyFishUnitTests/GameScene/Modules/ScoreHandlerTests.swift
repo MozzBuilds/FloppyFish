@@ -120,16 +120,19 @@ final class ScoreHandlerTests: XCTestCase {
     }
     
     func testRenderScoreLabel_setsLabelPositions() {
+        
         XCTAssertEqual(scoreLabel?.zPosition, 50)
         XCTAssertEqual(scoreLabel?.horizontalAlignmentMode, .center)
         XCTAssertEqual(scoreLabel?.verticalAlignmentMode, .center)
     }
     
     func testRenderScoreLabel_setsLabelName() {
+        
         XCTAssertEqual(scoreLabel?.name, "scoreLabel")
     }
     
     func testRenderScoreLabel_setsText_andTextProperties() {
+        
         XCTAssertEqual(scoreLabel?.fontName, "Arial-BoldMT")
         XCTAssertEqual(scoreLabel?.fontSize, 60)
         XCTAssertNotEqual(scoreLabel?.fontColor, .clear)
@@ -137,10 +140,12 @@ final class ScoreHandlerTests: XCTestCase {
     }
     
     func testRenderScoreLabel_addsChild_toParent() {
+        
         XCTAssertEqual(scoreLabel?.parent?.childNode(withName: "scoreLabel"), scoreLabel)
     }
     
     func testUpdateScore_addsOneToScore_andScoreLabelText() {
+        
         scoreHandler.updateScore()
         
         XCTAssertEqual(scoreHandler.score, 1)
@@ -148,6 +153,7 @@ final class ScoreHandlerTests: XCTestCase {
     }
     
     func testCheckHighScore_updatesHighscore_ifScoreIsGreater() {
+        
         UserDefaults.standard.set(1, forKey: "highScore")
         scoreHandler = ScoreHandler(delegate: delegate)
         XCTAssertEqual(scoreHandler.highScore, 1)
@@ -161,6 +167,7 @@ final class ScoreHandlerTests: XCTestCase {
     }
     
     func testCheckHighScore_doesNotUpdateHighSccore_ifScoreIsLower() {
+        
         UserDefaults.standard.set(2, forKey: "highScore")
         scoreHandler = ScoreHandler(delegate: delegate)
         XCTAssertEqual(scoreHandler.highScore, 2)
@@ -172,4 +179,19 @@ final class ScoreHandlerTests: XCTestCase {
         XCTAssertEqual(scoreHandler.highScore, 2)
     }
     
+    func testHide_hidesScoreBackground_andScoreLabel() throws {
+                
+        scoreHandler.hide()
+        let check = try XCTUnwrap(delegate.childNode(withName: "scoreBackground")?.isHidden)
+        
+        XCTAssertTrue(check)
+    }
+    
+    func testHid_showsScoreBackground_andScoreLabel() throws {
+        
+        scoreHandler.show()
+        let check = try XCTUnwrap(delegate.childNode(withName: "scoreBackground")?.isHidden)
+        
+        XCTAssertFalse(check)
+    }
 }
