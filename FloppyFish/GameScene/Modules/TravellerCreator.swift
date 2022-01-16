@@ -9,9 +9,9 @@ import SpriteKit
 
 class TravellerCreator {
     
-    private var traveller: SKSpriteNode
+    private(set) var traveller: SKSpriteNode
     
-    let delegate: SKScene
+    private(set) var delegate: SKScene
     
     init(delegate: SKScene) {
         self.delegate = delegate
@@ -22,11 +22,12 @@ class TravellerCreator {
         traveller.zPosition = 30
         traveller.size = CGSize(width: 125, height: 100)
         traveller.position = CGPoint(x: -delegate.size.width / 3, y: 0)
+        traveller.name = "traveller"
         setPhysics()
         delegate.addChild(traveller)
     }
         
-    private func setPhysics() {
+    func setPhysics() {
         let physicsBodySize = CGSize(width: traveller.size.width * 0.8, height: traveller.size.height * 0.8)
         
         traveller.physicsBody = SKPhysicsBody(rectangleOf: physicsBodySize)
@@ -52,9 +53,12 @@ class TravellerCreator {
     }
     
     func rotate() {
-        if (traveller.physicsBody?.velocity.dy)! < 0 {
+        
+        guard let velocityY = traveller.physicsBody?.velocity.dy else { return }
+        
+        if velocityY < 0 {
             traveller.zRotation = -0.4
-        } else if (traveller.physicsBody?.velocity.dy)! > 0 {
+        } else if velocityY > 0 {
         traveller.zRotation = 0.4
         } else { traveller.zRotation = 0 }
     }
