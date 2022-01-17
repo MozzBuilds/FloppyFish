@@ -113,16 +113,15 @@ final class ObstacleCreatorTests: XCTestCase {
     }
     
     func testSetPositions_setsObstaclePositionProperties_forRandomIntValue_ofOne() throws {
-        
-        obstacleCreator.renderObstacles()
 
+        let randomPosition = obstacleCreator.randomPosition
         let obstacle1Height = try XCTUnwrap(obstacle1?.size.height)
         let obstacle2Height = try XCTUnwrap(obstacle2?.size.height)
         let expectObstacle1TopPositionY = (delegate.size.height * 0.5) - (obstacle1Height * 0.5)
         let expectObstacle2BottomPositionY = -((delegate.size.height * 0.5) - (obstacle2Height * 0.5))
         let accuracy = CGFloat(0.01)
         
-        if obstacleCreator.randomPosition == 1 {
+        if randomPosition == 1 {
             
             XCTAssertEqual(try XCTUnwrap(obstacle1?.position.y),
                            expectObstacle1TopPositionY,
@@ -141,16 +140,15 @@ final class ObstacleCreatorTests: XCTestCase {
     }
     
     func testSetPositions_setsObstaclePositionProperties_forRandomIntValue_ofTwo() throws {
-        
-        obstacleCreator.renderObstacles()
 
+        let randomPosition = obstacleCreator.randomPosition
         let obstacle1Height = try XCTUnwrap(obstacle1?.size.height)
         let obstacle2Height = try XCTUnwrap(obstacle2?.size.height)
         let expectObstacle1BottomPositionY = -((delegate.size.height * 0.5) - (obstacle1Height * 0.5))
         let expectObstacle2TopPositionY = (delegate.size.height * 0.5) - (obstacle2Height * 0.5)
         let accuracy = CGFloat(0.01)
         
-        if obstacleCreator.randomPosition == 2 {
+        if randomPosition == 2 {
             
             XCTAssertEqual(try XCTUnwrap(obstacle1?.position.y),
                            expectObstacle1BottomPositionY,
@@ -166,5 +164,32 @@ final class ObstacleCreatorTests: XCTestCase {
                            .pi,
                            accuracy: accuracy)
         }
+    }
+    
+    func testSetPhysics_initialisesPhysicsBodies() throws {
+        
+        obstacleCreator.renderObstacles()
+        
+        let obstacle1PhysicsBody = try XCTUnwrap(obstacle1?.physicsBody)
+        let obstacle2PhysicsBody = try XCTUnwrap(obstacle2?.physicsBody)
+
+        XCTAssert(obstacle1PhysicsBody .isKind(of: SKPhysicsBody.self))
+        XCTAssert(obstacle2PhysicsBody .isKind(of: SKPhysicsBody.self))
+    }
+    
+    func testSetPhysics_setsPhysicsProperties_forEachObstacle() throws {
+        
+        obstacleCreator.renderObstacles()
+
+        let obstacle1PhysicsBody = try XCTUnwrap(obstacle1?.physicsBody)
+        let obstacle2PhysicsBody = try XCTUnwrap(obstacle2?.physicsBody)
+        
+        XCTAssertEqual(obstacle1PhysicsBody.collisionBitMask, 0)
+        XCTAssertFalse(obstacle1PhysicsBody.affectedByGravity)
+        XCTAssertFalse(obstacle1PhysicsBody.isDynamic)
+
+        XCTAssertEqual(obstacle2PhysicsBody.collisionBitMask, 0)
+        XCTAssertFalse(obstacle2PhysicsBody.affectedByGravity)
+        XCTAssertFalse(obstacle2PhysicsBody.isDynamic)
     }
 }

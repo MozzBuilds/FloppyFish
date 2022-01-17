@@ -31,6 +31,9 @@ final class GameSceneSpy: GameScene {
         enumerateChildNodesCallCount += 1
         enumerateChildNodesCompletion = block
     }
+    
+    @objc override func handleObstacleTimer(timer: Timer) {
+    }
 }
 
 final class GameSceneTests: XCTestCase {

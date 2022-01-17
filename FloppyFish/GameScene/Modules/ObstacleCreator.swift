@@ -32,7 +32,7 @@ class ObstacleCreator {
     private(set) var defaultSize: CGSize
     private let defaultColor: UIColor = .black
     
-    private(set) var randomPosition: Int?
+    private(set) var randomPosition = 1
     
     init(delegate: SKScene) {
         
@@ -67,41 +67,6 @@ class ObstacleCreator {
         obstacle1.size = CGSize(width: defaultWidth, height: maxHeight * randomSize)
         obstacle2.size = CGSize(width: defaultWidth, height: obstacle1.size.height * 0.4)
     }
-    
-//    func setPositions() {
-//
-//        obstacles.forEach{
-//            $0.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-//            $0.name = "obstacle"
-//            $0.position.x = delegate.size.width
-//            $0.zPosition = 25
-//        }
-//
-//        ///Calculate middle points
-//        let obstacle1HeightMidpoint = obstacle1.size.height / 2
-//        let screenHeightMidpoint = delegate.size.height / 2
-//
-//        let obstacle1PositionTop = screenHeightMidpoint - obstacle1HeightMidpoint
-//
-//        let obstacle2HeightMidpoint = obstacle2.size.height / 2
-//
-//        ///Randomise the obstacles being at top or bottom (one at each)
-//        randomPosition = Int.random(in: 1...2)
-//
-//        if (randomPosition == 1) {
-//            obstacle1.position.y = obstacle1PositionTop
-//            obstacle1.zRotation = .pi
-//            obstacle1.xScale = 1.0
-//            obstacle2.position.y = -(screenHeightMidpoint - obstacle2HeightMidpoint)
-//        }
-//
-//        else if (randomPosition == 2) {
-//            obstacle1.position.y = -(obstacle1PositionTop)
-//            obstacle2.position.y = screenHeightMidpoint - obstacle2HeightMidpoint
-//            obstacle2.xScale = 1.0
-//            obstacle2.zRotation = .pi
-//        }
-//    }
     
     func setPositions() {
 
