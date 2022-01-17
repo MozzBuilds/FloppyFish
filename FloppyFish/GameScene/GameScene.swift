@@ -17,26 +17,26 @@ struct ColliderType {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
             
-    private var obstacleCreator: ObstacleCreator!
-    private var backgroundHandler: BackgroundHandler?
-    private var worldPhysics: WorldPhysics!
-    private var travellerCreator: TravellerCreator!
+    private(set) var obstacleCreator: ObstacleCreator!
+    private(set) var backgroundHandler: BackgroundHandler?
+    private(set) var worldPhysics: WorldPhysics!
+    private(set) var travellerCreator: TravellerCreator!
     
-    private var scoreHandler: ScoreHandler?
-    private var pauseButton: PauseButton?
+    private(set) var scoreHandler: ScoreHandler?
+    private(set) var pauseButton: PauseButton?
+    private(set) var countDownLabel: SKLabelNode?
     
-    private var countDownTime = 3
+    private(set) var countDownTime = 3
                 
     override func didMove(to view: SKView) {
-
-        self.scaleMode = .resizeFill
         
         ///Initiate our creators and handlers
         obstacleCreator = ObstacleCreator(delegate: self)
         worldPhysics = WorldPhysics(delegate: self)
-        
         travellerCreator = TravellerCreator(delegate: self)
         
+        self.scaleMode = .resizeFill
+
         setUpScene()
     }
     
@@ -88,11 +88,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !isPaused {
             if countDownTime > 0 {
             
-                let countDownLabel = SKLabelNode()
+                countDownLabel = SKLabelNode()
+                
+                guard let countDownLabel = countDownLabel else { return }
                 
                 countDownLabel.fontSize = 144
                 countDownLabel.fontName = "ArialMT"
-                countDownLabel.fontColor = UIColor(red: 1, green: 90/255, blue: 0, alpha: 0.8)
+                countDownLabel.fontColor = UIColor(red: 1, green: 0.35, blue: 0, alpha: 0.8)
                 countDownLabel.zPosition = 50
                 countDownLabel.text = String(countDownTime)
                 
@@ -148,6 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ///Look out for new nodes
             enumerateChildNodes(withName: "obstacle", using: { (obstacle, stop) in
                 let newItem = obstacle as! SKSpriteNode
+                newItem.name = "newItem"
                 newItem.position.x -= 5 ///set the X speed
             })
         }
