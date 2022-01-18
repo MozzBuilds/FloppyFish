@@ -150,7 +150,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ///Look out for new nodes
             enumerateChildNodes(withName: "obstacle", using: { (obstacle, stop) in
                 let newItem = obstacle as! SKSpriteNode
-                newItem.name = "newItem"
                 newItem.position.x -= 5 ///set the X speed
             })
         }
