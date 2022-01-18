@@ -15,7 +15,6 @@ class MainMenuBackgroundSpy: MainMenuBackground {
     private(set) var renderBackgroundParent: SKScene?
     
     override func renderBackground(parent: SKScene) {
-        
         renderBackgroundCallCount += 1
         renderBackgroundParent = parent
     }

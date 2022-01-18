@@ -16,20 +16,16 @@ final class ObstacleCreatorSpy: ObstacleCreator {
     private(set) var setPhysicsCallCount = 0
     
     override func setSizes() {
-        
         setSizesCallCount += 1
     }
     
     override func setPositions() {
-        
         setPositionsCallCount += 1
     }
     
     override func setPhysics() {
-        
         setPhysicsCallCount += 1
     }
-    
 }
 
 final class ObstacleCreatorTests: XCTestCase {

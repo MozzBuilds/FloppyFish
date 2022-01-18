@@ -29,9 +29,7 @@ final class GameSceneSpy: GameScene {
     //MARK: - Inherited Methods
     
     override func addChild(_ node: SKNode) {
-        
         super.addChild(node)
-        
         addChildCallCount += 1
         addChildNodesAdded.append(node)
     }
@@ -39,7 +37,6 @@ final class GameSceneSpy: GameScene {
     override func enumerateChildNodes(withName name: String, using block: @escaping (SKNode, UnsafeMutablePointer<ObjCBool>) -> Void) {
         
         super.enumerateChildNodes(withName: name, using: block)
-        
         enumerateChildNodesCallCount += 1
         enumerateChildNodesCompletion = block
     }
@@ -47,9 +44,7 @@ final class GameSceneSpy: GameScene {
     //MARK: - GameScene Methods
     
     override func setUpScene() {
-        
         super.setUpScene()
-        
         setUpSceneCallCount += 1
     }
     
@@ -62,6 +57,7 @@ final class GameSceneSpy: GameScene {
     }
     
     override func setUpScoreHandler() {
+        super.setUpScoreHandler()
         setUpScoreHandlerCallCount += 1
     }
     
@@ -70,9 +66,7 @@ final class GameSceneSpy: GameScene {
     }
     
     override func setUpTraveller() {
-        
         super.setUpTraveller()
-        
         setUpTravellerCallCount += 1
     }
     
@@ -280,7 +274,8 @@ final class GameSceneTests: XCTestCase {
 
         gameSceneSpy.update(CFTimeInterval(0.01))
         
-        XCTAssertEqual(gameSceneSpy.enumerateChildNodesCallCount, 0)
+        ///This is called once regardless
+        XCTAssertEqual(gameSceneSpy.enumerateChildNodesCallCount, 1)
     }
     
     func testUpdate_movesBackground_ifGameNotPaused() {

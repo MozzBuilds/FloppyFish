@@ -9,17 +9,12 @@
 import SpriteKit
 import XCTest
 
-final class BackgroundHandlerSpy: BackgroundHandler {
-    
-}
-
 final class BackgroundHandlerTests: XCTestCase {
     
     private var delegate: GameSceneSpy!
     private var backgroundHandler: BackgroundHandler!
     
     override func setUp() {
-        
         delegate = GameSceneSpy()
         backgroundHandler = BackgroundHandler(delegate: delegate)
     }

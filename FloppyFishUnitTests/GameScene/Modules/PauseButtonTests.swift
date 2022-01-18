@@ -18,17 +18,13 @@ final class PauseButtonSpy: PauseButton {
     private(set) var renderPauseLogoParent: SKShapeNode?
         
     override func renderPauseLogoBackground(parent: SKScene) {
-        
         super.renderPauseLogoBackground(parent: parent)
-
         renderPauseLogoBackgroundCallCount += 1
         renderPauseLogoBackgroundParent = parent
     }
     
     override func renderPauseLogo(parent: SKShapeNode) {
-        
         super.renderPauseLogo(parent: parent)
-        
         renderPauseLogoCallCount += 1
         renderPauseLogoParent = parent
     }

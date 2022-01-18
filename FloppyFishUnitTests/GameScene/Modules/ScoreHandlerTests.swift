@@ -18,17 +18,13 @@ final class ScoreHandlerSpy: ScoreHandler {
     private(set) var renderScoreLabelParent: SKShapeNode?
         
     override func renderScoreBackground(parent: SKScene) {
-        
         super.renderScoreBackground(parent: parent)
-
         renderScoreBackgroundCallCount += 1
         renderScoreBackgroundParent = parent
     }
     
     override func renderScoreLabel(parent: SKShapeNode) {
-        
         super.renderScoreLabel(parent: parent)
-        
         renderScoreLabelCallCount += 1
         renderScoreLabelParent = parent
     }

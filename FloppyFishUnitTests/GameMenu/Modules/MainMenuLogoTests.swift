@@ -15,7 +15,6 @@ class MainMenuLogoSpy: MainMenuLogo {
     private(set) var renderLogoParent: SKScene?
     
     override func renderLogo(parent: SKScene) {
-        
         renderLogoCallCount += 1
         renderLogoParent = parent
     }

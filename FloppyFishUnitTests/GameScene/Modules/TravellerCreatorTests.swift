@@ -14,7 +14,6 @@ final class TravellerCreatorSpy: TravellerCreator {
     private(set) var setPhysicsCallCount = 0
     
     override func setPhysics() {
-        
         setPhysicsCallCount += 1
     }
     

@@ -18,17 +18,13 @@ class MainMenuPlayButtonSpy: MainMenuPlayButton {
     private(set) var renderLabelParent: SKShapeNode?
         
     override func renderBackground(parent: SKScene) {
-        
         super.renderBackground(parent: parent)
-
         renderBackgroundCallCount += 1
         renderBackgroundParent = parent
     }
     
     override func renderLabel(parent: SKShapeNode) {
-        
         super.renderLabel(parent: parent)
-        
         renderLabelCallCount += 1
         renderLabelParent = parent
     }

@@ -9,22 +9,26 @@ import SpriteKit
 
 class GameEndedView {
     
-    let delegate: SKScene
-    let score: Int
-    let highScore: Int
+    private(set) var delegate: SKScene
+    private(set) var score: Int
+    private(set) var highScore: Int
     
     ///Background SKShapeNode properties
-    let maxHeight: CGFloat
-    let maxWidth: CGFloat
-    let defaultRadius = CGFloat(20)
+    private(set) var maxHeight: CGFloat
+    private(set) var maxWidth: CGFloat
+    private(set) var defaultRadius = CGFloat(20)
 
-    var gameOverLabel: SKLabelNode
-    var scoreLabelText: SKLabelNode
-    var highScoreLabelText: SKLabelNode
-    var scoreLabelValue: SKLabelNode
-    var highScoreLabelValue: SKLabelNode
-    var playAgainLabel: SKLabelNode
-    var menuLabel: SKLabelNode
+    private(set) var gameOverLabel: SKLabelNode
+    private(set) var scoreLabelText: SKLabelNode
+    private(set) var highScoreLabelText: SKLabelNode
+    private(set) var scoreLabelValue: SKLabelNode
+    private(set) var highScoreLabelValue: SKLabelNode
+    private(set) var playAgainLabel: SKLabelNode
+    private(set) var menuLabel: SKLabelNode
+    
+    private(set) var scoreBackground: SKShapeNode?
+    private(set) var playAgainBackground: SKShapeNode?
+    private(set) var menuBackground: SKShapeNode?
     
     let labels: [SKLabelNode]
         
@@ -113,28 +117,40 @@ class GameEndedView {
     //MARK: - Render Label Backgrounds
 
     func renderScoreBackground() {
+        
         let scoreBackgroundSize = CGSize(width: maxWidth * 0.7, height: maxHeight * 0.5)
-        let scoreBackground = SKShapeNode(rectOf: scoreBackgroundSize, cornerRadius: defaultRadius)
+        let shadowWidth = CGFloat(6)
+        let shadowSize = CGSize(width: scoreBackgroundSize.width + shadowWidth,
+                                height: scoreBackgroundSize.height + shadowWidth)
+        
+        scoreBackground = SKShapeNode(rectOf: scoreBackgroundSize, cornerRadius: defaultRadius)
+        
+        guard let scoreBackground = scoreBackground else { return }
         
         scoreBackground.name = "scoreGameOverBackground"
         scoreBackground.fillColor = UIColor(r: 250, g: 225, b: 100)
         scoreBackground.alpha = 0.9
-        let shadowWidth = CGFloat(6)
-        let shadowSize = CGSize(width: scoreBackgroundSize.width + shadowWidth,
-                                height: scoreBackgroundSize.height + shadowWidth)
 
         scoreBackground.shadow(color: .gray,
-                          size: shadowSize,
-                          width: shadowWidth,
-                          cornerRadius: defaultRadius)
+                               size: shadowSize,
+                               width: shadowWidth,
+                               cornerRadius: defaultRadius)
         
         commonFinalBackgroundProperties(background: scoreBackground, size: scoreBackgroundSize)
+    
+        renderScoreLabelPositions(backgroundSize: scoreBackgroundSize)
         
-        scoreLabelText.position.y = (scoreBackgroundSize.height / 2) - scoreLabelText.fontSize
+        addScoreNodesToDelegate(scoreBackground: scoreBackground)
+    }
+    
+    func renderScoreLabelPositions(backgroundSize: CGSize) {
+        scoreLabelText.position.y = (backgroundSize.height / 2) - scoreLabelText.fontSize
         scoreLabelValue.position.y = scoreLabelText.position.y - (scoreLabelText.fontSize * 2)
         highScoreLabelText.position.y = scoreLabelValue.position.y - (scoreLabelText.fontSize * 1.5)
         highScoreLabelValue.position.y = highScoreLabelText.position.y - (scoreLabelText.fontSize * 2)
-        
+    }
+    
+    func addScoreNodesToDelegate(scoreBackground: SKShapeNode) {
         scoreBackground.addChild(scoreLabelText)
         scoreBackground.addChild(scoreLabelValue)
         scoreBackground.addChild(highScoreLabelText)
@@ -144,7 +160,9 @@ class GameEndedView {
 
     func renderPlayAgainBackground() {
         let playAgainBackgroundSize = CGSize(width: maxWidth * 0.5, height: maxHeight * 0.2)
-        let playAgainBackground = SKShapeNode(rectOf: playAgainBackgroundSize, cornerRadius: defaultRadius)
+        playAgainBackground = SKShapeNode(rectOf: playAgainBackgroundSize, cornerRadius: defaultRadius)
+        
+        guard let playAgainBackground = playAgainBackground else { return }
         
         playAgainBackground.name = "playAgainBackground"
         playAgainBackground.position = CGPoint(x: maxWidth * 0.5, y: -maxHeight * 0.5)
@@ -160,7 +178,9 @@ class GameEndedView {
 
     func renderMenuBackground() {
         let menuBackgroundSize = CGSize(width: maxWidth * 0.5, height: maxHeight * 0.2)
-        let menuBackground = SKShapeNode(rectOf: menuBackgroundSize, cornerRadius: defaultRadius)
+        menuBackground = SKShapeNode(rectOf: menuBackgroundSize, cornerRadius: defaultRadius)
+        
+        guard let menuBackground = menuBackground else { return }
         
         menuBackground.name = "gameOverMenuBackground"
         menuBackground.position = CGPoint(x: -maxWidth * 0.5, y: -maxHeight * 0.5)
@@ -175,22 +195,6 @@ class GameEndedView {
     
     //MARK: - Helper Fuctions
     
-    func attributedShadowedText(string: String, font: String, size: CGFloat, color: UIColor, shadowSize: CGFloat, shadowColor: UIColor) -> NSAttributedString {
-        
-        let shadow = NSShadow()
-        shadow.shadowBlurRadius = shadowSize
-        shadow.shadowOffset = CGSize(width: shadowSize, height: shadowSize)
-        shadow.shadowColor = shadowColor
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: font, size: size) ?? UIFont.systemFont(ofSize: size),
-            .foregroundColor: color,
-            .shadow: shadow
-        ]
-        
-        return NSAttributedString(string: string, attributes: attributes)
-    }
-    
     func commonInitialLabelProperties() {
         labels.forEach{
             $0.zPosition = 125
@@ -204,5 +208,21 @@ class GameEndedView {
         background.lineWidth = 3
         background.strokeColor = .darkGray
         background.glowWidth = 2
+    }
+    
+    private func attributedShadowedText(string: String, font: String, size: CGFloat, color: UIColor, shadowSize: CGFloat, shadowColor: UIColor) -> NSAttributedString {
+        
+        let shadow = NSShadow()
+        shadow.shadowBlurRadius = shadowSize
+        shadow.shadowOffset = CGSize(width: shadowSize, height: shadowSize)
+        shadow.shadowColor = shadowColor
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: font, size: size) ?? UIFont.systemFont(ofSize: size),
+            .foregroundColor: color,
+            .shadow: shadow
+        ]
+        
+        return NSAttributedString(string: string, attributes: attributes)
     }
 }

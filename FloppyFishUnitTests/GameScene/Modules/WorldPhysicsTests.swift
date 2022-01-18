@@ -20,27 +20,21 @@ final class WorldPhysicsSpy: WorldPhysics {
     private(set) var commonBoundaryPropertiesNode: SKSpriteNode?
 
     override func maximumBoundary(parent: SKScene) {
-        
         super.maximumBoundary(parent: parent)
-        
         maximumBoundaryCallCount += 1
         maximumBoundaryParent = parent
     }
     
     override func minimumBoundary(parent: SKScene) {
-        
         super.minimumBoundary(parent: parent)
-        
         minimumBoundaryCallCount += 1
         minimumBoundaryParent = parent
     }
     
     override func commonBoundaryProperties(boundary: SKSpriteNode) {
-        
         commonBoundaryPropertiesCallCount += 1
         commonBoundaryPropertiesNode = boundary
     }
-    
 }
 
 final class WorldPhysicsTests: XCTestCase {
