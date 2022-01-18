@@ -9,7 +9,10 @@ import SpriteKit
 
 class WorldPhysics {
     
-    private let delegate: SKScene
+    private(set) var delegate: SKScene
+    
+    private(set) var maxBoundary: SKSpriteNode?
+    private(set) var minBoundary: SKSpriteNode?
     
     init(delegate: SKScene) {
         self.delegate = delegate
@@ -21,33 +24,36 @@ class WorldPhysics {
     }
     
     func addBoundaries() {
-        delegate.addChild(maximumBoundary())
-        delegate.addChild(minimumBoundary())
+        maximumBoundary(parent: delegate)
+        minimumBoundary(parent: delegate)
     }
     
-    private func maximumBoundary() -> SKSpriteNode {
-        let maxBoundary =  SKSpriteNode()
+    func maximumBoundary(parent: SKScene){
+        maxBoundary =  SKSpriteNode()
+        guard let maxBoundary = maxBoundary else { return }
         commonBoundaryProperties(boundary: maxBoundary)
         
         maxBoundary.name = "maxBoundary"
         maxBoundary.position.y = delegate.size.height / 2
         maxBoundary.physicsBody?.categoryBitMask = ColliderType.maxBoundary
         
-        return maxBoundary
+        parent.addChild(maxBoundary)
     }
     
-    private func minimumBoundary() -> SKSpriteNode {
-        let minBoundary =  SKSpriteNode()
+    func minimumBoundary(parent: SKScene) {
+        minBoundary =  SKSpriteNode()
+        guard let minBoundary = minBoundary else { return }
+
         commonBoundaryProperties(boundary: minBoundary)
         
         minBoundary.name = "minBoundary"
         minBoundary.position.y = -delegate.size.height / 2
         minBoundary.physicsBody?.categoryBitMask = ColliderType.minBoundary
         
-        return minBoundary
+        parent.addChild(minBoundary)
     }
     
-    private func commonBoundaryProperties(boundary: SKSpriteNode) {
+    func commonBoundaryProperties(boundary: SKSpriteNode) {
         boundary.size = CGSize(width: delegate.size.width, height: 1)
         
         boundary.physicsBody = SKPhysicsBody(rectangleOf: boundary.size)

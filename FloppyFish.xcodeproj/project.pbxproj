@@ -19,6 +19,7 @@
 		A718285F272EDB070002A8B5 /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718285E272EDB070002A8B5 /* GameMenu.swift */; };
 		A7182861272EDB2C0002A8B5 /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = A7182860272EDB2C0002A8B5 /* GameMenu.sks */; };
 		A7182864272F46CA0002A8B5 /* ObstacleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */; };
+		A7BB51082790399A00E2EA96 /* MainMenuPlayButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BB50F82790393000E2EA96 /* MainMenuPlayButtonTests.swift */; };
 		A7C6CD3B273D0AF300B0815B /* BackgroundHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */; };
 		A7DE585D278F8C7E0068F108 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A7DE5837278F8C7E0068F108 /* README.md */; };
 		A7DE5877278F8C9B0068F108 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A7DE5876278F8C9A0068F108 /* README.md */; };
@@ -26,6 +27,17 @@
 		A7DE587D278F8CE70068F108 /* Game_Over_Screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE587A278F8CE70068F108 /* Game_Over_Screenshot.png */; };
 		A7DE587E278F8CE70068F108 /* Gameplay_Screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE587B278F8CE70068F108 /* Gameplay_Screenshot.png */; };
 		A7DE5880278F9D9A0068F108 /* TravellerCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE587F278F9D9A0068F108 /* TravellerCreator.swift */; };
+		A7EA74E22790B3BE00AE8D82 /* GameSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74E12790B3BE00AE8D82 /* GameSceneTests.swift */; };
+		A7EA74E42790B43E00AE8D82 /* GameMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74E32790B43E00AE8D82 /* GameMenuTests.swift */; };
+		A7EA74E62790BBA100AE8D82 /* MainMenuLogoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74E52790BBA100AE8D82 /* MainMenuLogoTests.swift */; };
+		A7EA74E82790CB4700AE8D82 /* MainMenuBackgroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74E72790CB4700AE8D82 /* MainMenuBackgroundTests.swift */; };
+		A7EA74EC2790DBAA00AE8D82 /* GameEndedViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74EB2790DBAA00AE8D82 /* GameEndedViewTests.swift */; };
+		A7EA74EE2790DBF800AE8D82 /* TravellerCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74ED2790DBF800AE8D82 /* TravellerCreatorTests.swift */; };
+		A7EA74F02790DC3000AE8D82 /* ScoreHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74EF2790DC3000AE8D82 /* ScoreHandlerTests.swift */; };
+		A7EA74F22790DCA100AE8D82 /* PauseButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74F12790DCA100AE8D82 /* PauseButtonTests.swift */; };
+		A7EA74F42790DCE000AE8D82 /* WorldPhysicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74F32790DCE000AE8D82 /* WorldPhysicsTests.swift */; };
+		A7EA74F62790DD0C00AE8D82 /* ObstacleCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74F52790DD0C00AE8D82 /* ObstacleCreatorTests.swift */; };
+		A7EA74F82790DD3B00AE8D82 /* BackgroundHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74F72790DD3B00AE8D82 /* BackgroundHandlerTests.swift */; };
 		A7FA4D4F27662AD7006A0031 /* ScoreHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */; };
 		A7FA4D51276631ED006A0031 /* PauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D50276631ED006A0031 /* PauseButton.swift */; };
 		A7FA4D532766326F006A0031 /* WorldPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA4D522766326F006A0031 /* WorldPhysics.swift */; };
@@ -35,14 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A7182840272EDA330002A8B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A7182820272EDA2F0002A8B5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A7182827272EDA300002A8B5;
-			remoteInfo = FloppyFish;
-		};
-		A718284B272EDA330002A8B5 /* PBXContainerItemProxy */ = {
+		A7BB51032790396D00E2EA96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7182820272EDA2F0002A8B5 /* Project object */;
 			proxyType = 1;
@@ -63,11 +68,10 @@
 		A7182836272EDA300002A8B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A7182838272EDA330002A8B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A718283A272EDA330002A8B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A718283F272EDA330002A8B5 /* FloppyFishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = FloppyFishTests.xctest; path = "/Users/colinmorrison/Desktop/Apps/FloppyFish/build/Debug-iphoneos/FloppyFishTests.xctest"; sourceTree = "<absolute>"; };
-		A718284A272EDA330002A8B5 /* FloppyFishUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = FloppyFishUITests.xctest; path = "/Users/colinmorrison/Desktop/Apps/FloppyFish/build/Debug-iphoneos/FloppyFishUITests.xctest"; sourceTree = "<absolute>"; };
 		A718285E272EDB070002A8B5 /* GameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		A7182860272EDB2C0002A8B5 /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
 		A7182863272F46CA0002A8B5 /* ObstacleCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleCreator.swift; sourceTree = "<group>"; };
+		A7BB50F82790393000E2EA96 /* MainMenuPlayButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuPlayButtonTests.swift; sourceTree = "<group>"; };
 		A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundHandler.swift; sourceTree = "<group>"; };
 		A7DE5837278F8C7E0068F108 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A7DE5857278F8C7E0068F108 /* FloppyFish.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FloppyFish.xcodeproj; sourceTree = "<group>"; };
@@ -76,6 +80,18 @@
 		A7DE587A278F8CE70068F108 /* Game_Over_Screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Game_Over_Screenshot.png; sourceTree = "<group>"; };
 		A7DE587B278F8CE70068F108 /* Gameplay_Screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gameplay_Screenshot.png; sourceTree = "<group>"; };
 		A7DE587F278F9D9A0068F108 /* TravellerCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravellerCreator.swift; sourceTree = "<group>"; };
+		A7EA74D1279056E300AE8D82 /* FloppyFishUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FloppyFishUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7EA74E12790B3BE00AE8D82 /* GameSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneTests.swift; sourceTree = "<group>"; };
+		A7EA74E32790B43E00AE8D82 /* GameMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuTests.swift; sourceTree = "<group>"; };
+		A7EA74E52790BBA100AE8D82 /* MainMenuLogoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuLogoTests.swift; sourceTree = "<group>"; };
+		A7EA74E72790CB4700AE8D82 /* MainMenuBackgroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuBackgroundTests.swift; sourceTree = "<group>"; };
+		A7EA74EB2790DBAA00AE8D82 /* GameEndedViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndedViewTests.swift; sourceTree = "<group>"; };
+		A7EA74ED2790DBF800AE8D82 /* TravellerCreatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravellerCreatorTests.swift; sourceTree = "<group>"; };
+		A7EA74EF2790DC3000AE8D82 /* ScoreHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreHandlerTests.swift; sourceTree = "<group>"; };
+		A7EA74F12790DCA100AE8D82 /* PauseButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButtonTests.swift; sourceTree = "<group>"; };
+		A7EA74F32790DCE000AE8D82 /* WorldPhysicsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldPhysicsTests.swift; sourceTree = "<group>"; };
+		A7EA74F52790DD0C00AE8D82 /* ObstacleCreatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleCreatorTests.swift; sourceTree = "<group>"; };
+		A7EA74F72790DD3B00AE8D82 /* BackgroundHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundHandlerTests.swift; sourceTree = "<group>"; };
 		A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreHandler.swift; sourceTree = "<group>"; };
 		A7FA4D50276631ED006A0031 /* PauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButton.swift; sourceTree = "<group>"; };
 		A7FA4D522766326F006A0031 /* WorldPhysics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldPhysics.swift; sourceTree = "<group>"; };
@@ -92,14 +108,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A718283C272EDA330002A8B5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A7182847272EDA330002A8B5 /* Frameworks */ = {
+		A7BB50FB2790396D00E2EA96 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -113,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				A7DE5832278F8C7E0068F108 /* FloppyFish */,
+				A7BB50FF2790396D00E2EA96 /* FloppyFishUnitTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				A7182828272EDA300002A8B5 /* FloppyFish.app */,
+				A7EA74D1279056E300AE8D82 /* FloppyFishUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,6 +174,7 @@
 		A7182862272F46A10002A8B5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A7DE587F278F9D9A0068F108 /* TravellerCreator.swift */,
 				A7FA4D4E27662AD7006A0031 /* ScoreHandler.swift */,
 				A7FA4D50276631ED006A0031 /* PauseButton.swift */,
 				A7FA4D522766326F006A0031 /* WorldPhysics.swift */,
@@ -171,6 +183,34 @@
 				A70F363E2763C63F00E51BD9 /* ClassExtensions.swift */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		A7BB50F6279038F200E2EA96 /* GameMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A7BB50F72790390400E2EA96 /* Modules */,
+				A7EA74E32790B43E00AE8D82 /* GameMenuTests.swift */,
+			);
+			path = GameMenu;
+			sourceTree = "<group>";
+		};
+		A7BB50F72790390400E2EA96 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				A7BB50F82790393000E2EA96 /* MainMenuPlayButtonTests.swift */,
+				A7EA74E52790BBA100AE8D82 /* MainMenuLogoTests.swift */,
+				A7EA74E72790CB4700AE8D82 /* MainMenuBackgroundTests.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		A7BB50FF2790396D00E2EA96 /* FloppyFishUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				A7EA74E02790B39B00AE8D82 /* GameScene */,
+				A7BB50F6279038F200E2EA96 /* GameMenu */,
+			);
+			path = FloppyFishUnitTests;
 			sourceTree = "<group>";
 		};
 		A7DE5832278F8C7E0068F108 /* FloppyFish */ = {
@@ -194,12 +234,34 @@
 		A7DE5878278F8CD70068F108 /* README_Assets */ = {
 			isa = PBXGroup;
 			children = (
-				A7DE587F278F9D9A0068F108 /* TravellerCreator.swift */,
 				A7DE587A278F8CE70068F108 /* Game_Over_Screenshot.png */,
 				A7DE587B278F8CE70068F108 /* Gameplay_Screenshot.png */,
 				A7DE5879278F8CE70068F108 /* Main_Menu_Screenshot.png */,
 			);
 			path = README_Assets;
+			sourceTree = "<group>";
+		};
+		A7EA74E02790B39B00AE8D82 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				A7EA74E92790DA9700AE8D82 /* Modules */,
+				A7EA74E12790B3BE00AE8D82 /* GameSceneTests.swift */,
+				A7EA74EB2790DBAA00AE8D82 /* GameEndedViewTests.swift */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
+		A7EA74E92790DA9700AE8D82 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				A7EA74ED2790DBF800AE8D82 /* TravellerCreatorTests.swift */,
+				A7EA74EF2790DC3000AE8D82 /* ScoreHandlerTests.swift */,
+				A7EA74F12790DCA100AE8D82 /* PauseButtonTests.swift */,
+				A7EA74F32790DCE000AE8D82 /* WorldPhysicsTests.swift */,
+				A7EA74F52790DD0C00AE8D82 /* ObstacleCreatorTests.swift */,
+				A7EA74F72790DD3B00AE8D82 /* BackgroundHandlerTests.swift */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		A7FA4D5827664E31006A0031 /* Modules */ = {
@@ -232,41 +294,23 @@
 			productReference = A7182828272EDA300002A8B5 /* FloppyFish.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A718283E272EDA330002A8B5 /* FloppyFishTests */ = {
+		A7BB50FD2790396D00E2EA96 /* FloppyFishUnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A7182856272EDA330002A8B5 /* Build configuration list for PBXNativeTarget "FloppyFishTests" */;
+			buildConfigurationList = A7BB51052790396D00E2EA96 /* Build configuration list for PBXNativeTarget "FloppyFishUnitTests" */;
 			buildPhases = (
-				A718283B272EDA330002A8B5 /* Sources */,
-				A718283C272EDA330002A8B5 /* Frameworks */,
-				A718283D272EDA330002A8B5 /* Resources */,
+				A7BB50FA2790396D00E2EA96 /* Sources */,
+				A7BB50FB2790396D00E2EA96 /* Frameworks */,
+				A7BB50FC2790396D00E2EA96 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A7182841272EDA330002A8B5 /* PBXTargetDependency */,
+				A7BB51042790396D00E2EA96 /* PBXTargetDependency */,
 			);
-			name = FloppyFishTests;
-			productName = FloppyFishTests;
-			productReference = A718283F272EDA330002A8B5 /* FloppyFishTests.xctest */;
+			name = FloppyFishUnitTests;
+			productName = FloppyFishUnitTests;
+			productReference = A7EA74D1279056E300AE8D82 /* FloppyFishUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		A7182849272EDA330002A8B5 /* FloppyFishUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A7182859272EDA330002A8B5 /* Build configuration list for PBXNativeTarget "FloppyFishUITests" */;
-			buildPhases = (
-				A7182846272EDA330002A8B5 /* Sources */,
-				A7182847272EDA330002A8B5 /* Frameworks */,
-				A7182848272EDA330002A8B5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A718284C272EDA330002A8B5 /* PBXTargetDependency */,
-			);
-			name = FloppyFishUITests;
-			productName = FloppyFishUITests;
-			productReference = A718284A272EDA330002A8B5 /* FloppyFishUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -280,11 +324,7 @@
 					A7182827272EDA300002A8B5 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
-					A718283E272EDA330002A8B5 = {
-						CreatedOnToolsVersion = 12.5.1;
-						TestTargetID = A7182827272EDA300002A8B5;
-					};
-					A7182849272EDA330002A8B5 = {
+					A7BB50FD2790396D00E2EA96 = {
 						CreatedOnToolsVersion = 12.5.1;
 						TestTargetID = A7182827272EDA300002A8B5;
 					};
@@ -310,8 +350,7 @@
 			projectRoot = "";
 			targets = (
 				A7182827272EDA300002A8B5 /* FloppyFish */,
-				A718283E272EDA330002A8B5 /* FloppyFishTests */,
-				A7182849272EDA330002A8B5 /* FloppyFishUITests */,
+				A7BB50FD2790396D00E2EA96 /* FloppyFishUnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -334,14 +373,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A718283D272EDA330002A8B5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A7182848272EDA330002A8B5 /* Resources */ = {
+		A7BB50FC2790396D00E2EA96 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -373,32 +405,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A718283B272EDA330002A8B5 /* Sources */ = {
+		A7BB50FA2790396D00E2EA96 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A7182846272EDA330002A8B5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				A7EA74F82790DD3B00AE8D82 /* BackgroundHandlerTests.swift in Sources */,
+				A7EA74EE2790DBF800AE8D82 /* TravellerCreatorTests.swift in Sources */,
+				A7EA74E62790BBA100AE8D82 /* MainMenuLogoTests.swift in Sources */,
+				A7EA74F42790DCE000AE8D82 /* WorldPhysicsTests.swift in Sources */,
+				A7EA74E22790B3BE00AE8D82 /* GameSceneTests.swift in Sources */,
+				A7EA74F22790DCA100AE8D82 /* PauseButtonTests.swift in Sources */,
+				A7BB51082790399A00E2EA96 /* MainMenuPlayButtonTests.swift in Sources */,
+				A7EA74EC2790DBAA00AE8D82 /* GameEndedViewTests.swift in Sources */,
+				A7EA74E42790B43E00AE8D82 /* GameMenuTests.swift in Sources */,
+				A7EA74E82790CB4700AE8D82 /* MainMenuBackgroundTests.swift in Sources */,
+				A7EA74F02790DC3000AE8D82 /* ScoreHandlerTests.swift in Sources */,
+				A7EA74F62790DD0C00AE8D82 /* ObstacleCreatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A7182841272EDA330002A8B5 /* PBXTargetDependency */ = {
+		A7BB51042790396D00E2EA96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A7182827272EDA300002A8B5 /* FloppyFish */;
-			targetProxy = A7182840272EDA330002A8B5 /* PBXContainerItemProxy */;
-		};
-		A718284C272EDA330002A8B5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A7182827272EDA300002A8B5 /* FloppyFish */;
-			targetProxy = A718284B272EDA330002A8B5 /* PBXContainerItemProxy */;
+			targetProxy = A7BB51032790396D00E2EA96 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -570,20 +602,18 @@
 			};
 			name = Release;
 		};
-		A7182857272EDA330002A8B5 /* Debug */ = {
+		A7BB51062790396D00E2EA96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = FloppyFishTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				INFOPLIST_FILE = FloppyFishUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFishTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFishUnitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -591,62 +621,22 @@
 			};
 			name = Debug;
 		};
-		A7182858272EDA330002A8B5 /* Release */ = {
+		A7BB51072790396D00E2EA96 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = FloppyFishTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				INFOPLIST_FILE = FloppyFishUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFishTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFishUnitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FloppyFish.app/FloppyFish";
-			};
-			name = Release;
-		};
-		A718285A272EDA330002A8B5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = FloppyFishUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFishUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FloppyFish;
-			};
-			name = Debug;
-		};
-		A718285B272EDA330002A8B5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = FloppyFishUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Mozz-Builds.FloppyFishUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FloppyFish;
 			};
 			name = Release;
 		};
@@ -671,20 +661,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A7182856272EDA330002A8B5 /* Build configuration list for PBXNativeTarget "FloppyFishTests" */ = {
+		A7BB51052790396D00E2EA96 /* Build configuration list for PBXNativeTarget "FloppyFishUnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A7182857272EDA330002A8B5 /* Debug */,
-				A7182858272EDA330002A8B5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A7182859272EDA330002A8B5 /* Build configuration list for PBXNativeTarget "FloppyFishUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A718285A272EDA330002A8B5 /* Debug */,
-				A718285B272EDA330002A8B5 /* Release */,
+				A7BB51062790396D00E2EA96 /* Debug */,
+				A7BB51072790396D00E2EA96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
