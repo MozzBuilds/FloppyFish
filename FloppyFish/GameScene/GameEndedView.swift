@@ -76,7 +76,13 @@ class GameEndedView {
         gameOverLabel.name = "gameOverLabel"
         gameOverLabel.position = CGPoint(x: 0, y: maxHeight * 0.4)
         
-        gameOverLabel.attributedText = attributedShadowedText(string: "GAME OVER", font: "Thonburi-Bold", size: 96, color: .orange, shadowSize: 10, shadowColor: .black)
+        if #available(iOS 11.0, *) {
+            gameOverLabel.attributedText = attributedShadowedText(string: "GAME OVER", font: "Thonburi-Bold", size: 96, color: .orange, shadowSize: 10, shadowColor: .black)
+        } else {
+            gameOverLabel.text = "GAME OVER"
+            gameOverLabel.fontSize = 96
+            gameOverLabel.fontColor = .orange
+        }
                 
         delegate.addChild(gameOverLabel)
     }
@@ -88,30 +94,65 @@ class GameEndedView {
         let fontSize = CGFloat(45)
         scoreLabelText.fontSize = fontSize // Used for size references later
         
-        scoreLabelText.attributedText = attributedShadowedText(string: "Your Score", font: "Thonburi", size: fontSize, color: .orange, shadowSize: CGFloat(4), shadowColor: .black)
+        if #available(iOS 11.0, *) {
+            scoreLabelText.attributedText = attributedShadowedText(string: "Your Score", font: "Thonburi", size: fontSize, color: .orange, shadowSize: CGFloat(4), shadowColor: .black)
+        } else {
+            scoreLabelText.text = "Your Score"
+            scoreLabelText.fontColor = .orange
+        }
         
-        highScoreLabelText.attributedText = attributedShadowedText(string: "High Score", font: "Thonburi", size: fontSize, color: .orange, shadowSize: CGFloat(4), shadowColor: .black)
+        if #available(iOS 11.0, *) {
+            highScoreLabelText.attributedText = attributedShadowedText(string: "High Score", font: "Thonburi", size: fontSize, color: .orange, shadowSize: CGFloat(4), shadowColor: .black)
+        } else {
+            highScoreLabelText.text = "High Score"
+            highScoreLabelText.fontSize = fontSize
+            highScoreLabelText.fontColor = .orange
+        }
     }
     
     func renderScoreValueLabels() {
         scoreLabelValue.name = "gameOverScoreLabelValue"
         highScoreLabelValue.name = "gameOverHighScoreLabelValue"
         
-        scoreLabelValue.attributedText = attributedShadowedText(string: "\(score)", font: "Thonburi-Bold", size: CGFloat(60), color: .white, shadowSize: 3, shadowColor: .black)
+        if #available(iOS 11.0, *) {
+            scoreLabelValue.attributedText = attributedShadowedText(string: "\(score)", font: "Thonburi-Bold", size: CGFloat(60), color: .white, shadowSize: 3, shadowColor: .black)
+        } else {
+            scoreLabelValue.text = "\(score)"
+            scoreLabelValue.fontSize = 60
+            scoreLabelValue.fontColor = .white
+        }
         
-        highScoreLabelValue.attributedText = attributedShadowedText(string: "\(highScore)", font: "Thonburi-Bold", size: CGFloat(60), color: .white, shadowSize: 3, shadowColor: .black)
+        if #available(iOS 11.0, *) {
+            highScoreLabelValue.attributedText = attributedShadowedText(string: "\(highScore)", font: "Thonburi-Bold", size: CGFloat(60), color: .white, shadowSize: 3, shadowColor: .black)
+        } else {
+            highScoreLabelValue.text = "\(highScore)"
+            highScoreLabelValue.fontSize = 60
+            highScoreLabelValue.fontColor = .white
+        }
     }
     
     func renderPlayAgainLabel() {
         playAgainLabel.name = "playAgainLabel"
         
-        playAgainLabel.attributedText = attributedShadowedText(string: ">", font: "Arial", size: CGFloat(96), color: .green, shadowSize: 5, shadowColor: .black)
+        if #available(iOS 11.0, *) {
+            playAgainLabel.attributedText = attributedShadowedText(string: ">", font: "Arial", size: CGFloat(96), color: .green, shadowSize: 5, shadowColor: .black)
+        } else {
+            playAgainLabel.text = ">"
+            playAgainLabel.fontSize = 96
+            playAgainLabel.fontColor = .green
+        }
     }
     
     func renderMenuLabel() {
         menuLabel.name = "gameOverMenuLabel"
         
-        menuLabel.attributedText = attributedShadowedText(string: "<", font: "Arial", size: CGFloat(96), color: .red, shadowSize: 5, shadowColor: .black)
+        if #available(iOS 11.0, *) {
+            menuLabel.attributedText = attributedShadowedText(string: "<", font: "Arial", size: CGFloat(96), color: .red, shadowSize: 5, shadowColor: .black)
+        } else {
+            menuLabel.text = "<"
+            menuLabel.fontSize = 96
+            menuLabel.fontColor = .red
+        }
     }
     
     //MARK: - Render Label Backgrounds

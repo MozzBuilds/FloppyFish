@@ -208,6 +208,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func resetScene() {
+        removeAllChildren()
+        removeFromParent()
         let gameScene = SKScene(fileNamed: "GameScene")!
         gameScene.scaleMode = .aspectFill
         view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 0.5))

@@ -48,12 +48,18 @@ class MainMenuPlayButton {
         
         let playLabelColor = UIColor(r: 255, g: 80, b: 0)
         
-        playLabel.attributedText = attributedShadowedText(string: "Play",
-                                                          font: "Thonburi-Bold",
-                                                          size: CGFloat(144),
-                                                          color: playLabelColor,
-                                                          shadowSize: 5,
-                                                          shadowColor: .black)
+        if #available(iOS 11.0, *) {
+            playLabel.attributedText = attributedShadowedText(string: "Play",
+                                                              font: "Thonburi-Bold",
+                                                              size: CGFloat(144),
+                                                              color: playLabelColor,
+                                                              shadowSize: 5,
+                                                              shadowColor: .black)
+        } else {
+            playLabel.text = "Play"
+            playLabel.fontSize = 144
+            playLabel.fontColor = playLabelColor
+        }
         
         parent.addChild(playLabel)
     }
