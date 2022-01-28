@@ -20,23 +20,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private(set) var obstacleCreator: ObstacleCreator!
     private(set) var backgroundHandler: BackgroundHandler?
     private(set) var worldPhysics: WorldPhysics!
-    private(set) var travellerCreator: TravellerCreator!
+    private(set) var travellerCreator: TravellerCreator?
+    private(set) var gameEndedView: GameEndedView?
     
     private(set) var scoreHandler: ScoreHandler?
     private(set) var pauseButton: PauseButton?
     private(set) var countDownLabel: SKLabelNode?
     
+    private(set) var countDownTimer: Timer?
+    private(set) var obstacleTimer: Timer?
+    private(set) var travellerRotatorTimer: Timer?
+    private(set) var cleanupTimer: Timer?
+    private(set) var scoreTimer: Timer?
+    private(set) var timers: [Timer?]?
+    
     private(set) var countDownTime = 3
                 
     override func didMove(to view: SKView) {
-        
-        ///Initiate our creators and handlers
         obstacleCreator = ObstacleCreator(delegate: self)
         worldPhysics = WorldPhysics(delegate: self)
         travellerCreator = TravellerCreator(delegate: self)
         
         self.scaleMode = .resizeFill
-
         setUpScene()
     }
     
@@ -70,8 +75,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setUpTraveller() {
-        travellerCreator.setUpTraveller()
-        travellerCreator.pauseTraveller()
+        travellerCreator?.setUpTraveller()
+        travellerCreator?.pauseTraveller()
     }
     
     func hideGameplayNodes() {
@@ -89,7 +94,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if countDownTime > 0 {
             
                 countDownLabel = SKLabelNode()
-                
                 guard let countDownLabel = countDownLabel else { return }
                 
                 countDownLabel.fontSize = 144
@@ -107,32 +111,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 countDownTime -= 1
 
             } else {
-                travellerCreator.unpauseTraveller()
+                travellerCreator?.unpauseTraveller()
                 showGameplayNodes()
+                countDownTimer?.invalidate()
+                countDownTimer = nil
             }
         }
     }
-    
+
     func setUpTimers() {
         let timeInterval = TimeInterval(1.2)
-        let delay = DispatchTime.now() + 3.0
+                
+        countDownTimer = Timer.scheduledTimer(timeInterval: TimeInterval(0.6), target: self, selector: #selector(GameScene.setUpCountdown), userInfo: nil, repeats: true)
         
-        ///Generate countdown
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.6), target: self, selector: #selector(GameScene.setUpCountdown), userInfo: nil, repeats: true)
+        obstacleTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
         
-        ///Generate obstacles at timed intervals
-        Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
+        travellerRotatorTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(GameScene.travellerRotator), userInfo: nil, repeats: true)
         
-        ///Set traveller rotation
-        Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(GameScene.travellerRotator), userInfo: nil, repeats: true)
+        cleanupTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
         
-        ///Remove obstacles/cleanup
-        Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
+        scoreTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.updateScore), userInfo: nil, repeats: true)
         
-        ///Update sccore
-        DispatchQueue.main.asyncAfter(deadline: delay) {
-            Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.updateScore), userInfo: nil, repeats: true)
-        }
+        timers = [countDownTimer, obstacleTimer, travellerRotatorTimer, cleanupTimer, scoreTimer]
     }
     
     @objc func cleanUp() {
@@ -147,7 +147,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !isPaused {
             backgroundHandler?.moveBackground()
 
-            ///Look out for new nodes
             enumerateChildNodes(withName: "obstacle", using: { (obstacle, stop) in
                 let newItem = obstacle as! SKSpriteNode
                 newItem.position.x -= 5 ///set the X speed
@@ -168,11 +167,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func travellerRotator() {
-        travellerCreator.rotate()
+        travellerCreator?.rotate()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         for touch in touches {
                 
                 let touchLocation = touch.location(in: self)
@@ -181,18 +179,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 case "pauseLogo", "pauseLogoBackground":
                     isPaused.toggle()
-                    
                 case "gameOverMenuLabel", "gameOverMenuBackground":
                     guard let menuScene = SKScene(fileNamed: "GameMenu") else { return }
                     menuScene.scaleMode = .aspectFill
                     view?.presentScene(menuScene, transition: SKTransition.fade(withDuration: 0.5))
-                    
                 case "playAgainLabel", "playAgainBackground":
                     resetScene()
-                    
                 default :
                     if !isPaused {
-                        travellerCreator.applyImpulse()
+                        travellerCreator?.applyImpulse()
                     }
                 }
             }
@@ -201,15 +196,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         isPaused = true
         hideGameplayNodes()
-        travellerCreator.updateTexture()
+        travellerCreator?.updateTexture()
         scoreHandler?.checkHighScore()
         
-        let _ = GameEndedView(delegate: self, score: scoreHandler!.score, highScore: scoreHandler!.highScore)
+        gameEndedView = GameEndedView(delegate: self, score: scoreHandler!.score, highScore: scoreHandler!.highScore)
+        
+        timers?.forEach{
+            $0?.invalidate()
+        }
     }
     
     func resetScene() {
-        removeAllChildren()
-        removeFromParent()
+        backgroundHandler = nil
+        obstacleCreator = nil
+        pauseButton = nil
+        scoreHandler = nil
+        travellerCreator = nil
+        worldPhysics = nil
+        gameEndedView = nil
+        
         let gameScene = SKScene(fileNamed: "GameScene")!
         gameScene.scaleMode = .aspectFill
         view?.presentScene(gameScene, transition: SKTransition.fade(withDuration: 0.5))

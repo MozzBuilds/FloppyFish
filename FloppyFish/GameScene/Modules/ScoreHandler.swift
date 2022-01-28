@@ -11,7 +11,7 @@ class ScoreHandler {
         
     private var delegate: SKScene
     
-    private(set) var score = Int(0)
+    private(set) var score = Int(-2)
     private(set) var highScore = UserDefaults.standard.integer(forKey: "highScore")
 
     private(set) var scoreLabel: SKLabelNode?

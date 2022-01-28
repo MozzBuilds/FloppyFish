@@ -73,3 +73,6 @@ Personal to do list for future development of the app
 ### Performance
 * Countdown is only needed for first 3 seconds, but it actually runs in the background till the game stops
 
+### Bugs
+* Full background does not display on larger screens (ipad mini)
+* After multiple repetitive game overs, obstacles are rendered at two or three times the expected rate, game lags and eventually is unplayable. 
