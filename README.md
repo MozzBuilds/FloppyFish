@@ -25,7 +25,7 @@ After clicking Play from the main menu, tap anywhere on screen to make your fish
 <img src="/README_Assets/GamePlay.png" width=30% height=30%>
 
 ### Game over!
-<img src="/README_Assets/GameOver.png" width=30% height=30%>
+<img src="/README_Assets/GameEnd.png" width=30% height=30%>
 
 
 ## How did I develop it?
