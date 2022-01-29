@@ -19,13 +19,13 @@ After clicking Play from the main menu, tap anywhere on screen to make your fish
 ## What does it look like?
 
 ### Main Menu
-<img src="/README_Assets/MainMenu" width=30% height=30%>
+<img src="/README_Assets/MainMenu.png" width=30% height=30%>
 
 ### Gameplay
-<img src="/README_Assets/GamePlay" width=30% height=30%>
+<img src="/README_Assets/GamePlay.png" width=30% height=30%>
 
 ### Game over!
-<img src="/README_Assets/GameEnd" width=30% height=30%>
+<img src="/README_Assets/GameOver.png" width=30% height=30%>
 
 
 ## How did I develop it?
