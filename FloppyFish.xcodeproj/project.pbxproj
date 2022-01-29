@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A70415A027A54EE200327A3A /* GamePlay.png in Resources */ = {isa = PBXBuildFile; fileRef = A704159D27A54EE100327A3A /* GamePlay.png */; };
+		A70415A127A54EE200327A3A /* MainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = A704159E27A54EE200327A3A /* MainMenu.png */; };
+		A70415A227A54EE200327A3A /* GameEnd.png in Resources */ = {isa = PBXBuildFile; fileRef = A704159F27A54EE200327A3A /* GameEnd.png */; };
 		A70F363D27614B7800E51BD9 /* GameEndedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70F363C27614B7800E51BD9 /* GameEndedView.swift */; };
 		A70F363F2763C63F00E51BD9 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70F363E2763C63F00E51BD9 /* ClassExtensions.swift */; };
 		A718282C272EDA300002A8B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718282B272EDA300002A8B5 /* AppDelegate.swift */; };
@@ -22,9 +25,6 @@
 		A7BB51082790399A00E2EA96 /* MainMenuPlayButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BB50F82790393000E2EA96 /* MainMenuPlayButtonTests.swift */; };
 		A7C6CD3B273D0AF300B0815B /* BackgroundHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */; };
 		A7DE5877278F8C9B0068F108 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A7DE5876278F8C9A0068F108 /* README.md */; };
-		A7DE587C278F8CE70068F108 /* Main_Menu_Screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE5879278F8CE70068F108 /* Main_Menu_Screenshot.png */; };
-		A7DE587D278F8CE70068F108 /* Game_Over_Screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE587A278F8CE70068F108 /* Game_Over_Screenshot.png */; };
-		A7DE587E278F8CE70068F108 /* Gameplay_Screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE587B278F8CE70068F108 /* Gameplay_Screenshot.png */; };
 		A7DE5880278F9D9A0068F108 /* TravellerCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE587F278F9D9A0068F108 /* TravellerCreator.swift */; };
 		A7EA74E22790B3BE00AE8D82 /* GameSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74E12790B3BE00AE8D82 /* GameSceneTests.swift */; };
 		A7EA74E42790B43E00AE8D82 /* GameMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EA74E32790B43E00AE8D82 /* GameMenuTests.swift */; };
@@ -56,6 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A704159D27A54EE100327A3A /* GamePlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GamePlay.png; sourceTree = "<group>"; };
+		A704159E27A54EE200327A3A /* MainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MainMenu.png; sourceTree = "<group>"; };
+		A704159F27A54EE200327A3A /* GameEnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameEnd.png; sourceTree = "<group>"; };
 		A70F363C27614B7800E51BD9 /* GameEndedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndedView.swift; sourceTree = "<group>"; };
 		A70F363E2763C63F00E51BD9 /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		A7182828272EDA300002A8B5 /* FloppyFish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FloppyFish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,9 +77,6 @@
 		A7C6CD3A273D0AF300B0815B /* BackgroundHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundHandler.swift; sourceTree = "<group>"; };
 		A7DE5857278F8C7E0068F108 /* FloppyFish.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FloppyFish.xcodeproj; sourceTree = "<group>"; };
 		A7DE5876278F8C9A0068F108 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		A7DE5879278F8CE70068F108 /* Main_Menu_Screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Main_Menu_Screenshot.png; sourceTree = "<group>"; };
-		A7DE587A278F8CE70068F108 /* Game_Over_Screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Game_Over_Screenshot.png; sourceTree = "<group>"; };
-		A7DE587B278F8CE70068F108 /* Gameplay_Screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gameplay_Screenshot.png; sourceTree = "<group>"; };
 		A7DE587F278F9D9A0068F108 /* TravellerCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravellerCreator.swift; sourceTree = "<group>"; };
 		A7EA74D1279056E300AE8D82 /* FloppyFishUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FloppyFishUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7EA74E12790B3BE00AE8D82 /* GameSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneTests.swift; sourceTree = "<group>"; };
@@ -231,9 +231,9 @@
 		A7DE5878278F8CD70068F108 /* README_Assets */ = {
 			isa = PBXGroup;
 			children = (
-				A7DE587A278F8CE70068F108 /* Game_Over_Screenshot.png */,
-				A7DE587B278F8CE70068F108 /* Gameplay_Screenshot.png */,
-				A7DE5879278F8CE70068F108 /* Main_Menu_Screenshot.png */,
+				A704159F27A54EE200327A3A /* GameEnd.png */,
+				A704159D27A54EE100327A3A /* GamePlay.png */,
+				A704159E27A54EE200327A3A /* MainMenu.png */,
 			);
 			path = README_Assets;
 			sourceTree = "<group>";
@@ -358,14 +358,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7182861272EDB2C0002A8B5 /* GameMenu.sks in Resources */,
+				A70415A227A54EE200327A3A /* GameEnd.png in Resources */,
+				A70415A127A54EE200327A3A /* MainMenu.png in Resources */,
 				A7182837272EDA300002A8B5 /* Main.storyboard in Resources */,
 				A718282E272EDA300002A8B5 /* GameScene.sks in Resources */,
-				A7DE587E278F8CE70068F108 /* Gameplay_Screenshot.png in Resources */,
+				A70415A027A54EE200327A3A /* GamePlay.png in Resources */,
 				A7182839272EDA330002A8B5 /* Assets.xcassets in Resources */,
 				A7DE5877278F8C9B0068F108 /* README.md in Resources */,
-				A7DE587C278F8CE70068F108 /* Main_Menu_Screenshot.png in Resources */,
 				A7182830272EDA300002A8B5 /* Actions.sks in Resources */,
-				A7DE587D278F8CE70068F108 /* Game_Over_Screenshot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

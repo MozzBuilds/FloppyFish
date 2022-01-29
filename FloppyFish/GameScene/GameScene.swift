@@ -89,6 +89,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreHandler?.show()
     }
     
+    func setUpTimers() {
+        let timeInterval = TimeInterval(1.2)
+                
+        countDownTimer = Timer.scheduledTimer(timeInterval: TimeInterval(0.6), target: self, selector: #selector(GameScene.setUpCountdown), userInfo: nil, repeats: true)
+        
+        obstacleTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
+        
+        travellerRotatorTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(GameScene.travellerRotator), userInfo: nil, repeats: true)
+        
+        cleanupTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
+        
+        scoreTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.updateScore), userInfo: nil, repeats: true)
+        
+        timers = [countDownTimer, obstacleTimer, travellerRotatorTimer, cleanupTimer, scoreTimer]
+    }
+    
     @objc func setUpCountdown () {
         if !isPaused {
             if countDownTime > 0 {
@@ -117,22 +133,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 countDownTimer = nil
             }
         }
-    }
-
-    func setUpTimers() {
-        let timeInterval = TimeInterval(1.2)
-                
-        countDownTimer = Timer.scheduledTimer(timeInterval: TimeInterval(0.6), target: self, selector: #selector(GameScene.setUpCountdown), userInfo: nil, repeats: true)
-        
-        obstacleTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.handleObstacleTimer), userInfo:nil, repeats: true)
-        
-        travellerRotatorTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(GameScene.travellerRotator), userInfo: nil, repeats: true)
-        
-        cleanupTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.cleanUp), userInfo: nil, repeats: true)
-        
-        scoreTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(GameScene.updateScore), userInfo: nil, repeats: true)
-        
-        timers = [countDownTimer, obstacleTimer, travellerRotatorTimer, cleanupTimer, scoreTimer]
     }
     
     @objc func cleanUp() {

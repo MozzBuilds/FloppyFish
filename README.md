@@ -19,14 +19,13 @@ After clicking Play from the main menu, tap anywhere on screen to make your fish
 ## What does it look like?
 
 ### Main Menu
-<img src="/README_Assets/Main_Menu_Screenshot.png" width=30% height=30%>
+<img src="/README_Assets/MainMenu" width=30% height=30%>
 
 ### Gameplay
-<img src="/README_Assets/Gameplay_Screenshot.png" width=30% height=30%>
-
+<img src="/README_Assets/GamePlay" width=30% height=30%>
 
 ### Game over!
-<img src="/README_Assets/Game_Over_Screenshot.png" width=30% height=30%>
+<img src="/README_Assets/GameEnd" width=30% height=30%>
 
 
 ## How did I develop it?
@@ -51,11 +50,12 @@ All the images you see have been hand drawn in Krita. The fish, the background, 
 ## Next Steps
 Personal to do list for future development of the app
 
-### OOP and Good Practice
+### OOP/Good Practice/Technical Debt
 * Static constants file that hosts common colours, fonts, attributed text shadow method
 * Classes have been Test Induced Design Damaged to allow access to previously private nodes for testing. This could be instead done by creating stubs, with protocols used to ensure methods are accounted for during testing
 * Rename files with better consistency - handler, helper. We don't need TravellerCreator. We just need Traveller. 
 * Some structs (MainMenuLogo for example) were changed to classes to allow inheritance for spies for testing other classes. But this could, and should be done by using protocols and a conforming stub instaead.
+* Strong referencing issue. Class instances had to be set to nil during the resetScene method. AFAIK they should be deallocated automatically when we render a new scene
 
 ### UI
 * Count down animation instead of just 3/2/1 text
@@ -65,14 +65,8 @@ Personal to do list for future development of the app
 ### Gameplay
 * When pause is pressed, a big play button should appear on screen to unpause it
 * When play is pressed after a pause, game remains paused till another countdown timer ends
-* Traveller jump could dependent on screen height
-* Might want to then also make the height between the upper/lower obstacles dependent on screen height also
 * Max score of 999 which if reached, game stops, and a fun message is displayed]
-* Separate the background (sea) and ground (sand) images and make corresponding notes. Better flexibility with physics, might help with screen size differences? TBC
-
-### Performance
-* Countdown is only needed for first 3 seconds, but it actually runs in the background till the game stops
 
 ### Bugs
-* Full background does not display on larger screens (ipad mini)
-* After multiple repetitive game overs, obstacles are rendered at two or three times the expected rate, game lags and eventually is unplayable. 
+* Menu background is cropped on ipad mini screen
+
