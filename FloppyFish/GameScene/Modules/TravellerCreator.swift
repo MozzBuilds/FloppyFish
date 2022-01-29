@@ -28,7 +28,7 @@ class TravellerCreator {
     }
         
     func setPhysics() {
-        let physicsBodySize = CGSize(width: traveller.size.width * 0.8, height: traveller.size.height * 0.8)
+        let physicsBodySize = CGSize(width: traveller.size.width * 0.6, height: traveller.size.height * 0.6)
         
         traveller.physicsBody = SKPhysicsBody(rectangleOf: physicsBodySize)
         
@@ -65,7 +65,7 @@ class TravellerCreator {
     
     func applyImpulse() {
         traveller.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-        let impulseY = traveller.size.height * 2
+        let impulseY = traveller.size.height * 1.3
         traveller.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulseY))
     }
     

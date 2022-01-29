@@ -19,7 +19,7 @@ class WorldPhysics {
     }
     
     func setUpPhysicsWorld() {
-        delegate.physicsWorld.gravity = CGVector(dx: 0, dy: -8.0)
+        delegate.physicsWorld.gravity = CGVector(dx: 0, dy: -8.2)
         delegate.physicsWorld.contactDelegate = delegate as? SKPhysicsContactDelegate
     }
     

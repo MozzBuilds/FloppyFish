@@ -14,7 +14,6 @@ class GameMenu: SKScene {
         _ = MainMenuBackground(delegate: self)
         _ = MainMenuLogo(delegate: self)
         _ = MainMenuPlayButton(delegate: self)
-
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -11,27 +11,26 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
+    var menuScene: GameMenu?
+    var gameScene: GameScene?
+    var skView: SKView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let view = self.view as! SKView? {
-
-            if let scene = SKScene(fileNamed: "GameMenu") {
-
-                scene.scaleMode = .aspectFill
-
-                view.presentScene(scene)
-            }
+        skView = (self.view as! SKView)
+        
+        menuScene = GameMenu(fileNamed: "GameMenu")
+        menuScene?.scaleMode = .aspectFill
+        skView?.presentScene(menuScene)
             
-            view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
-        }
+        skView?.ignoresSiblingOrder = true
+//        skView?.showsFPS = true
+//        skView?.showsNodeCount = true
     }
 
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -45,5 +44,5 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
+        
 }

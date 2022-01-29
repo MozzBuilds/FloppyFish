@@ -2,7 +2,7 @@
 
 ## What is Floppy Fish?
 
-One of the one hit wonder mobile games is called Flappy bird. After it gained worldwide momentum, the original developer removed it from the app store due to its addictive nature. However due to its simplicity and ease of development, hundreds of replicas appeared within a short space of time, and continue to do so to this day.
+After one-hit-wonder mobile game Flappy Bird gained worldwide momentum, the original developer removed it from the app store. However due to its simplicity and ease of development, hundreds of replicas appeared within a short space of time, and continue to do so to this day.
 
 Seeing the impact and joy that just one simple game can have on people is one part of what got me into programming in 2020, and now I have made my own version for the iOS Platform, for a bit of fun.
 
@@ -19,20 +19,19 @@ After clicking Play from the main menu, tap anywhere on screen to make your fish
 ## What does it look like?
 
 ### Main Menu
-<img src="/README_Assets/Main_Menu_Screenshot.png" width=30% height=30%>
+<img src="/README_Assets/MainMenu.png" width=30% height=30%>
 
 ### Gameplay
-<img src="/README_Assets/Gameplay_Screenshot.png" width=30% height=30%>
-
+<img src="/README_Assets/GamePlay.png" width=30% height=30%>
 
 ### Game over!
-<img src="/README_Assets/Game_Over_Screenshot.png" width=30% height=30%>
+<img src="/README_Assets/GameEnd.png" width=30% height=30%>
 
 
 ## How did I develop it?
 
 ### Background
-This is my first Swift app, and first mobile app at all. It was built from the ground up over a period of 5 months putting in a few hours where possible in evenings, and was started at the same time I started my first ever programming job (iOS Engineer). Mobile development has been an interest of mine since 2020, and this was an opportunity to give it a bash, and upskill for my career at the same time
+This is my first solo Swift project, first mobile app, and first game. Everything was built from the ground up over a period of about 5 months, starting at the same time I started my first role as a software engineer. Mobile development has been an interest of mine since 2020, and this was an opportunity to give it a bash, and upskill for my career at the same time
 
 ### Process
 * Started with a square block for a fish, and rectangle blocks for the rock obstacles
@@ -46,29 +45,28 @@ This is my first Swift app, and first mobile app at all. It was built from the g
 * And a tonne of refactoring
 
 ### Images and Artwork
-All the images you see have been hand drawn in Krita. The fish, the background, sand, rocks, pause button, menu logo. All of it. No copyright infringement on my watch (hopefully).
-
-### Reusability
-The code is designed to be simple and reusable, and  particular methods and variables are named as such. The fish object isn't actually a fish, it's a "traveller", and the rocks are "obstacles". A small thing, but it means that if I wanted to, I could redo the game with a space ship avoiding asteroids, and the only thing I'd need to change are the image tags. Maybe a player could even choose their own type of fish. Maybe I flood the app store with 10,000 variations of the same code and have to fix x10,000 as many bugs, who knows.
-
-This means I can change the fish to a mouse, background to a farm, obstacles to bales of hay, just by changing the image links themselves, and no part of the code will still refer to fish or rocks or the sea. Or  space ship avoiding asteroids (hey there's a good idea..). So we can flood the app store with 10,000 of them 
+All the images you see have been hand drawn in Krita. The fish, the background, sand, rocks, pause button, menu logo. All of it. No copyright infringement on my watch (hopefully). 
 
 ## Next Steps
 Personal to do list for future development of the app
 
+### OOP/Good Practice/Technical Debt
+* Static constants file that hosts common colours, fonts, attributed text shadow method
+* Classes have been Test Induced Design Damaged to allow access to previously private nodes for testing. This could be instead done by creating stubs, with protocols used to ensure methods are accounted for during testing
+* Rename files with better consistency - handler, helper. We don't need TravellerCreator. We just need Traveller. 
+* Some structs (MainMenuLogo for example) were changed to classes to allow inheritance for spies for testing other classes. But this could, and should be done by using protocols and a conforming stub instaead.
+* Strong referencing issue. Class instances had to be set to nil during the resetScene method. AFAIK they should be deallocated automatically when we render a new scene
+
 ### UI
 * Count down animation instead of just 3/2/1 text
-* A "How to Play" animation on the main menu
-* Some bubbles from the fish
-* Images used were produced very large and scaled down. Need anti aliasing to prevent pixelation, particularly on the rocks
+* A "How to Play" guide on the main menu
+* Images used were produced very large and scaled down. Need anti aliasing to prevent pixelation, particularly on the rock.
 
 ### Gameplay
 * When pause is pressed, a big play button should appear on screen to unpause it
 * When play is pressed after a pause, game remains paused till another countdown timer ends
-* Traveller jump could dependent on screen height
-* Might want to then also make the height between the upper/lower obstacles dependent on screen height also
-* Max score of 999 which when reached, game stops, and a fun message is displayed]
-* Separate the background (sea) and ground (sand) images and make corresponding notes. Better flexibility with physics, might help with screen size differences? TBC
+* Max score of 999 which if reached, game stops, and a fun message is displayed]
 
-### Performance
-* Countdown is only needed for first 3 seconds, but it actually runs in the background till the game stops
+### Bugs
+* Menu background is cropped on ipad mini screen
+
